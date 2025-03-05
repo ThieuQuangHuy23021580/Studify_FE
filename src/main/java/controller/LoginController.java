@@ -108,30 +108,6 @@ public class LoginController {
         }
     }
 
-    public static boolean checkStrongPassword(String password) {
-        String spCharacter = "!@#$%^&*()_+-={}[]|:;\"'<>,.?/";
-        boolean haveUpperCase = false;
-        boolean haveLowerCase = false;
-        boolean haveSpecial = false;
-        boolean haveDigit = false;
-        for (int i = 0; i < password.length(); i++) {
-            char c = password.charAt(i);
-            if (Character.isUpperCase(c)) {
-                haveUpperCase = true;
-            }
-            if (Character.isLowerCase(c)) {
-                haveLowerCase = true;
-            }
-            if (Character.isDigit(c)) {
-                haveDigit = true;
-            }
-            if (spCharacter.indexOf(c) != -1) {
-                haveSpecial = true;
-            }
-        }
-        return haveDigit && haveUpperCase && haveLowerCase && haveSpecial;
-    }
-
     /**
      * Chuyển khung hình từ Đăng nhập sang Đăng kí.
      *
