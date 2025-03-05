@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+    <children>
+        <ImageView fx:id="bg" fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true">
+            <image>
+                <Image url="@../../PICTURES/GradientArtWallpaper.png" />
+            </image>
+        </ImageView>
+        <AnchorPane prefHeight="800.0" prefWidth="1200.0">
+            <children>
+                <AnchorPane fx:id="layer2" layoutX="411.0" prefHeight="799.0" prefWidth="790.0">
+                    <children>
+                        <Label fx:id="lb_text3" layoutX="215.0" layoutY="151.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;;" text="Sign in to Studify" textFill="#e50914">
+                            <font>
+                                <Font name="Arial" size="49.0" />
+                            </font>
+                            <effect>
+                                <Glow level="0.2" />
+                            </effect>
+                        </Label>
+                        <Button fx:id="signInButton" layoutX="425.0" layoutY="580.0" mnemonicParsing="false" onAction="#signInButtonPressed" prefHeight="78.0" prefWidth="161.0" style="-fx-background-radius: 50; -fx-background-color: transparent; -fx-border-radius: 50; -fx-border-color: #E50914FF; -fx-border-width: 3.5;" text="SIGN IN" textFill="#e50914">
+                            <font>
+                                <Font name="Webdings" size="24.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="signUpButton" layoutX="425.0" layoutY="665.0" mnemonicParsing="false" onAction="#signUpButtonPressed" prefHeight="78.0" prefWidth="161.0" style="-fx-background-radius: 50; -fx-background-color: transparent; -fx-border-radius: 50; -fx-border-color: #E50914FF; -fx-border-width: 3.5;" text="SIGN UP" textFill="#e50914">
+                            <font>
+                                <Font name="Webdings" size="24.0" />
+                            </font>
+                        </Button>
+                        <TextField fx:id="emailAddressField" layoutX="255.0" layoutY="310.0" prefHeight="70.0" prefWidth="330.0" promptText="Enter your email address " style="-fx-background-color: transparent; -fx-font-family: 'Poppins-ExtraBold'; -fx-border-color: #E50914FF; -fx-font-size: 20;">
+                            <font>
+                                <Font name="Times New Roman" size="16.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutX="255.0" layoutY="275.0" opacity="0.7" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;;" text="Email Address" textFill="#e50914">
+                            <font>
+                                <Font name="Times New Roman" size="18.0" />
+                            </font>
+                        </Label>
+                        <PasswordField fx:id="passwordField" layoutX="255.0" layoutY="435.0" prefHeight="70.0" prefWidth="330.0" promptText="Enter your password" style="-fx-border-color: #E50914FF; -fx-background-color: transparent; -fx-font-family: 'Poppins-ExtraBold'; -fx-font-size: 20;">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </PasswordField>
+                        <Label layoutX="255.0" layoutY="400.0" opacity="0.7" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;;" text="Password" textFill="#e50914">
+                            <font>
+                                <Font name="Times New Roman" size="18.0" />
+                            </font>
+                        </Label>
+                        <PasswordField fx:id="ConfirmPasswordField" layoutX="255.0" layoutY="560.0" prefHeight="70.0" prefWidth="330.0" promptText="Confirm your password" style="-fx-background-color: transparent; -fx-font-family: 'Poppins-ExtraBold'; -fx-font-size: 20; -fx-border-color: #E50914FF;">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </PasswordField>
+                        <Label fx:id="lb_text5" layoutX="255.0" layoutY="525.0" opacity="0.7" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;;" text="Confirm password" textFill="#e50914">
+                            <font>
+                                <Font name="Times New Roman" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lb_text4" layoutX="194.0" layoutY="151.0" style="-fx-font-family: &quot;Popins&quot;;" text="Sign up to Studify" textFill="#e50914">
+                            <effect>
+                                <Glow level="0.2" />
+                            </effect>
+                            <font>
+                                <Font name="Forte" size="49.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="190.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../PICTURES/user.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="190.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../PICTURES/locked-padlock.png" />
+                            </image>
+                        </ImageView>
+                        <CheckBox fx:id="show" layoutX="586.0" layoutY="494.0" mnemonicParsing="false" onAction="#showCharacter" prefHeight="60.0" prefWidth="172.0" text="Show Character" textFill="#e50914">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </CheckBox>
+                        <TextField fx:id="showPassword" layoutX="255.0" layoutY="435.0" prefHeight="70.0" prefWidth="330.0" style="-fx-background-color: transparent; -fx-font-family: 'Poppins-ExtraBold'; -fx-font-size: 20; -fx-border-color: #E50914FF;" stylesheets="@../../css/fullpackstyling.css">
+                            <font>
+                                <Font name="Times New Roman" size="16.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="layer1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="407.0">
+                    <children>
+                        <Label layoutX="92.0" layoutY="200.0" prefHeight="83.0" prefWidth="229.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;;" text="Welcome" textFill="WHITE">
+                            <font>
+                                <Font name="Arial Bold" size="50.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lb_text1" alignment="TOP_LEFT" layoutX="45.0" layoutY="269.0" prefHeight="59.0" prefWidth="413.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;;" text="Login into your account to continue" textFill="WHITE">
+                            <font>
+                                <Font name="Forte" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="72.0" layoutY="750.0" prefHeight="35.0" prefWidth="412.0" text="A production of Three - Stick Company" textAlignment="CENTER" textFill="#fcfcfc">
+                            <font>
+                                <Font name="Candara Light" size="15.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="toSignUpButton" layoutX="115.0" layoutY="420.0" mnemonicParsing="false" onAction="#toSignUpButtonPressed" prefHeight="78.0" prefWidth="161.0" style="-fx-background-radius: 50; -fx-background-color: transparent; -fx-border-radius: 50; -fx-border-color: #ffffff; -fx-border-width: 3.5;" text="SIGN UP" textFill="WHITE">
+                            <font>
+                                <Font name="Webdings" size="24.0" />
+                            </font>
+                        </Button>
+                        <Label layoutX="187.0" layoutY="340.0" style="-fx-font-family: &quot;Poppins-Bold&quot;;" text="or" textFill="WHITE">
+                            <font>
+                                <Font name="Forte" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lb_text2" layoutX="45.0" layoutY="269.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;;" text="Create your new account to continue" textFill="WHITE">
+                            <font>
+                                <Font name="Forte" size="20.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="toSignInButton" layoutX="115.0" layoutY="420.0" mnemonicParsing="false" onAction="#toSignInButtonPressed" prefHeight="78.0" prefWidth="161.0" style="-fx-background-radius: 50; -fx-background-color: transparent; -fx-border-radius: 50; -fx-border-color: #ffffff; -fx-border-width: 3.5;" text="SIGN IN" textFill="WHITE">
+                            <font>
+                                <Font name="Webdings" size="24.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

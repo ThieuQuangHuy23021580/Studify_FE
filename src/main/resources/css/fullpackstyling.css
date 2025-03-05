@@ -1,0 +1,446 @@
+
+#toSignUpButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-border-color:  #ffffff; /* Màu viền */
+    -fx-border-width: 3px; /* Độ dày viền */
+    -fx-text-fill: #ffffff; /* Màu chữ */
+    -fx-background-radius: 50px; /* Bo góc button */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
+}
+
+#toSignUpButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+}
+#signInButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-border-color: #E50914FF; /* Màu viền */
+    -fx-border-width: 3px; /* Độ dày viền */
+    -fx-text-fill: #E50914FF; /* Màu chữ */
+    -fx-background-radius: 50px; /* Bo góc button */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
+}
+
+#signInButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-border-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #E50914FF, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(229, 9, 20, 0.7); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: #E50914FF; /* Màu chữ khi hover */
+}
+#toSignInButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-border-color:  #ffffff; /* Màu viền */
+    -fx-border-width: 3px; /* Độ dày viền */
+    -fx-text-fill: #ffffff; /* Màu chữ */
+    -fx-background-radius: 50px; /* Bo góc button */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
+}
+
+#toSignInButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+}
+#signUpButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-border-color: #E50914FF; /* Màu viền */
+    -fx-border-width: 3px; /* Độ dày viền */
+    -fx-text-fill: #E50914FF; /* Màu chữ */
+    -fx-background-radius: 50px; /* Bo góc button */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
+}
+
+#signUpButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-border-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #E50914FF, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(229, 9, 20, 0.7); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: #E50914FF; /* Màu chữ khi hover */
+}
+
+
+@font-face {
+    -fx-font-family: 'Poppins-ExtraBold';
+    src: url('css/Font/Poppins-ExtraBold.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Black';
+    src: url('css/Font/Poppins-Black.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-BlackItalic';
+    src: url('css/Font/Poppins-BlackItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Bold';
+    src: url('css/Font/Poppins-Bold.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-BoldItalic';
+    src: url('css/Font/Poppins-BoldItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-ExtraBoldItalic';
+    src: url('css/Font/Poppins-ExtraBoldItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Light';
+    src: url('css/Font/Poppins-Light.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Italic';
+    src: url('css/Font/Poppins-Italic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-LightItalic';
+    src: url('css/Font/Poppins-LightItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Medium';
+    src: url('css/Font/Poppins-Medium.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-MediumItalic';
+    src: url('css/Font/Poppins-MediumItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Regular';
+    src: url('css/Font/Poppins-Regular.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-SemiBold';
+    src: url('css/Font/Poppins-SemiBold.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Thin';
+    src: url('css/Font/Poppins-Thin.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-SemiBoldItalic';
+    src: url('css/Font/Poppins-SemiBoldItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-ThinItalic';
+    src: url('css/Font/Poppins-ThinItalic.ttf');
+}
+
+.button {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-font-size: 24px;
+}
+
+.label {
+    -fx-font-family: "Poppins-ExtraBold";
+}
+
+.scroll-pane {
+    -fx-background-color: transparent; /* Làm trong suốt nền của ScrollPane */
+    -fx-border-color: transparent; /* Ẩn viền */
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent; /* Làm trong suốt nền của Viewport bên trong ScrollPane */
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: #e50914; /* Màu của thanh trượt ngang */
+    -fx-pref-width: 2px;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(229, 9, 20, 0.31); /* Màu của thanh trượt dọc */
+    -fx-transition: 0.3s;          /* Thời gian chuyển đổi */
+}
+.scroll-pane .scroll-bar:vertical:hover .thumb {
+    -fx-background-color: rgb(229, 9, 20);
+}
+.scroll-pane .scroll-bar:vertical .track,
+.scroll-pane .scroll-bar:horizontal .track {
+    -fx-background-color: transparent; /* Nền trong suốt cho track */
+}
+
+.scroll-pane .scroll-bar:horizontal .track,
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: transparent; /* Màu của nền thanh cuộn */
+}
+
+.scroll-pane .scroll-bar:horizontal .decrement-arrow,
+.scroll-pane .scroll-bar:vertical .decrement-arrow,
+.scroll-pane .scroll-bar:horizontal .increment-arrow,
+.scroll-pane .scroll-bar:vertical .increment-arrow {
+    -fx-background-color: transparent; /* Màu của các nút mũi tên */
+}
+.scroll-pane {
+    -fx-hbar-policy: never; /* Ẩn thanh trượt ngang */
+}
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-insets: 100 ;
+}
+
+#gradient_left_rectangle {
+    -fx-fill: linear-gradient(to right, black, transparent);
+}
+#gradient_right_rectangle {
+    -fx-fill: linear-gradient(to left, black, transparent);
+}
+#gradient_up_rectangle {
+    -fx-fill: linear-gradient(to bottom, black, transparent);
+}
+#gradient_down_rectangle {
+    -fx-fill: linear-gradient(to top, black, transparent);
+}
+
+#the_most_popular_books:hover {
+    -fx-effect: dropshadow(gaussian, rgba(229, 9, 20, 0.71), 10, 0.5, 0, 0); /* Hiệu ứng phát sáng khi hover */
+    -fx-background-color: #ffffff; /* Tăng độ sáng nền khi hover */
+}
+
+#discover {
+    -fx-text-fill: white; /* Màu văn bản ban đầu */
+    -fx-transition: 0.3s;  /* Thời gian chuyển đổi hiệu ứng */
+}
+
+#discover:hover {
+    -fx-effect: dropshadow(gaussian, rgba(229, 9, 20, 0.71), 10, 0.5, 0, 0); /* Hiệu ứng phát sáng khi hover */
+    -fx-text-fill: #ffffff; /* Thay đổi màu văn bản khi hover */
+}
+
+#homeButton_active {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill: #7c7a7a;
+
+}
+
+#homeButton_active:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+}
+
+#homeButton_inactive {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(229, 9, 20, 0.65);
+}
+#homeButton_inactive:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian, #e50914, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(229, 9, 20, 0.37); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: #e50914; /* Màu chữ khi hover */
+}
+
+#categoriesButton_active {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill: #7c7a7a;
+}
+#categoriesButton_active:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+}
+
+#categoriesButton_inactive {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(229, 9, 20, 0.65);
+}
+#categoriesButton_inactive:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian, #e50914, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(229, 9, 20, 0.37); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: #e50914; /* Màu chữ khi hover */
+}
+
+#searchButton {
+    -fx-border-color: #fdfdfd;
+
+}
+#searchButton:hover {
+    -fx-border-color: #E50914FF ;
+
+}
+
+#categoriesMenuButton {
+    /*-fx-font-family: "Poppins-ExtraBold";*/
+    -fx-background-color: transparent;
+    /*-fx-text-fill-fill: #f6f0f6 !important;*/
+    -fx-mark-color:  #ffffff;
+
+}
+
+#searchTextField {
+    -fx-text-fill: white;
+}
+#userMenuButton {
+    -fx-mark-color: #7C7A7AFF;
+}
+
+#educationButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+
+#educationButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#fictionButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#fictionButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#comicButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#comicButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#businessAndEconomicButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#businessAndEconomicButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#healthAndFitnessButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#healthAndFitnessButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#otherCategoriesButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#otherCategoriesButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#changeInfoButton:hover {
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
+}
+#updateInfoButton:hover {
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
+}
+#cancelInfoButton:hover {
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
+}
+
+#seeUserPasswordButton:hover{
+    -fx-border-color: red;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+
+.menu-item {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
+.menu-item:hover {
+    -fx-text-fill: white;
+    -fx-border-color: red;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+    -fx-background-color: #830a0a;
+}
+
+#moreInfoButton:hover{
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+
+#undoButton:hover{
+    -fx-effect: dropshadow(gaussian, white, 10, 0, 0, 0);
+}
+#uploadButton:hover{
+    -fx-effect: dropshadow(gaussian, white, 10, 0, 0, 0);
+}
+#returnButton:hover{
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+#borrowButton:hover{
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+#showPassword{
+    -fx-border-color: #E50914FF;
+}
+.table-view{
+    -fx-alignment: center;
+    -fx-background-color: linear-gradient(to bottom, #ca0000, #5e0404);
+}
+/*#userTableView .column-header{*/
+/*    -fx-text-fill: white;*/
+/*}*/
+.table-view .column-header {
+    -fx-background-color: white;
+    -fx-text-fill: white;
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+}
+.table-row-cell {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-font-size: 20;
+}
+.table-cell {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}
+
+#deleteUserButton:hover{
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+#showLoanButton:hover{
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
