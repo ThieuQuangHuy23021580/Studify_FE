@@ -3,238 +3,590 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardController">
    <children>
-      <AnchorPane prefHeight="800.0" prefWidth="1200.0">
+      <AnchorPane>
          <children>
-            <AnchorPane>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#282322" height="800.0" stroke="#282322" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="5.0" width="120.0" />
+            <Group fx:id="dashBoardButtonGroup" layoutX="10.0" layoutY="110.0">
                <children>
-                  <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../PICTURES/dashboard_background.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#282322" height="800.0" stroke="#282322" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="5.0" width="120.0" />
-                  <Group fx:id="dashBoardButtonGroup" layoutX="10.0" layoutY="110.0">
-                     <children>
-                        <Button fx:id="dashBoardButton" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                           <graphic>
-                              <FontIcon fill="WHITE" iconLiteral="dashicons-admin-home" iconSize="50" />
-                           </graphic>
-                        </Button>
-                        <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Dashboard" textFill="WHITE" />
-                     </children>
-                  </Group>
-                  <Group layoutX="10.0" layoutY="330.0">
-                     <children>
-                        <Button fx:id="timetableButton" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                           <graphic>
-                              <FontIcon fill="WHITE" iconLiteral="dashicons-calendar-alt" iconSize="43" />
-                           </graphic>
-                        </Button>
-                        <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="TimeTable" textFill="WHITE" />
-                     </children>
-                  </Group>
-                  <Group layoutX="10.0" layoutY="440.0">
-                     <children>
-                        <Button fx:id="timetableButton1" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                           <graphic>
-                              <FontIcon fill="WHITE" iconLiteral="fth-book-open" iconSize="43" />
-                           </graphic>
-                        </Button>
-                        <Label layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Study Material" textFill="WHITE" />
-                     </children>
-                  </Group>
-                  <Group layoutX="10.0" layoutY="550.0">
-                     <children>
-                        <Button fx:id="timetableButton11" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                           <graphic>
-                              <FontIcon fill="WHITE" iconColor="WHITE" iconLiteral="fth-message-square" iconSize="43" text="" />
-                           </graphic>
-                        </Button>
-                        <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="AI Chatbot" textFill="WHITE" />
-                     </children>
-                  </Group>
-                  <Group fx:id="dashBoardButtonGroup1" layoutX="10.0" layoutY="220.0">
-                     <children>
-                        <Button fx:id="dashBoardButton1" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                           <graphic>
-                              <FontIcon fill="WHITE" iconLiteral="fth-user" iconSize="50" />
-                           </graphic>
-                        </Button>
-                        <Label layoutX="10.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Study Stats" textFill="WHITE" />
-                     </children>
-                  </Group>
-                  <AnchorPane layoutX="160.0" layoutY="30.0" opacity="0.95" prefHeight="80.0" prefWidth="170.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
-                     <children>
-                        <FontIcon iconColor="WHITE" iconLiteral="dashicons-analytics" iconSize="25" layoutX="12.0" layoutY="35.0" />
-                        <Label layoutX="40.0" layoutY="15.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="Pomodoro Timer" textFill="WHITE" />
-                        <Label layoutX="28.0" layoutY="37.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 23;" text="00 : 45 : 00" textFill="WHITE" />
-                        <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" style="-fx-background-radius: 15; -fx-background-color: transparent;" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="350.0" layoutY="30.0" opacity="0.95" prefHeight="80.0" prefWidth="170.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
-                     <children>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-check-square-o" iconSize="25" layoutX="20.0" layoutY="35.0" />
-                        <Label layoutX="50.0" layoutY="15.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="Session Goals" textFill="WHITE" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="37.0" prefHeight="34.0" prefWidth="115.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 23;" text="0/1" textFill="WHITE" />
-                        <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" style="-fx-background-radius: 15; -fx-background-color: transparent;" />
-                     </children>
-                  </AnchorPane>
-                  <Button layoutX="810.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+                  <Button fx:id="dashBoardButton" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-image" iconSize="40" />
+                        <FontIcon fill="WHITE" iconLiteral="dashicons-admin-home" iconSize="50" />
                      </graphic>
                   </Button>
-                  <Button layoutX="900.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+                  <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Dashboard" textFill="WHITE" />
+               </children>
+            </Group>
+            <Group layoutX="10.0" layoutY="330.0">
+               <children>
+                  <Button fx:id="timetableButton" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-music" iconSize="40" />
+                        <FontIcon fill="WHITE" iconLiteral="dashicons-calendar-alt" iconSize="43" />
                      </graphic>
                   </Button>
-                  <Button layoutX="983.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+                  <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="TimeTable" textFill="WHITE" />
+               </children>
+            </Group>
+            <Group layoutX="10.0" layoutY="440.0">
+               <children>
+                  <Button fx:id="timetableButton1" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-headphones" iconSize="40" />
+                        <FontIcon fill="WHITE" iconLiteral="fth-book-open" iconSize="43" />
                      </graphic>
                   </Button>
-                  <Button layoutX="1068.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+                  <Label layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Study Material" textFill="WHITE" />
+               </children>
+            </Group>
+            <Group layoutX="10.0" layoutY="550.0">
+               <children>
+                  <Button fx:id="timetableButton11" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-window-maximize" iconSize="40" />
+                        <FontIcon fill="WHITE" iconColor="WHITE" iconLiteral="fth-message-square" iconSize="43" text="" />
                      </graphic>
                   </Button>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="426.0" layoutY="496.0" strokeType="INSIDE" width="200.0">
+                  <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="AI Chatbot" textFill="WHITE" />
+               </children>
+            </Group>
+            <Group fx:id="dashBoardButtonGroup1" layoutX="10.0" layoutY="220.0">
+               <children>
+                  <Button fx:id="dashBoardButton1" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fill="WHITE" iconLiteral="fth-user" iconSize="50" />
+                     </graphic>
+                  </Button>
+                  <Label layoutX="10.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Study Stats" textFill="WHITE" />
+               </children>
+            </Group>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="800.0" fitWidth="1080.0" layoutX="120.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../PICTURES/dashboard_background.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="160.0" layoutY="30.0" opacity="0.95" prefHeight="80.0" prefWidth="170.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+         <children>
+            <FontIcon iconColor="WHITE" iconLiteral="dashicons-analytics" iconSize="25" layoutX="12.0" layoutY="35.0" />
+            <Label layoutX="40.0" layoutY="15.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="Pomodoro Timer" textFill="WHITE" />
+            <Label layoutX="28.0" layoutY="37.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 23;" text="00 : 45 : 00" textFill="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" style="-fx-background-radius: 15; -fx-background-color: transparent;" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="350.0" layoutY="30.0" opacity="0.95" prefHeight="80.0" prefWidth="170.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+         <children>
+            <FontIcon iconColor="WHITE" iconLiteral="fa-check-square-o" iconSize="25" layoutX="20.0" layoutY="35.0" />
+            <Label layoutX="50.0" layoutY="15.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="Session Goals" textFill="WHITE" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="37.0" prefHeight="34.0" prefWidth="115.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 23;" text="0/1" textFill="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" style="-fx-background-radius: 15; -fx-background-color: transparent;" />
+         </children>
+      </AnchorPane>
+      <Button layoutX="880.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fa-image" iconSize="40" />
+         </graphic>
+      </Button>
+      <Button layoutX="960.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fa-music" iconSize="40" />
+         </graphic>
+      </Button>
+      <Button layoutX="1033.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="dashicons-editor-quote" iconSize="40" />
+         </graphic>
+      </Button>
+      <Button layoutX="1108.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fa-window-maximize" iconSize="40" />
+         </graphic>
+      </Button>
+      <FlowPane layoutX="160.0" layoutY="142.0" prefHeight="648.0" prefWidth="370.0">
+         <children>
+            <AnchorPane fx:id="sessionGoalAnchorPane" opacity="0.95" prefHeight="307.0" prefWidth="370.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+               <children>
+                  <FontIcon iconColor="WHITE" iconLiteral="fa-check-square-o" iconSize="35" layoutX="25.0" layoutY="55.0" />
+                  <Label layoutX="70.0" layoutY="25.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Session Goals" textFill="WHITE" />
+                  <TextField layoutX="25.0" layoutY="70.0" prefHeight="63.0" prefWidth="241.0" promptText="Type a goal..." style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 4; -fx-font-size: 22;" />
+                  <Button layoutX="310.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="280.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-border-width: 3;" textAlignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-plus" iconSize="35" selectionStart="1" tabSize="0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#514745" height="95.0" layoutX="25.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 25; -fx-arc-width: 25;" width="316.0" />
+                  <Label alignment="CENTER" layoutX="54.0" layoutY="150.0" prefHeight="58.0" prefWidth="105.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 40;" text="0" textAlignment="CENTER" textFill="WHITE" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3d3e3e" height="70.0" layoutX="180.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="4.0" />
+                  <Label layoutX="82.0" layoutY="200.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Open" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="210.0" layoutY="150.0" prefHeight="58.0" prefWidth="105.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 40;" text="0" textAlignment="CENTER" textFill="#47d504" />
+                  <Label layoutX="213.0" layoutY="200.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Completed" textFill="WHITE" />
+                  <Button layoutX="75.0" layoutY="247.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="224.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-border-width: 3; -fx-font-size: 18;" text="See all" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="13.0" prefWidth="370.0" />
+            <AnchorPane fx:id="pomodoroAnchorPane" opacity="0.95" prefHeight="157.0" prefWidth="370.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+               <children>
+                  <FontIcon iconColor="WHITE" iconLiteral="dashicons-analytics" iconSize="35" layoutX="25.0" layoutY="55.0">
                      <stroke>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
                               <Stop>
                                  <color>
-                                    <Color red="1.0" blue="0.8999999761581421" />
+                                    <Color />
                                  </color>
                               </Stop>
                               <Stop offset="1.0">
                                  <color>
-                                    <Color green="1.0" blue="0.9833333492279053" />
+                                    <Color red="1.0" green="1.0" blue="1.0" />
                                  </color>
                               </Stop>
                            </stops>
                         </LinearGradient>
                      </stroke>
-                  </Rectangle>
-                  <FlowPane layoutX="160.0" layoutY="142.0" prefHeight="648.0" prefWidth="370.0">
-                     <children>
-                        <AnchorPane opacity="0.95" prefHeight="165.0" prefWidth="370.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
-                           <children>
-                              <FontIcon iconColor="WHITE" iconLiteral="dashicons-analytics" iconSize="35" layoutX="25.0" layoutY="55.0">
-                                 <stroke>
-                                    <LinearGradient endX="1.0" endY="1.0">
-                                       <stops>
-                                          <Stop>
-                                             <color>
-                                                <Color />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="1.0">
-                                             <color>
-                                                <Color red="1.0" green="1.0" blue="1.0" />
-                                             </color>
-                                          </Stop>
-                                       </stops>
-                                    </LinearGradient>
-                                 </stroke>
-                              </FontIcon>
-                              <Label layoutX="70.0" layoutY="25.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Pomodoro Timer" textFill="WHITE" />
-                              <Label layoutX="25.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 38;" text="00 : 45 : 00" textFill="WHITE" />
-                              <Button layoutX="237.0" layoutY="15.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30;">
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" />
-                                 </graphic>
-                                 <font>
-                                    <Font size="1.0" />
-                                 </font>
-                              </Button>
-                              <Button layoutX="297.0" layoutY="15.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="67.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
-                                 </graphic>
-                                 <font>
-                                    <Font size="1.0" />
-                                 </font>
-                              </Button>
-                              <Button layoutX="232.0" layoutY="70.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white;" textAlignment="CENTER">
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="fa-navicon" iconSize="20" tabSize="0" />
-                                 </graphic>
-                                 <font>
-                                    <Font size="1.0" />
-                                 </font>
-                              </Button>
-                              <Button layoutX="295.0" layoutY="70.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white;" textAlignment="CENTER">
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="fa-play" iconSize="20" tabSize="0" />
-                                 </graphic>
-                                 <font>
-                                    <Font size="1.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="30.0" prefWidth="370.0" />
-                        <AnchorPane opacity="0.95" prefHeight="329.0" prefWidth="370.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
-                           <children>
-                              <FontIcon iconColor="WHITE" iconLiteral="fa-check-square-o" iconSize="35" layoutX="25.0" layoutY="55.0" />
-                              <Label layoutX="70.0" layoutY="25.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Session Goals" textFill="WHITE" />
-                              <TextField layoutX="25.0" layoutY="80.0" prefHeight="63.0" prefWidth="241.0" promptText="Type a goal..." style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 4; -fx-font-size: 22;" />
-                              <Button layoutX="297.0" layoutY="15.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="67.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
-                                 </graphic>
-                                 <font>
-                                    <Font size="1.0" />
-                                 </font>
-                              </Button>
-                              <Button layoutX="280.0" layoutY="80.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-border-width: 3;" textAlignment="CENTER">
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="fth-plus" iconSize="35" selectionStart="1" tabSize="0" />
-                                 </graphic>
-                                 <font>
-                                    <Font size="1.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </FlowPane>
+                  </FontIcon>
+                  <Label layoutX="70.0" layoutY="25.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Pomodoro Timer" textFill="WHITE" />
+                  <Label layoutX="25.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 38;" text="00 : 45 : 00" textFill="WHITE" />
+                  <Button layoutX="237.0" layoutY="15.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30;">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="310.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="232.0" layoutY="70.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white;" textAlignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-navicon" iconSize="20" tabSize="0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="295.0" layoutY="70.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white;" textAlignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-play" iconSize="20" tabSize="0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="pomodoroFixAnchorPane" disable="true" layoutX="10.0" layoutY="369.0" opacity="0.95" prefHeight="307.0" prefWidth="370.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="82.0" layoutY="85.0" opacity="0.82" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 25; -fx-arc-width: 25;" width="210.0" />
+                  <FontIcon iconColor="WHITE" iconLiteral="dashicons-analytics" iconSize="35" layoutX="25.0" layoutY="55.0">
+                     <stroke>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </stroke>
+                  </FontIcon>
+                  <Label layoutX="70.0" layoutY="25.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Pomodoro Timer" textFill="WHITE" />
+                  <Label layoutX="90.0" layoutY="83.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 38;" text="00 : 45 : 00" textFill="WHITE" />
+                  <Button layoutX="237.0" layoutY="15.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30;">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="310.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="25.0" layoutY="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white;" textAlignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-minus" iconSize="20" tabSize="0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="295.0" layoutY="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white;" textAlignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-plus" iconSize="20" tabSize="0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="120.0" layoutY="60.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 18;" text="Focus Time (min)" textFill="WHITE" />
+                  <Button layoutX="25.0" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white;" textAlignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-minus" iconSize="20" tabSize="0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="122.0" layoutY="135.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 18;" text="Break Time(min)" textFill="WHITE" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="82.0" layoutY="160.0" opacity="0.82" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 25; -fx-arc-width: 25;" width="210.0" />
+                  <Label layoutX="90.0" layoutY="158.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 38;" text="00 : 45 : 00" textFill="WHITE" />
+                  <Button layoutX="295.0" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white;" textAlignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-plus" iconSize="20" tabSize="0" />
+                     </graphic>
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <RadioButton layoutX="40.0" layoutY="220.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 16;" text="Loop Automatically" textFill="WHITE" />
+                  <Button layoutX="75.0" layoutY="250.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="224.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-border-width: 3; -fx-font-size: 18;" text="Start Timer" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>
+      </FlowPane>
+      <AnchorPane fx:id="taskAnchorPane" layoutX="530.0" layoutY="142.0" opacity="0.95" prefHeight="307.0" prefWidth="233.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+         <children>
+            <VBox prefHeight="305.0" prefWidth="233.0">
+               <children>
+                  <AnchorPane prefHeight="61.0" prefWidth="233.0">
+                     <children>
+                        <RadioButton layoutX="15.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="169.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 18; -fx-font-weight: bold;" text="Task 1" textFill="WHITE" />
+                        <Button layoutX="190.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fth-x" iconSize="30" wrappingWidth="31.0" />
+                           </graphic>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="61.0" prefWidth="233.0">
+                     <children>
+                        <RadioButton layoutX="15.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="169.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 18; -fx-font-weight: bold;" text="Task 2" textFill="WHITE" />
+                        <Button layoutX="190.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fth-x" iconSize="30" wrappingWidth="31.0" />
+                           </graphic>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="71.0" prefHeight="61.0" prefWidth="233.0">
+                     <children>
+                        <RadioButton layoutX="15.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="169.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 18; -fx-font-weight: bold;" text="Task 3" textFill="WHITE" />
+                        <Button layoutX="190.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fth-x" iconSize="30" wrappingWidth="31.0" />
+                           </graphic>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="132.0" prefHeight="61.0" prefWidth="233.0">
+                     <children>
+                        <RadioButton layoutX="15.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="169.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 18; -fx-font-weight: bold;" text="Task 4" textFill="WHITE" />
+                        <Button layoutX="190.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fth-x" iconSize="30" wrappingWidth="31.0" />
+                           </graphic>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="193.0" prefHeight="61.0" prefWidth="233.0">
+                     <children>
+                        <RadioButton layoutX="15.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="169.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 18; -fx-font-weight: bold;" text="Task 5" textFill="WHITE" />
+                        <Button layoutX="190.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fth-x" iconSize="30" wrappingWidth="31.0" />
+                           </graphic>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
       </AnchorPane>
+      <AnchorPane fx:id="backgroundAnchorPane" layoutX="878.0" layoutY="139.0" opacity="0.95" prefHeight="482.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+         <children>
+            <FontIcon iconColor="WHITE" iconLiteral="fa-image" iconSize="30" layoutX="25.0" layoutY="50.0">
+               <stroke>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </stroke>
+            </FontIcon>
+            <Label layoutX="70.0" layoutY="25.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Background" textFill="WHITE" />
+            <Button layoutX="230.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+               <font>
+                  <Font size="1.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
+               </graphic>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="150.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="20.0" layoutY="170.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="150.0" layoutY="170.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="20.0" layoutY="260.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="150.0" layoutY="260.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <FontIcon iconColor="RED" iconLiteral="dashicons-youtube" iconSize="35" layoutX="25.0" layoutY="380.0">
+               <stroke>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </stroke>
+            </FontIcon>
+            <Label layoutX="70.0" layoutY="350.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Youtube URL" textFill="WHITE" />
+            <TextField layoutX="25.0" layoutY="385.0" prefHeight="48.0" prefWidth="201.0" promptText="Enter link here ..." style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 4; -fx-font-size: 20;" />
+            <Button layoutX="229.0" layoutY="385.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-border-width: 3;" textAlignment="CENTER">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="dashicons-format-links" iconSize="30" selectionStart="1" tabSize="0" />
+               </graphic>
+               <font>
+                  <Font size="1.0" />
+               </font>
+            </Button>
+            <Slider layoutX="70.0" layoutY="450.0" prefHeight="10.0" prefWidth="200.0" />
+            <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" layoutX="30.0" layoutY="467.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="soundAnchorPane" disable="true" layoutX="878.0" layoutY="139.0" opacity="0.95" prefHeight="482.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false">
+         <children>
+            <FontIcon iconColor="WHITE" iconLiteral="fa-music" iconSize="30" layoutX="25.0" layoutY="50.0">
+               <stroke>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </stroke>
+            </FontIcon>
+            <Label layoutX="70.0" layoutY="25.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Sound" textFill="WHITE" />
+            <Button layoutX="230.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+               <font>
+                  <Font size="1.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
+               </graphic>
+            </Button>
+            <VBox layoutY="75.0" prefHeight="360.0" prefWidth="290.0">
+               <children>
+                  <AnchorPane prefHeight="60.0" prefWidth="290.0">
+                     <children>
+                        <Label layoutX="30.0" layoutY="1.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="LoFi Beat" textFill="#fffb00" />
+                        <Slider layoutX="70.0" layoutY="35.0" prefHeight="10.0" prefWidth="200.0" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" layoutX="35.0" layoutY="52.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="290.0">
+                     <children>
+                        <Label layoutX="30.0" layoutY="1.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Fireplace Sound" textFill="#fffb00" />
+                        <Slider layoutX="70.0" layoutY="35.0" prefHeight="10.0" prefWidth="200.0" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" layoutX="35.0" layoutY="52.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="70.0" prefHeight="60.0" prefWidth="290.0">
+                     <children>
+                        <Label layoutX="30.0" layoutY="1.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Natural Sound" textFill="#fffb00" />
+                        <Slider layoutX="70.0" layoutY="35.0" prefHeight="10.0" prefWidth="200.0" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" layoutX="35.0" layoutY="52.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="130.0" prefHeight="60.0" prefWidth="290.0">
+                     <children>
+                        <Label layoutX="30.0" layoutY="1.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Rain Sound" textFill="#fffb00" />
+                        <Slider layoutX="70.0" layoutY="35.0" prefHeight="10.0" prefWidth="200.0" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" layoutX="35.0" layoutY="52.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="190.0" prefHeight="60.0" prefWidth="290.0">
+                     <children>
+                        <Label layoutX="30.0" layoutY="1.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Binaural beats" textFill="#fffb00" />
+                        <Slider layoutX="70.0" layoutY="35.0" prefHeight="10.0" prefWidth="200.0" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" layoutX="35.0" layoutY="52.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="250.0" prefHeight="60.0" prefWidth="290.0">
+                     <children>
+                        <Label layoutX="30.0" layoutY="1.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Piano music" textFill="#fffb00" />
+                        <Slider layoutX="70.0" layoutY="35.0" prefHeight="10.0" prefWidth="200.0" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" layoutX="35.0" layoutY="52.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="quoteAnchorPane" disable="true" layoutX="878.0" layoutY="139.0" opacity="0.95" prefHeight="201.0" prefWidth="296.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false">
+         <children>
+            <FontIcon iconColor="WHITE" iconLiteral="dashicons-editor-quote" iconSize="30" layoutX="25.0" layoutY="55.0">
+               <stroke>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </stroke>
+            </FontIcon>
+            <Label layoutX="70.0" layoutY="25.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Quote" textFill="WHITE" />
+            <Button layoutX="230.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-width: 2;">
+               <font>
+                  <Font size="1.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" layoutX="70.0" layoutY="70.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="148.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-border-width: 3;" text="   Shuffe   " textFill="WHITE">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fth-rotate-cw" iconSize="25" tabSize="0" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" layoutX="70.0" layoutY="125.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="148.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-border-width: 3;" text="   Hide   " textFill="WHITE">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fth-eye-off" iconSize="25" tabSize="0" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Text fill="WHITE" layoutX="626.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="“Challenges are what make life interesting. Overcoming them is what makes life meaningful.”" wrappingWidth="533.13671875">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="31.0" />
+         </font>
+         <effect>
+            <DropShadow height="21.37" radius="4.992500000000001" spread="0.17" width="0.6">
+               <input>
+                  <Glow level="1.0" />
+               </input>
+            </DropShadow>
+         </effect>
+      </Text>
    </children>
-</StackPane>
+</AnchorPane>
