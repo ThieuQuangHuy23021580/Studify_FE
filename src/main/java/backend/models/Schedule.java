@@ -7,11 +7,12 @@ public class Schedule {
     private String course;
     private String period;
     private String dayOfWeek;
+    private String room;
     private List<Integer> studentIds;
 
     public Schedule() {}
 
-    public Schedule(int id, String course, String period, String dayOfWeek, List<Integer> studentIds) {
+    public Schedule(int id, String course, String period, String dayOfWeek, String room, List<Integer> studentIds) {
         this.id = id;
         this.course = course;
         this.period = period;
@@ -49,6 +50,14 @@ public class Schedule {
 
     public void setDayOfWeek(String dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
     }
 
     public List<Integer> getStudentIds() {
