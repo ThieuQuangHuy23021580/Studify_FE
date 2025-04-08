@@ -16,8 +16,8 @@ public class UserDAO {
     }
 
     public User findByUsername(String username) {
-        String query = "SELECT * FROM users WHERE username = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -35,8 +35,8 @@ public class UserDAO {
     }
 
     public boolean insert(User user) {
-        String query = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
             stmt.setString(3, user.getEmail());

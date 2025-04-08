@@ -15,6 +15,7 @@ module controller.libraryapp {
     requires com.google.gson;
     requires java.sql;
     requires jbcrypt;
+    requires org.checkerframework.checker.qual;
 
     opens controller to javafx.fxml;
 

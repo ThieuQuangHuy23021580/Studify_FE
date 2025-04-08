@@ -2,6 +2,7 @@ package backend.controllers;
 
 import backend.dao.UserDAO;
 import backend.models.User;
+import org.checkerframework.checker.units.qual.A;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class AuthController {
@@ -34,5 +35,11 @@ public class AuthController {
         user.setPassword(hashed);
 
         return userDAO.insert(user);
+    }
+
+    public static void main(String[] args) throws Exception {
+        User user = new User("xochimcu12323", "manhmanh20", "aduijidfd@gmail.com");
+        AuthController ac = new AuthController();
+        ac.register(user);
     }
 }
