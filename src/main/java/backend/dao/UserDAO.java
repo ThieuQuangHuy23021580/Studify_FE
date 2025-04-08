@@ -15,15 +15,14 @@ public class UserDAO {
         connection = Database.getConnect();
     }
 
-    public User findByUsername(String username) {
-        String sql = "SELECT * FROM users WHERE username = ?";
+    public User findByEmail(String email) {
+        String sql = "SELECT * FROM users WHERE email = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, username);
+            stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 User user = new User();
-                user.setStudentId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
+                user.setUserId(rs.getInt("id"));
                 user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
                 return user;
@@ -35,11 +34,10 @@ public class UserDAO {
     }
 
     public boolean insert(User user) {
-        String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO users (password, email) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getEmail());
+            stmt.setString(1, user.getPassword());
+            stmt.setString(2, user.getEmail());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

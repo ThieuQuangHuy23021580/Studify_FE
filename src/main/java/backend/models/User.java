@@ -1,40 +1,29 @@
 package backend.models;
 
 public class User {
-    private int studentId;
-    private String username;
+    private int userId;
     private String password;
     private String email;
 
     public User() {}
 
-    public User(int studentId, String username, String password, String email) {
-        this.studentId = studentId;
-        this.username = username;
+    public User(int userId, String email, String password) {
+        this.userId = userId;
         this.password = password;
         this.email = email;
     }
 
-    public User(String username, String password, String email) {
-        this.username = username;
+    public User(String email, String password) {
         this.password = password;
         this.email = email;
     }
 
-    public int getStudentId() {
-        return studentId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {
@@ -56,8 +45,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-               "studentId=" + studentId +
-               ", username='" + username + '\'' +
+               "studentId=" + userId +
                ", email='" + email + '\'' + '}';
     }
 } 

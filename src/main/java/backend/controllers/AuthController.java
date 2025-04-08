@@ -2,7 +2,6 @@ package backend.controllers;
 
 import backend.dao.UserDAO;
 import backend.models.User;
-import org.checkerframework.checker.units.qual.A;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class AuthController {
@@ -12,8 +11,8 @@ public class AuthController {
         userDAO = new UserDAO();
     }
 
-    public User login(String username, String password) throws Exception {
-        User user = userDAO.findByUsername(username);
+    public User login(String email, String password) throws Exception {
+        User user = userDAO.findByEmail(email);
 
         if (user == null) {
             throw new Exception("The username doesn't exist!");
@@ -27,7 +26,7 @@ public class AuthController {
     }
 
     public boolean register(User user) throws Exception {
-        if (userDAO.findByUsername(user.getUsername()) != null) {
+        if (userDAO.findByEmail(user.getEmail()) != null) {
             throw new Exception("The username already exists!");
         }
 
@@ -35,11 +34,5 @@ public class AuthController {
         user.setPassword(hashed);
 
         return userDAO.insert(user);
-    }
-
-    public static void main(String[] args) throws Exception {
-        User user = new User("xochimcu12323", "manhmanh20", "aduijidfd@gmail.com");
-        AuthController ac = new AuthController();
-        ac.register(user);
     }
 }
