@@ -4,6 +4,7 @@ public class User {
     private int userId;
     private String password;
     private String email;
+    private int backgroundId;
 
     public User() {}
 
@@ -40,6 +41,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getBackgroundId() {
+        return backgroundId;
+    }
+
+    public void setBackgroundId(int backgroundId) {
+        this.backgroundId = backgroundId;
     }
 
     @Override

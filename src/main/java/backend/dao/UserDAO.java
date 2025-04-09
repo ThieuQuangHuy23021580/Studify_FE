@@ -44,4 +44,34 @@ public class UserDAO {
         }
         return false;
     }
+
+    public boolean setUserBackground(int userId, int backgroundId) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "UPDATE users SET background_id = ? WHERE id = ?"
+            );
+            stmt.setInt(1, backgroundId);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public int getUserBackgroundId(int userId) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT background_id FROM users WHERE id = ?"
+            );
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("background_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }
