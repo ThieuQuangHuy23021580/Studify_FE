@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.paint.Color?>
+
+<VBox fx:id="mainContainer" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #1a1b1e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chat.ChatbotUIController">
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <children>
+      <!-- Title Bar -->
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" style="-fx-background-color: #1a1b1e;">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <Label text="🤖" style="-fx-font-size: 24;"/>
+               <Label text="AI Study Assistant" textFill="#10b981" style="-fx-font-size: 24; -fx-font-weight: bold;">
+                  <font>
+                     <Font name="Segoe UI" size="24.0" />
+                  </font>
+               </Label>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#handleSettings" styleClass="icon-button" text="⚙" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </HBox>
+
+      <!-- Chat Area -->
+      <ScrollPane fx:id="chatScrollPane" fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="chat-scroll-pane">
+         <content>
+            <VBox fx:id="chatContainer" spacing="15" style="-fx-background-color: #1a1b1e;" />
+         </content>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </ScrollPane>
+
+      <!-- Quick Actions -->
+      <HBox spacing="10" alignment="CENTER">
+         <children>
+            <Button fx:id="explainButton" styleClass="quick-action-button" text="Explain this concept" onAction="#handleQuickAction" />
+            <Button fx:id="quizButton" styleClass="quick-action-button" text="Generate study questions" onAction="#handleQuickAction" />
+            <Button fx:id="notesButton" styleClass="quick-action-button" text="Summarize my notes" onAction="#handleQuickAction" />
+            <Button fx:id="focusButton" styleClass="quick-action-button" text="Help me focus" onAction="#handleQuickAction" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </HBox>
+
+      <!-- Input Area -->
+      <HBox alignment="CENTER" spacing="10.0" styleClass="input-area">
+         <children>
+            <TextField fx:id="inputField" HBox.hgrow="ALWAYS" promptText="Ask me anything..." styleClass="input-field" />
+            <Button fx:id="attachButton" mnemonicParsing="false" onAction="#handleAttachment" styleClass="attach-button" text="📎" />
+            <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleSend" styleClass="send-button" text="📨" />
+         </children>
+      </HBox>
+   </children>
+</VBox> 

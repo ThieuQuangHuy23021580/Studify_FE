@@ -1,0 +1,168 @@
+/* Global Styles */
+.root {
+    -fx-background-color: #1a1b1e;
+    -fx-font-family: "Segoe UI";
+}
+
+/* Button Base Styles */
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+    -fx-transition-duration: 0.2s;
+}
+
+/* Icon Button */
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 20px;
+    -fx-padding: 8 12;
+}
+
+.icon-button:hover {
+    -fx-text-fill: #10b981;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+/* Quick Action Buttons */
+.quick-action-button {
+    -fx-background-color: #27272a;
+    -fx-text-fill: #10b981;
+    -fx-font-size: 14px;
+    -fx-padding: 10 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 1);
+}
+
+.quick-action-button:hover {
+    -fx-background-color: #3f3f46;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2);
+    -fx-translate-y: -1;
+}
+
+/* Send Button */
+.send-button {
+    -fx-background-color: #10b981;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-min-width: 45px;
+    -fx-min-height: 45px;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+}
+
+.send-button:hover {
+    -fx-background-color: #059669;
+    -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.4), 8, 0, 0, 0);
+    -fx-rotate: -45;
+}
+
+/* Mic Button */
+.mic-button {
+    -fx-background-color: #27272a;
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 18px;
+    -fx-min-width: 45px;
+    -fx-min-height: 45px;
+}
+
+.mic-button:hover {
+    -fx-background-color: #3f3f46;
+    -fx-text-fill: #10b981;
+}
+
+/* Attach Button */
+.attach-button {
+    -fx-background-color: #27272a;
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 20px;
+    -fx-min-width: 45px;
+    -fx-min-height: 45px;
+}
+
+.attach-button:hover {
+    -fx-background-color: #3f3f46;
+    -fx-text-fill: #10b981;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+/* Input Field */
+.input-field {
+    -fx-background-color: #27272a;
+    -fx-text-fill: #e2e8f0;
+    -fx-prompt-text-fill: #71717a;
+    -fx-font-size: 14px;
+    -fx-padding: 12;
+    -fx-background-radius: 8;
+    -fx-min-height: 45px;
+}
+
+.input-field:focused {
+    -fx-background-color: #3f3f46;
+    -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.2), 4, 0, 0, 0);
+}
+
+/* Chat ScrollPane */
+.chat-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-width: 1;
+    -fx-border-color: #27272a;
+    -fx-border-radius: 12;
+    -fx-padding: 10;
+}
+
+.chat-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #27272a;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #3f3f46;
+}
+
+/* Chat Bubbles */
+.user-bubble {
+    -fx-background-color: #10b981;
+    -fx-background-radius: 18 18 0 18;
+    -fx-padding: 12 16;
+    -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.2), 8, 0, 0, 2);
+}
+
+.user-bubble .text {
+    -fx-fill: white;
+    -fx-font-size: 14px;
+}
+
+.ai-bubble {
+    -fx-background-color: #27272a;
+    -fx-background-radius: 18 18 18 0;
+    -fx-padding: 12 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 1);
+}
+
+.ai-bubble .text {
+    -fx-fill: #e2e8f0;
+    -fx-font-size: 14px;
+}
+
+/* Time Label */
+.time-label {
+    -fx-text-fill: #71717a;
+    -fx-font-size: 12px;
+    -fx-padding: 4 0;
+} 
