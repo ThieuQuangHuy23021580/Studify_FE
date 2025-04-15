@@ -1,8 +1,5 @@
 package controller;
 
-import backend.controllers.AuthController;
-import backend.models.Database;
-import backend.models.User;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,17 +66,12 @@ public class LoginController {
 
     @FXML
     private ImageView bg;
-
     @FXML
     private TextField showPassword;
-
-    private AuthController authController;
-
     Rectangle clip;
 
     @FXML
     void initialize() {
-        authController = new AuthController(); // Khởi tạo AuthController
         showPassword.setVisible(false);
         lb_text2.setVisible(false);
         lb_text5.setVisible(false);
@@ -95,73 +87,14 @@ public class LoginController {
     }
 
     @FXML
-    void signUpButtonPressed(ActionEvent event) {
-        String email = emailAddressField.getText();
-        String password = passwordField.getText();
-        String confirmPassword = ConfirmPasswordField.getText();
+    void signUpButtonPressed(ActionEvent event) throws SQLException {
 
-        // Kiểm tra dữ liệu đầu vào
-        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            lb_text4.setText("Vui lòng điền đầy đủ thông tin!");
-            lb_text4.setVisible(true);
-            return;
-        }
-
-        if (!password.equals(confirmPassword)) {
-            lb_text4.setText("Mật khẩu xác nhận không khớp!");
-            lb_text4.setVisible(true);
-            return;
-        }
-
-        if (!checkStrongPassword(password)) {
-            lb_text4.setText("Mật khẩu cần có chữ hoa, chữ thường, số và ký tự đặc biệt!");
-            lb_text4.setVisible(true);
-            return;
-        }
-
-        // Đăng ký người dùng
-        try {
-            User newUser = new User(email, password);
-            boolean success = authController.register(newUser);
-            if (success) {
-                lb_text4.setText("Đăng ký thành công! Vui lòng đăng nhập.");
-                lb_text4.setVisible(true);
-                toSignInButtonPressed(event); // Chuyển về màn đăng nhập
-            }
-        } catch (Exception e) {
-            lb_text4.setText("Lỗi: " + e.getMessage());
-            lb_text4.setVisible(true);
-        }
     }
 
     @FXML
     void signInButtonPressed() throws IOException {
-        String email = emailAddressField.getText();
-        String password = passwordField.getText();
-
-        // Kiểm tra dữ liệu đầu vào
-        if (email.isEmpty() || password.isEmpty()) {
-            lb_text3.setText("Vui lòng điền đầy đủ thông tin!");
-            lb_text3.setVisible(true);
-            return;
-        }
-
-        // Đăng nhập
-        try {
-            User user = authController.login(email, password);
-            lb_text3.setText("Đăng nhập thành công: " + user.getEmail());
-            lb_text3.setVisible(true);
-
-            // Chuyển đến màn hình chính sau khi đăng nhập (nếu có)
-            // Ví dụ: FXMLLoader.load(getClass().getResource("/path/to/main.fxml"));
-            Stage stage = (Stage) signInButton.getScene().getWindow();
-            stage.setTitle("Main Application");
-            // Tải giao diện chính (nếu có) hoặc hiển thị thông báo
-        } catch (Exception e) {
-            lb_text3.setText("Lỗi: " + e.getMessage());
-            lb_text3.setVisible(true);
-        }
     }
+
 
     public void showCharacter() {
         if (show.isSelected()) {
@@ -199,26 +132,36 @@ public class LoginController {
         return haveDigit && haveUpperCase && haveLowerCase && haveSpecial;
     }
 
+    /**
+     * Chuyển khung hình từ Đăng nhập sang Đăng kí.
+     *
+     * @param actionEvent sự kiện nhấn nút Sign Up.
+     */
     public void toSignUpButtonPressed(ActionEvent actionEvent) {
         emailAddressField.setText("");
         passwordField.setText("");
         show.setVisible(false);
+        //Dịch chuyển khung hình hiên thị background trái sang phải.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);
         moveClip.setToX(793);
         moveClip.play();
+        System.out.println("moveclip " + moveClip.getNode().getTranslateX());
 
+        //Dịch chuyển layer1 sang phải.
         TranslateTransition slide1 = new TranslateTransition();
         slide1.setDuration(Duration.seconds(0.8));
         slide1.setNode(layer1);
         slide1.setToX(793);
         slide1.play();
 
+        //Dịch chuyển layer2 sang trái.
         TranslateTransition slide2 = new TranslateTransition();
         slide2.setDuration(Duration.seconds(0.5));
         slide2.setNode(layer2);
         slide2.setToX(-420);
         slide2.play();
 
+        // Kiểm tra vị trí dịch chuyển của layer2, thay đổi hiển thị các đối tượng.
         slide2.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
             double currentTranslateX = layer2.getTranslateX();
 
@@ -236,30 +179,43 @@ public class LoginController {
             }
         });
 
-        slide1.setOnFinished(event -> {});
-        slide2.setOnFinished(event -> {});
+        slide1.setOnFinished(event -> {
+        });
+        slide2.setOnFinished(event -> {
+        });
+
     }
 
+    /**
+     * Chuyển khung hình từ Đăng kí sang Đăng nhập.
+     *
+     * @param actionEvent sự kiện nhấn nút Sign In.
+     */
     public void toSignInButtonPressed(ActionEvent actionEvent) {
         emailAddressField.setText(null);
         passwordField.setText(null);
         show.setVisible(true);
+        //Dịch chuyển khung hình hiên thị background phải sang trái.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);
         moveClip.setToX(0);
         moveClip.play();
+        System.out.println("moveclip " + moveClip.getNode().getTranslateX());
 
+        // Dịch chuyển layer1 sang trái.
         TranslateTransition slide1 = new TranslateTransition();
         slide1.setDuration(Duration.seconds(0.8));
         slide1.setNode(layer1);
         slide1.setToX(0);
         slide1.play();
 
+        //Dịch chuyển layer2 sang phải.
         TranslateTransition slide2 = new TranslateTransition();
         slide2.setDuration(Duration.seconds(0.5));
         slide2.setNode(layer2);
         slide2.setToX(0);
         slide2.play();
 
+        // Kiểm tra vị trí dịch chuyển của layer2, thay đổi hiển thị các đối tượng.
         slide2.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
             double currentTranslateX = layer2.getTranslateX();
 
@@ -278,7 +234,11 @@ public class LoginController {
             }
         });
 
-        slide1.setOnFinished(event -> {});
-        slide2.setOnFinished(event -> {});
+        slide1.setOnFinished(event -> {
+        });
+        slide2.setOnFinished(event -> {
+        });
+
     }
+
 }
