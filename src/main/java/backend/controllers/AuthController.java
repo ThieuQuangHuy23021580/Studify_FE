@@ -15,11 +15,11 @@ public class AuthController {
         User user = userDAO.findByEmail(email);
 
         if (user == null) {
-            throw new Exception("The username doesn't exist!");
+            throw new Exception("Email không tồn tại!");
         }
 
         if (!BCrypt.checkpw(password, user.getPassword())) {
-            throw new Exception("Wrong username or password!");
+            throw new Exception("Sai email hoặc mật khẩu!");
         }
 
         return user;
@@ -27,7 +27,7 @@ public class AuthController {
 
     public boolean register(User user) throws Exception {
         if (userDAO.findByEmail(user.getEmail()) != null) {
-            throw new Exception("The username already exists!");
+            throw new Exception("Email đã tồn tại!");
         }
 
         String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
