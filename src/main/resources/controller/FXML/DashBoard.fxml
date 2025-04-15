@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
@@ -21,84 +20,15 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardController">
+
+<AnchorPane prefHeight="800.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardController">
    <children>
-      <AnchorPane>
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#282322" height="800.0" stroke="#282322" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="5.0" width="120.0" />
-            <Group fx:id="dashBoardButtonGroup" layoutX="10.0" layoutY="110.0">
-               <children>
-                  <Button fx:id="dashBoardButton" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                     <graphic>
-                        <FontIcon fill="WHITE" iconLiteral="dashicons-admin-home" iconSize="50" />
-                     </graphic>
-                  </Button>
-                  <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Dashboard" textFill="WHITE" />
-               </children>
-            </Group>
-            <Group layoutX="10.0" layoutY="330.0">
-               <children>
-                  <Button fx:id="timetableButton" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                     <graphic>
-                        <FontIcon fill="WHITE" iconLiteral="dashicons-calendar-alt" iconSize="43" />
-                     </graphic>
-                  </Button>
-                  <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="TimeTable" textFill="WHITE" />
-               </children>
-            </Group>
-            <Group layoutX="10.0" layoutY="440.0">
-               <children>
-                  <Button fx:id="timetableButton1" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                     <graphic>
-                        <FontIcon fill="WHITE" iconLiteral="fth-book-open" iconSize="43" />
-                     </graphic>
-                  </Button>
-                  <Label layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Study Material" textFill="WHITE" />
-               </children>
-            </Group>
-            <Group layoutX="10.0" layoutY="550.0">
-               <children>
-                  <Button fx:id="timetableButton11" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                     <graphic>
-                        <FontIcon fill="WHITE" iconColor="WHITE" iconLiteral="fth-message-square" iconSize="43" text="" />
-                     </graphic>
-                  </Button>
-                  <Label layoutX="13.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="AI Chatbot" textFill="WHITE" />
-               </children>
-            </Group>
-            <Group fx:id="dashBoardButtonGroup1" layoutX="10.0" layoutY="220.0">
-               <children>
-                  <Button fx:id="dashBoardButton1" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                     <graphic>
-                        <FontIcon fill="WHITE" iconLiteral="fth-user" iconSize="50" />
-                     </graphic>
-                  </Button>
-                  <Label layoutX="10.0" layoutY="70.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Study Stats" textFill="WHITE" />
-               </children>
-            </Group>
-         </children>
-      </AnchorPane>
-      <ImageView fitHeight="800.0" fitWidth="1080.0" layoutX="120.0" pickOnBounds="true">
+      <ImageView fitHeight="800.0" fitWidth="1080.0" pickOnBounds="true">
          <image>
             <Image url="@../../PICTURES/dashboard_background.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="160.0" layoutY="30.0" opacity="0.95" prefHeight="80.0" prefWidth="170.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+      <AnchorPane layoutX="38.0" layoutY="31.0" opacity="0.95" prefHeight="80.0" prefWidth="170.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
          <children>
             <FontIcon iconColor="WHITE" iconLiteral="dashicons-analytics" iconSize="25" layoutX="12.0" layoutY="35.0" />
             <Label layoutX="40.0" layoutY="15.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="Pomodoro Timer" textFill="WHITE" />
@@ -106,7 +36,7 @@
             <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" style="-fx-background-radius: 15; -fx-background-color: transparent;" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="350.0" layoutY="30.0" opacity="0.95" prefHeight="80.0" prefWidth="170.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+      <AnchorPane layoutX="228.0" layoutY="31.0" opacity="0.95" prefHeight="80.0" prefWidth="170.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
          <children>
             <FontIcon iconColor="WHITE" iconLiteral="fa-check-square-o" iconSize="25" layoutX="20.0" layoutY="35.0" />
             <Label layoutX="50.0" layoutY="15.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="Session Goals" textFill="WHITE" />
@@ -114,27 +44,27 @@
             <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" style="-fx-background-radius: 15; -fx-background-color: transparent;" />
          </children>
       </AnchorPane>
-      <Button layoutX="880.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+      <Button layoutX="758.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fa-image" iconSize="40" />
          </graphic>
       </Button>
-      <Button layoutX="960.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+      <Button layoutX="838.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fa-music" iconSize="40" />
          </graphic>
       </Button>
-      <Button layoutX="1033.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+      <Button layoutX="911.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="dashicons-editor-quote" iconSize="40" />
          </graphic>
       </Button>
-      <Button layoutX="1108.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
+      <Button layoutX="986.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #282322; -fx-border-color: white; -fx-border-width: 2;" textFill="#282322">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fa-window-maximize" iconSize="40" />
          </graphic>
       </Button>
-      <FlowPane layoutX="160.0" layoutY="142.0" prefHeight="648.0" prefWidth="370.0">
+      <FlowPane layoutX="38.0" layoutY="140.0" prefHeight="648.0" prefWidth="370.0">
          <children>
             <AnchorPane fx:id="sessionGoalAnchorPane" opacity="0.95" prefHeight="307.0" prefWidth="370.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
                <children>
@@ -312,7 +242,7 @@
             </AnchorPane>
          </children>
       </FlowPane>
-      <AnchorPane fx:id="taskAnchorPane" layoutX="530.0" layoutY="142.0" opacity="0.95" prefHeight="307.0" prefWidth="233.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+      <AnchorPane fx:id="taskAnchorPane" layoutX="408.0" layoutY="140.0" opacity="0.95" prefHeight="307.0" prefWidth="233.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
          <children>
             <VBox prefHeight="305.0" prefWidth="233.0">
                <children>
@@ -385,7 +315,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="backgroundAnchorPane" layoutX="878.0" layoutY="139.0" opacity="0.95" prefHeight="482.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
+      <AnchorPane fx:id="backgroundAnchorPane" layoutX="758.0" layoutY="140.0" opacity="0.95" prefHeight="482.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;">
          <children>
             <FontIcon iconColor="WHITE" iconLiteral="fa-image" iconSize="30" layoutX="25.0" layoutY="50.0">
                <stroke>
@@ -452,7 +382,7 @@
             <FontIcon iconColor="WHITE" iconLiteral="fth-volume-2" iconSize="25" layoutX="30.0" layoutY="467.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="soundAnchorPane" disable="true" layoutX="878.0" layoutY="139.0" opacity="0.95" prefHeight="482.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false">
+      <AnchorPane fx:id="soundAnchorPane" disable="true" layoutX="758.0" layoutY="140.0" opacity="0.95" prefHeight="482.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false">
          <children>
             <FontIcon iconColor="WHITE" iconLiteral="fa-music" iconSize="30" layoutX="25.0" layoutY="50.0">
                <stroke>
@@ -529,7 +459,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="quoteAnchorPane" disable="true" layoutX="878.0" layoutY="139.0" opacity="0.95" prefHeight="201.0" prefWidth="296.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false">
+      <AnchorPane fx:id="quoteAnchorPane" disable="true" layoutX="758.0" layoutY="140.0" opacity="0.95" prefHeight="201.0" prefWidth="296.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false">
          <children>
             <FontIcon iconColor="WHITE" iconLiteral="dashicons-editor-quote" iconSize="30" layoutX="25.0" layoutY="55.0">
                <stroke>
@@ -576,7 +506,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Text fill="WHITE" layoutX="626.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="“Challenges are what make life interesting. Overcoming them is what makes life meaningful.”" wrappingWidth="533.13671875">
+      <Text fill="WHITE" layoutX="489.0" layoutY="683.0" strokeType="OUTSIDE" strokeWidth="0.0" text="“Challenges are what make life interesting. Overcoming them is what makes life meaningful.”" wrappingWidth="533.13671875">
          <font>
             <Font name="Book Antiqua Bold Italic" size="31.0" />
          </font>
