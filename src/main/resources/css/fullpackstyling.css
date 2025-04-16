@@ -293,6 +293,7 @@
 
 .scroll-pane .viewport {
     -fx-background-color:  #25201f;
+    -fx-border-color: gray;
 }
 
 .scroll-pane .scroll-bar:vertical {
@@ -300,21 +301,47 @@
 }
 
 .scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: #731581;
+    -fx-background-color: #E8B931;
     -fx-transition: 0.3s;
 }
 
 .scroll-pane .scroll-bar:vertical:hover .thumb {
-    -fx-background-color: #dd00ff;
+    -fx-background-color: #E8B931;
 }
 
 .scroll-pane .scroll-bar:horizontal .thumb {
-    -fx-background-color: #dd00ff;
+    -fx-background-color: #E8B931;
     -fx-pref-width: 2px;
 }
-
 .scroll-pane .scroll-bar .track,
 .scroll-pane .scroll-bar .increment-arrow,
 .scroll-pane .scroll-bar .decrement-arrow {
     -fx-background-color: transparent;
+}
+.sidebar-item {
+    -fx-background-color: transparent;
+}
+.sidebar-item.selected {
+    -fx-background-color: transparent;
+}
+.sidebar-item:hover {
+    -fx-background-color: transparent;
+}
+.sidebar-item .button .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+.sidebar-item:hover .button .ikonli-font-icon {
+    -fx-effect: dropshadow(gaussian, #ffffff, 10, 0, 0, 0);
+}
+.sidebar-item.selected .button .ikonli-font-icon {
+    -fx-icon-color: #E8B931;
+}
+.sidebar-item .label {
+    -fx-icon-color: white;
+}
+.sidebar-item:hover .label {
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0);
+}
+.sidebar-item.selected .label {
+    -fx-text-fill: #E8B931;
 }

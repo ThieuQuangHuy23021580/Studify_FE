@@ -8,7 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SidebarController {
     @FXML
@@ -33,41 +35,23 @@ public class SidebarController {
 
     private VBox selectedItem;
 
-    public void handleDashboardClick() throws IOException {
-        setSelected(dashboardBtn);
-        loadMainContent("/controller/FXML/DashBoardView.fxml");
-    }
-
-    public void handleStudyStatsClick() throws IOException {
-        setSelected(studystatsBtn);
-        loadMainContent("/controller/FXML/DashBoardView.fxml");
-    }
-
-    public void handleTimetableClick() throws IOException {
-        setSelected(timetableBtn);
-        loadMainContent("/controller/FXML/DashBoardView.fxml");
-    }
-
-    public void handleMaterialClick() throws IOException {
-        setSelected(studymaterialBtn);
-        loadMainContent("/controller/FXML/DashBoardView.fxml");
-    }
-
-    public void handleAiChatbotClick() throws IOException {
-        setSelected(aichatbotBtn);
-        loadMainContent("/controller/FXML/DashBoardView.fxml");
-    }
+    private Map<String, AnchorPane> contentCache = new HashMap<>();
 
     private AnchorPane mainContent;
 
     @FXML
     private void initialize() {
         sidebarItems = List.of(dashboardBtn, studymaterialBtn, timetableBtn,studystatsBtn, aichatbotBtn);
+        setSelected(dashboardBtn);
+    }
+
+    public void setMainContent(AnchorPane mainContent) {
+        this.mainContent = mainContent;
     }
 
     /**
      *  Chọn Button trên Sidebar.
-     * @param item là Button.
+     * @param item là Vbox chứa Button.
      */
     private void setSelected(VBox item){
         for(VBox box : sidebarItems){
@@ -76,27 +60,51 @@ public class SidebarController {
         item.getStyleClass().add("selected");
         selectedItem = item;
     }
-
-    /**
-     * Gán mainContent ở Sidebar để show ở Main khi tương tác Button.
-     * @param mainContent cần hiện trên màn hình.
-     */
-    public void setMainContent(AnchorPane mainContent) {
-        this.mainContent = mainContent;
-    }
-
     /**
      * Truyền mainContent từ Main vào Sidebar.
-     * @param fxml resource từ Main.
-     * @throws IOException ném ngoại lệ khi không load được fxml.
+     * @param fxmlPath resource từ Main.
      */
-    private void loadMainContent(String fxml) throws IOException {
-        Parent content = FXMLLoader.load(getClass().getResource(fxml));
-        mainContent.getChildren().setAll(content);
-        AnchorPane.setTopAnchor(content, 0.0);
-        AnchorPane.setBottomAnchor(content, 0.0);
-        AnchorPane.setLeftAnchor(content, 0.0);
-        AnchorPane.setRightAnchor(content, 0.0);
+    private void loadMainContent(String fxmlPath) {
+        try {
+            AnchorPane newContent = contentCache.computeIfAbsent(fxmlPath, path -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+                    return loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            mainContent.getChildren().setAll(newContent);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load main content" + e.getMessage());
+        }
+    }
+
+    public void handleDashboardClick() throws IOException {
+        setSelected(dashboardBtn);
+        loadMainContent("/controller/FXML/DashBoard.fxml");
+    }
+
+    public void handleStudyStatsClick() throws IOException {
+        setSelected(studystatsBtn);
+        loadMainContent("/controller/FXML/StudyStats.fxml");
+    }
+
+    public void handleTimetableClick() throws IOException {
+        setSelected(timetableBtn);
+        loadMainContent("/controller/FXML/TimeTable.fxml");
+    }
+
+    public void handleMaterialClick() throws IOException {
+        setSelected(studymaterialBtn);
+        loadMainContent("/controller/FXML/StudyMaterial.fxml");
+    }
+
+    public void handleAiChatbotClick() throws IOException {
+        setSelected(aichatbotBtn);
+        loadMainContent("/controller/FXML/AIChatbot.fxml");
     }
 
 
