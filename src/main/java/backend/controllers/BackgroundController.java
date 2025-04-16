@@ -15,18 +15,22 @@ public class BackgroundController {
         userDAO = new UserDAO();
     }
 
+    /** Lấy tất cả hình nền */
     public List<Background> getAllBackgrounds() {
         return backgroundDAO.getAllBackgrounds();
     }
 
+    /** Lấy tất cả hình nên theo phân loại */
     public List<Background> getBackgroundsByCategory(String category) {
         return backgroundDAO.getBackgroundsByCategory(category);
     }
 
+    /** Chọn hình nền của người dùng */
     public boolean setUserBackground(int userId, int backgroundId) {
         return userDAO.setUserBackground(userId, backgroundId);
     }
 
+    /** Lấy hình nền của người dùng */
     public Background getUserBackground(int userId) {
         return backgroundDAO.getBackgroundById(userDAO.getUserBackgroundId(userId));
     }

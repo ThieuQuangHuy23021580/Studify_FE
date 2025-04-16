@@ -2,6 +2,7 @@ package backend.controllers;
 
 import backend.dao.UserDAO;
 import backend.models.User;
+import org.checkerframework.checker.units.qual.A;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class AuthController {
@@ -11,6 +12,11 @@ public class AuthController {
         userDAO = new UserDAO();
     }
 
+    /**
+     * Đăng nhập
+     * @param email Email của người dùng
+     * @param password Mật khẩu của người dùng
+     * */
     public User login(String email, String password) throws Exception {
         User user = userDAO.findByEmail(email);
 
