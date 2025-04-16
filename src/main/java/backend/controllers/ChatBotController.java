@@ -15,12 +15,7 @@ public class ChatBotController {
      * @param prompt Câu hỏi
      * */
 
-    public String askBot(String prompt) {
-        return chatBot.askChatbot(prompt);
-    }
-
-    public static void main(String[] args) {
-        ChatBotController chatBotController = new ChatBotController();
-        System.out.println(chatBotController.askBot("What is my name"));
+    public String askBot(String sessionId, String prompt) {
+        return chatBot.askChatbot(sessionId, prompt);
     }
 }
