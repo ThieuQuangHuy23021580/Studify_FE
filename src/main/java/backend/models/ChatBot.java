@@ -1,30 +1,33 @@
 package backend.models;
 
-import backend.controllers.ChatBotController;
+import backend.dao.ChatBotDAO;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class ChatBot {
-    private Map<String, String> sessionHistory = new HashMap<>();
+    private Map<String, List<String>> sessionHistory;
+
+    public ChatBot() {
+        ChatBotDAO chatBotDAO = new ChatBotDAO();
+        sessionHistory = chatBotDAO.loadAllSessionHistories();  
+    }
 
     public String askChatbot(String sessionId, String prompt) {
         try {
-            URL url = new URL("http://127.0.0.1:11434/api/generate");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            List<String> history = sessionHistory.getOrDefault(sessionId, new ArrayList<>());
 
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setDoOutput(true);
+            history.add("User: " + prompt);
 
-            String history = sessionHistory.getOrDefault(sessionId, "");
-            String updatedPrompt = history + "\nUser: " + prompt + "\nBot:";
+            StringBuilder fullPrompt = new StringBuilder();
+            for (String msg : history) {
+                fullPrompt.append(msg).append("\n");
+            }
+            fullPrompt.append("Bot:");
 
-            String escapedPrompt = updatedPrompt
+            String escapedPrompt = fullPrompt.toString()
                     .replace("\\", "\\\\")
                     .replace("\"", "\\\"")
                     .replace("\n", "\\n");
@@ -36,6 +39,12 @@ public class ChatBot {
               "stream": false
             }
             """.formatted(escapedPrompt);
+
+            URL url = new URL("http://127.0.0.1:11434/api/generate");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
 
             try (OutputStream os = conn.getOutputStream()) {
                 byte[] input = jsonInput.getBytes("utf-8");
@@ -54,7 +63,8 @@ public class ChatBot {
             int end = responseJson.indexOf("\"", start);
             String response = responseJson.substring(start, end).replace("\\n", "\n");
 
-            sessionHistory.put(sessionId, updatedPrompt + response);
+            history.add("Bot: " + response);
+            sessionHistory.put(sessionId, history);
 
             return response;
 
@@ -63,17 +73,21 @@ public class ChatBot {
         }
     }
 
+    public List<String> getSessionHistory(String sessionId) {
+        return sessionHistory.getOrDefault(sessionId, new ArrayList<>());
+    }
+
     public static void main(String[] args) {
         ChatBot bot = new ChatBot();
         String sessionId = "user123";
 
-        String r1 = bot.askChatbot(sessionId, "I'm 20 years old. Please remember it");
-        System.out.println("Bot 1: " + r1);
+        System.out.println("Bot 1: " + bot.askChatbot(sessionId, "My favorite color is blue"));
+        System.out.println("Bot 2: " + bot.askChatbot(sessionId, "What is my favorite color?"));
 
-        String r2 = bot.askChatbot(sessionId, "What did I just ask you to do");
-        System.out.println("Bot 2: " + r2);
-
-        String r3 = bot.askChatbot(sessionId, "What's my age?");
-        System.out.println("Bot 3: " + r3);
+        System.out.println("\n--- Chat History ---");
+        for (String msg : bot.getSessionHistory(sessionId)) {
+            System.out.println(msg);
+        }
     }
+
 }

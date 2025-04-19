@@ -1,21 +1,34 @@
 package backend.controllers;
 
+import backend.dao.ChatBotDAO;
 import backend.models.ChatBot;
-import java.util.Scanner;
+
+import java.util.List;
+import java.util.Map;
 
 public class ChatBotController {
     private ChatBot chatBot;
+    private ChatBotDAO chatBotDAO;
 
     public ChatBotController() {
-        chatBot = new ChatBot();
+        this.chatBot = new ChatBot();
+        this.chatBotDAO = new ChatBotDAO();
     }
 
     /**
-     * Hỏi ChatBot và nhận được phản hồi kiểu String
-     * @param prompt Câu hỏi
+     * Hỏi chatbot và nhận lại String lời phản hồi
+     * @param sessionId ID của session
+     * @param prompt câu hỏi muốn hỏi
      * */
+    public String sendMessage(String sessionId, String prompt) {
+        chatBotDAO.saveMessage(sessionId, "user", prompt);
+        String response = chatBot.askChatbot(sessionId, prompt);
+        chatBotDAO.saveMessage(sessionId, "bot", response);
+        return response;
+    }
 
-    public String askBot(String sessionId, String prompt) {
-        return chatBot.askChatbot(sessionId, prompt);
+
+    public List<String> getConversationHistory(String sessionId) {
+        return chatBot.getSessionHistory(sessionId);
     }
 }

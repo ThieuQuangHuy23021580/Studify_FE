@@ -31,6 +31,7 @@ public class AuthController {
         return user;
     }
 
+    /** Đăng ký tài khoản */
     public boolean register(User user) throws Exception {
         if (userDAO.findByEmail(user.getEmail()) != null) {
             throw new Exception("The username already exists!");
