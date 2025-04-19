@@ -116,6 +116,7 @@ public class LoginController {
     public void toSignUpButtonPressed(ActionEvent actionEvent) {
         emailAddressField.setText("");
         passwordField.setText("");
+        ConfirmPasswordField.setText("");
         show.setVisible(false);
         //Dịch chuyển khung hình hiên thị background trái sang phải.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);

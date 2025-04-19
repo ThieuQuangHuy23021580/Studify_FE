@@ -17,19 +17,16 @@ public class MainController {
         System.out.println("Bắt đầu khởi tạo MainController..."); // Debug log
 
         try {
-            // 1. Load Sidebar
             System.out.println("Đang tải Sidebar.fxml...");
             FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/controller/FXML/Sidebar.fxml"));
             AnchorPane sidebar = sidebarLoader.load();
             SidebarController sidebarController = sidebarLoader.getController();
 
-            // 2. Load Dashboard
             System.out.println("Đang tải DashBoard.fxml...");
             FXMLLoader dashboardLoader = new FXMLLoader(getClass().getResource("/controller/FXML/DashBoard.fxml"));
             AnchorPane dashboard = dashboardLoader.load();
             sidebarController.setMainContent(dashboard);
 
-            // 3. Thiết lập layout
             mainView.setLeft(sidebar);
             mainView.setCenter(dashboard);
 
