@@ -21,9 +21,7 @@ public class ChatBotController {
      * @param prompt câu hỏi muốn hỏi
      * */
     public String sendMessage(String sessionId, String prompt) {
-        chatBotDAO.saveMessage(sessionId, "user", prompt);
         String response = chatBot.askChatbot(sessionId, prompt);
-        chatBotDAO.saveMessage(sessionId, "bot", response);
         return response;
     }
 

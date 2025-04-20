@@ -7,6 +7,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 public class ChatBot {
     private Map<String, List<String>> sessionHistory;
 
@@ -17,9 +21,14 @@ public class ChatBot {
 
     public String askChatbot(String sessionId, String prompt) {
         try {
+            ChatBotDAO chatBotDAO = new ChatBotDAO(); // để lưu message
+
             List<String> history = sessionHistory.getOrDefault(sessionId, new ArrayList<>());
 
             history.add("User: " + prompt);
+            if (history.size() > 20) {
+                history = history.subList(history.size() - 20, history.size()); // giữ 20 dòng cuối
+            }
 
             StringBuilder fullPrompt = new StringBuilder();
             for (String msg : history) {
@@ -27,18 +36,11 @@ public class ChatBot {
             }
             fullPrompt.append("Bot:");
 
-            String escapedPrompt = fullPrompt.toString()
-                    .replace("\\", "\\\\")
-                    .replace("\"", "\\\"")
-                    .replace("\n", "\\n");
-
-            String jsonInput = """
-            {
-              "model": "llama3:8b",
-              "prompt": "%s",
-              "stream": false
-            }
-            """.formatted(escapedPrompt);
+            // Dùng Gson để tạo JSON request
+            JsonObject json = new JsonObject();
+            json.addProperty("model", "llama3:8b");
+            json.addProperty("prompt", fullPrompt.toString());
+            json.addProperty("stream", false);
 
             URL url = new URL("http://127.0.0.1:11434/api/generate");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -47,7 +49,7 @@ public class ChatBot {
             conn.setDoOutput(true);
 
             try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonInput.getBytes("utf-8");
+                byte[] input = json.toString().getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
 
@@ -59,12 +61,14 @@ public class ChatBot {
 
             conn.disconnect();
 
-            int start = responseJson.indexOf("\"response\":\"") + 12;
-            int end = responseJson.indexOf("\"", start);
-            String response = responseJson.substring(start, end).replace("\\n", "\n");
+            JsonObject responseObj = JsonParser.parseString(responseJson).getAsJsonObject();
+            String response = responseObj.get("response").getAsString().trim();
 
             history.add("Bot: " + response);
             sessionHistory.put(sessionId, history);
+
+            chatBotDAO.saveMessage(sessionId, "user", prompt);
+            chatBotDAO.saveMessage(sessionId, "bot", response);
 
             return response;
 
@@ -81,8 +85,7 @@ public class ChatBot {
         ChatBot bot = new ChatBot();
         String sessionId = "user123";
 
-        System.out.println("Bot 1: " + bot.askChatbot(sessionId, "My favorite color is blue"));
-        System.out.println("Bot 2: " + bot.askChatbot(sessionId, "What is my favorite color?"));
+        System.out.println("Bot 2: " + bot.askChatbot(sessionId, "What is the third law of newton1?"));
 
         System.out.println("\n--- Chat History ---");
         for (String msg : bot.getSessionHistory(sessionId)) {
