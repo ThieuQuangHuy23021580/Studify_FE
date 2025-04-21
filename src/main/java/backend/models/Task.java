@@ -10,7 +10,7 @@ public class Task {
 
     public Task(String title, int studentId) {
         this.title = title;
-        this.completed = true;
+        this.completed = false;
         this.studentId = studentId;
     }
 

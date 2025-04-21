@@ -2,11 +2,13 @@ package backend.dao;
 
 import backend.models.Database;
 import backend.models.Task;
+import backend.models.TaskStat;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +20,16 @@ public class TaskDAO {
     }
 
     public boolean insert(Task task) {
-        String sql = "INSERT INTO tasks (title, completed, user_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO tasks (title, completed, user_id, completed_at) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, task.getTitle());
             stmt.setBoolean(2, task.isCompleted());
             stmt.setInt(3, task.getStudentId());
+            if (task.isCompleted()) {
+                stmt.setString(4, java.time.LocalDateTime.now().toString());
+            } else {
+                stmt.setNull(4, java.sql.Types.NULL);
+            }
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -32,12 +39,17 @@ public class TaskDAO {
     }
 
     public boolean update(Task task) {
-        String sql = "UPDATE tasks SET title = ?, completed = ?, user_id = ? WHERE id = ?";
+        String sql = "UPDATE tasks SET title = ?, completed = ?, user_id = ?, completed_at = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, task.getTitle());
             stmt.setBoolean(2, task.isCompleted());
             stmt.setInt(3, task.getStudentId());
-            stmt.setInt(4, task.getId());
+            if (task.isCompleted()) {
+                stmt.setString(4, java.time.LocalDateTime.now().toString());
+            } else {
+                stmt.setNull(4, java.sql.Types.NULL);
+            }
+            stmt.setInt(5, task.getId());
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -77,5 +89,43 @@ public class TaskDAO {
             e.printStackTrace();
         }
         return tasks;
+    }
+
+    public List<TaskStat> getCompletedTaskStatsByDay(int userId) {
+        String sql = "SELECT DATE(completed_at) AS period, COUNT(*) AS total " +
+                "FROM tasks WHERE completed = 1 AND user_id = ? " +
+                "GROUP BY period ORDER BY period";
+        return getStats(sql, userId);
+    }
+
+    public List<TaskStat> getCompletedTaskStatsByMonth(int userId) {
+        String sql = "SELECT strftime('%Y-%m-01', completed_at) AS period, COUNT(*) AS total " +
+                "FROM tasks WHERE completed = 1 AND user_id = ? " +
+                "GROUP BY period ORDER BY period";
+        return getStats(sql, userId);
+    }
+
+    public List<TaskStat> getCompletedTaskStatsByYear(int userId) {
+        String sql = "SELECT strftime('%Y-01-01', completed_at) AS period, COUNT(*) AS total " +
+                "FROM tasks WHERE completed = 1 AND user_id = ? " +
+                "GROUP BY period ORDER BY period";
+        return getStats(sql, userId);
+    }
+
+    private List<TaskStat> getStats(String sql, int userId) {
+        List<TaskStat> stats = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String periodStr = rs.getString("period");
+                LocalDate date = LocalDate.parse(periodStr);
+                int total = rs.getInt("total");
+                stats.add(new TaskStat(date, total));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stats;
     }
 }

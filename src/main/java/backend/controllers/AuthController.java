@@ -2,11 +2,13 @@ package backend.controllers;
 
 import backend.dao.UserDAO;
 import backend.models.User;
-import org.checkerframework.checker.units.qual.A;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AuthController {
-    private UserDAO userDAO;
+    protected UserDAO userDAO;
 
     public AuthController() {
         userDAO = new UserDAO();
@@ -33,11 +35,22 @@ public class AuthController {
 
     /** Đăng ký tài khoản */
     public boolean register(User user) throws Exception {
-        if (userDAO.findByEmail(user.getEmail()) != null) {
-            throw new Exception("The username already exists!");
+        String email = user.getEmail();
+        String password = user.getPassword();
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            throw new Exception("Invalid email format!");
         }
 
-        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        if (password.length() < 6 || password.length() > 16 || !password.matches(".*[A-Z].*")) {
+            throw new Exception("Password must be 6-16 characters and contain at least one uppercase letter!");
+        }
+
+        if (userDAO.findByEmail(email) != null) {
+            throw new Exception("The email already exists!");
+        }
+
+        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
         user.setPassword(hashed);
 
         return userDAO.insert(user);

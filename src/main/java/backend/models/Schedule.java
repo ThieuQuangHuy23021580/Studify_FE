@@ -17,6 +17,7 @@ public class Schedule {
         this.course = course;
         this.period = period;
         this.dayOfWeek = dayOfWeek;
+        this.room = room;
         this.studentIds = studentIds;
     }
 
