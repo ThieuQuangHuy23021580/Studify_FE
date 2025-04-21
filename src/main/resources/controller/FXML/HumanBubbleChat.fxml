@@ -7,7 +7,7 @@
 
 <FlowPane hgap="5.0" prefHeight="70.0" prefWidth="700.0" style="-fx-background-color: #25201f;" vgap="5.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BubbleChatController">
    <children>
-      <Label fx:id="humanMessageLabel" alignment="CENTER_RIGHT" prefWidth="700.0" text="Human Message ..." textFill="WHITE" wrapText="true">
+      <Label fx:id="messageLabel" alignment="CENTER_RIGHT" prefWidth="700.0" text="Human Message ..." textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Italic" size="16.0" />
          </font>
