@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ScheduleController {
-    private final ScheduleDAO scheduleDAO;
+    protected ScheduleDAO scheduleDAO;
 
     public ScheduleController() {
         this.scheduleDAO = new ScheduleDAO();

@@ -6,7 +6,7 @@ import backend.models.Session;
 import java.util.List;
 
 public class SessionController {
-    private final SessionDAO sessionDAO = new SessionDAO();
+    protected SessionDAO sessionDAO = new SessionDAO();
 
     public boolean createNewSession(String sessionId, String userId) {
         if (sessionDAO.sessionExists(sessionId)) {

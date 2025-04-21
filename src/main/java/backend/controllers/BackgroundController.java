@@ -15,6 +15,12 @@ public class BackgroundController {
         userDAO = new UserDAO();
     }
 
+    public BackgroundController(BackgroundDAO backgroundDAO, UserDAO userDAO) {
+        this.backgroundDAO = backgroundDAO;
+        this.userDAO = userDAO;
+    }
+
+
     /** Lấy tất cả hình nền */
     public List<Background> getAllBackgrounds() {
         return backgroundDAO.getAllBackgrounds();
