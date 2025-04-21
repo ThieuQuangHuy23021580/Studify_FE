@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane hgap="5.0" prefHeight="70.0" prefWidth="700.0" style="-fx-background-color: #25201f;" vgap="5.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BubbleChatController">
+   <children>
+      <Label fx:id="humanMessageLabel" alignment="CENTER_RIGHT" prefWidth="700.0" text="Human Message ..." textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Italic" size="16.0" />
+         </font>
+         <padding>
+            <Insets bottom="20.0" left="80.0" right="20.0" />
+         </padding>
+      </Label>
+   </children>
+   <padding>
+      <Insets bottom="5.0" />
+   </padding>
+</FlowPane>

@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import View.LoginView;
 
 public class Main extends Application {
-
+    private Stage primaryStage;
     @Override
     public void start(Stage stage) {
         try {

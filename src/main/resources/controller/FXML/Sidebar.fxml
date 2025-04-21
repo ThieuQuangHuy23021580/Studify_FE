@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="120.0" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SidebarController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#282322" height="800.0" stroke="#282322" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="5.0" width="120.0" />
+      <VBox fx:id="sidebarContainer" alignment="CENTER" layoutY="120.0" prefHeight="550.0" prefWidth="120.0">
+         <children>
+            <VBox fx:id="dashboardBtn" onMouseClicked="#handleDashboardClick" prefHeight="110.0" prefWidth="120.0" styleClass="sidebar-item">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#handleDashboardClick" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fill="WHITE" iconLiteral="dashicons-admin-home" iconSize="50" />
+                     </graphic>
+                  </Button>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="120.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Dashboard" textAlignment="CENTER" textFill="WHITE" />
+               </children>
+            </VBox>
+            <VBox fx:id="studystatsBtn" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleStudyStatsClick" prefHeight="110.0" prefWidth="120.0" styleClass="sidebar-item">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#handleStudyStatsClick" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fill="WHITE" iconLiteral="fth-user" iconSize="50" />
+                     </graphic>
+                  </Button>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="120.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Study Stats" textAlignment="CENTER" textFill="WHITE" />
+               </children>
+            </VBox>
+            <VBox fx:id="timetableBtn" layoutX="10.0" layoutY="120.0" onMouseClicked="#handleTimetableClick" prefHeight="110.0" prefWidth="120.0" styleClass="sidebar-item">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#handleTimetableClick" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fill="WHITE" iconLiteral="dashicons-calendar-alt" iconSize="50" />
+                     </graphic>
+                  </Button>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="120.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="TimeTable" textAlignment="CENTER" textFill="WHITE" />
+               </children>
+            </VBox>
+            <VBox fx:id="studymaterialBtn" layoutX="10.0" layoutY="230.0" onMouseClicked="#handleMaterialClick" prefHeight="110.0" prefWidth="120.0" styleClass="sidebar-item">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#handleMaterialClick" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fill="WHITE" iconLiteral="fth-book-open" iconSize="50" />
+                     </graphic>
+                  </Button>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="120.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="Study Material" textAlignment="CENTER" textFill="WHITE" />
+               </children>
+            </VBox>
+            <VBox fx:id="aichatbotBtn" layoutX="10.0" layoutY="340.0" onMouseClicked="#handleAiChatbotClick" prefHeight="110.0" prefWidth="120.0" styleClass="sidebar-item">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#handleAiChatbotClick" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fill="WHITE" iconLiteral="fth-message-square" iconSize="50" />
+                     </graphic>
+                  </Button>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="120.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 15; -fx-font-weight: bold;" stylesheets="@../../css/fullpackstyling.css" text="AI Chatbot" textAlignment="CENTER" textFill="WHITE" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
