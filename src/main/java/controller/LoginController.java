@@ -1,5 +1,7 @@
 package controller;
 
+import backend.controllers.AuthController;
+import backend.models.User;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,6 +72,8 @@ public class LoginController {
     private TextField showPassword;
     Rectangle clip;
 
+    private AuthController authController;
+
     @FXML
     void initialize() {
         showPassword.setVisible(false);
@@ -84,11 +88,26 @@ public class LoginController {
         signInButton.setCursor(Cursor.HAND);
         signUpButton.setCursor(Cursor.HAND);
         showPassword.setCursor(Cursor.HAND);
+
+        authController = new AuthController();
     }
 
     @FXML
-    void signUpButtonPressed(ActionEvent event) throws SQLException {
-
+    void signUpButtonPressed(ActionEvent event) throws Exception {
+        if (!passwordField.getText().equals(ConfirmPasswordField.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Error", "The password must match!");
+        } else {
+            User user = new User(emailAddressField.getText(), passwordField.getText());
+            try {
+                authController.register(user);
+                showAlert(Alert.AlertType.INFORMATION, "Successful", "Successful", "Registered successfully!");
+                emailAddressField.clear();
+                passwordField.clear();
+                ConfirmPasswordField.clear();
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Error", e.getMessage());
+            }
+        }
     }
 
     @FXML
@@ -215,6 +234,20 @@ public class LoginController {
         slide2.setOnFinished(event -> {
         });
 
+    }
+
+    /** Phương thức để hiển thị Alert lên màn hình
+     * @param type Loại Alert: AlertType.INFORMATION, WARNING, ERROR, CONFIRMATION, NONE
+     * @param title Tiêu đề
+     * @param header Đề mục
+     * @param content Nội dung
+     * */
+    public static void showAlert(Alert.AlertType type, String title, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }
