@@ -1,5 +1,7 @@
 package controller;
 
+import backend.controllers.AuthController;
+import backend.models.User;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,6 +72,8 @@ public class LoginController {
     private TextField showPassword;
     Rectangle clip;
 
+    private AuthController authController;
+
     @FXML
     void initialize() {
         showPassword.setVisible(false);
@@ -84,15 +88,49 @@ public class LoginController {
         signInButton.setCursor(Cursor.HAND);
         signUpButton.setCursor(Cursor.HAND);
         showPassword.setCursor(Cursor.HAND);
+
+        authController = new AuthController();
     }
 
     @FXML
-    void signUpButtonPressed(ActionEvent event) throws SQLException {
-
+    void signUpButtonPressed(ActionEvent event) throws Exception {
+        if (!passwordField.getText().equals(ConfirmPasswordField.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Error", "The password must match!");
+        } else {
+            User user = new User(emailAddressField.getText(), passwordField.getText());
+            try {
+                authController.register(user);
+                showAlert(Alert.AlertType.INFORMATION, "Successful", "Successful", "Registered successfully!");
+                emailAddressField.clear();
+                passwordField.clear();
+                ConfirmPasswordField.clear();
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Error", e.getMessage());
+            }
+        }
     }
 
     @FXML
     void signInButtonPressed() throws IOException {
+        String email = emailAddressField.getText();
+        String password = passwordField.getText();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Missing Information", "Please enter both email and password.");
+            return;
+        }
+
+        try {
+            User user = authController.login(email, password);
+            if (user != null) {
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", null, "Welcome back!");
+                // TODO: Chuyển đến màn hình chính (main scene)
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Login Failed", null, "Invalid email or password.");
+            }
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Login Error", e.getMessage());
+        }
     }
 
 
@@ -116,7 +154,6 @@ public class LoginController {
     public void toSignUpButtonPressed(ActionEvent actionEvent) {
         emailAddressField.setText("");
         passwordField.setText("");
-        ConfirmPasswordField.setText("");
         show.setVisible(false);
         //Dịch chuyển khung hình hiên thị background trái sang phải.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);
@@ -216,6 +253,20 @@ public class LoginController {
         slide2.setOnFinished(event -> {
         });
 
+    }
+
+    /** Phương thức để hiển thị Alert lên màn hình
+     * @param type Loại Alert: AlertType.INFORMATION, WARNING, ERROR, CONFIRMATION, NONE
+     * @param title Tiêu đề
+     * @param header Đề mục
+     * @param content Nội dung
+     * */
+    public static void showAlert(Alert.AlertType type, String title, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }

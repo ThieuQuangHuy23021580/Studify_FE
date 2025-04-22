@@ -13,6 +13,7 @@ module controller.libraryapp {
     requires java.desktop;
 //    requires org.mariadb.jdbc;
     requires com.google.gson;
+    requires jbcrypt;
     requires java.sql;
     requires javafx.media;
     requires jdk.jsobject;

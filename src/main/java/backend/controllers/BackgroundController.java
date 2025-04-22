@@ -1,0 +1,43 @@
+package backend.controllers;
+
+import backend.dao.BackgroundDAO;
+import backend.dao.UserDAO;
+import backend.models.Background;
+
+import java.util.List;
+
+public class BackgroundController {
+    private BackgroundDAO backgroundDAO;
+    private UserDAO userDAO;
+
+    public BackgroundController() {
+        backgroundDAO = new BackgroundDAO();
+        userDAO = new UserDAO();
+    }
+
+    public BackgroundController(BackgroundDAO backgroundDAO, UserDAO userDAO) {
+        this.backgroundDAO = backgroundDAO;
+        this.userDAO = userDAO;
+    }
+
+
+    /** Lấy tất cả hình nền */
+    public List<Background> getAllBackgrounds() {
+        return backgroundDAO.getAllBackgrounds();
+    }
+
+    /** Lấy tất cả hình nên theo phân loại */
+    public List<Background> getBackgroundsByCategory(String category) {
+        return backgroundDAO.getBackgroundsByCategory(category);
+    }
+
+    /** Chọn hình nền của người dùng */
+    public boolean setUserBackground(int userId, int backgroundId) {
+        return userDAO.setUserBackground(userId, backgroundId);
+    }
+
+    /** Lấy hình nền của người dùng */
+    public Background getUserBackground(int userId) {
+        return backgroundDAO.getBackgroundById(userDAO.getUserBackgroundId(userId));
+    }
+}
