@@ -112,6 +112,25 @@ public class LoginController {
 
     @FXML
     void signInButtonPressed() throws IOException {
+        String email = emailAddressField.getText();
+        String password = passwordField.getText();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Missing Information", "Please enter both email and password.");
+            return;
+        }
+
+        try {
+            User user = authController.login(email, password);
+            if (user != null) {
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", null, "Welcome back!");
+                // TODO: Chuyển đến màn hình chính (main scene)
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Login Failed", null, "Invalid email or password.");
+            }
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Login Error", e.getMessage());
+        }
     }
 
 
