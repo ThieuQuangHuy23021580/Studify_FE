@@ -5,54 +5,103 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1080.0" style="-fx-background-color: #25201f;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AIChatbotController">
+<StackPane style="-fx-background-color: #2f2f2f;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AIChatbotController">
    <children>
-      <Button fx:id="newChatBtn" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322">
-         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fth-edit" iconSize="35" />
-         </graphic>
-      </Button>
-      <Label alignment="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="40.0" prefWidth="130.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 23;" text="AI-Chatbot" textFill="WHITE">
-         <effect>
-            <Glow />
-         </effect>
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="190.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="700.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="60.0" AnchorPane.topAnchor="0.0">
-         <content>
-            <VBox fx:id="chatVbox" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <AnchorPane prefHeight="70.0" prefWidth="700.0" />
-               </children>
-            </VBox>
-         </content>
-      </ScrollPane>
-      <HBox layoutX="190.0" layoutY="740.0" prefHeight="60.0" prefWidth="700.0">
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="640.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="30.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="652.0" minHeight="10.0" prefHeight="652.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
+         </rowConstraints>
          <children>
-            <TextField fx:id="sendTextField" prefHeight="60.0" prefWidth="638.0" promptText="Send a message ..." style="-fx-background-color: #1D1918; -fx-background-radius: 15px 0px 0px 0px; -fx-border-color: gray; -fx-border-radius: 15px 0px 0px 15px; -fx-font-size: 20; -fx-border-width: 1;">
-               <HBox.margin>
+            <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="700.0" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowSpan="2">
+               <content>
+                  <VBox fx:id="chatVbox" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #2f2f2f;" />
+               </content>
+            </ScrollPane>
+            <HBox minHeight="50.0" minWidth="640.0" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <TextField fx:id="sendTextField" minHeight="60.0" minWidth="545.0" promptText="Ask anything ..." style="-fx-background-color: #424242; -fx-background-radius: 15px 0px 0px 15px; -fx-font-size: 20;" />
+                  <Button layoutX="311.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="50.0" style="-fx-background-color: #424242;">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="dashicons-database-import" iconSize="40" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="sendBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="50.0" style="-fx-background-color: #424242; -fx-background-radius: 0px 15px 15px 0px;">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fth-corner-right-up" iconSize="40" />
+                     </graphic>
+                  </Button>
+               </children>
+               <GridPane.margin>
                   <Insets />
-               </HBox.margin>
-            </TextField>
-            <Button fx:id="sendBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="77.0" style="-fx-background-color: #1D1918; -fx-border-color: gray; -fx-border-radius: 0px 15px 15px 0px;">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
+               </GridPane.margin>
+            </HBox>
+            <AnchorPane fx:id="chatHistoryAnchorPane" style="-fx-background-color: #212121;" GridPane.rowSpan="3">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="190.0" style="-fx-background-color: #2f2f2f;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="100.0">
+                     <content>
+                        <FlowPane minHeight="600.0" minWidth="190.0" prefWidth="190.0" style="-fx-background-color: #212121;" />
+                     </content>
+                  </ScrollPane>
+                  <Label layoutY="75.0" prefHeight="27.0" prefWidth="202.0" text="     History" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="newChatBtn" mnemonicParsing="false" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322">
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fth-corner-right-up" iconSize="40" />
+                  <FontIcon iconColor="WHITE" iconLiteral="fth-edit" iconSize="35" />
                </graphic>
+               <GridPane.margin>
+                  <Insets bottom="30.0" left="60.0" />
+               </GridPane.margin>
             </Button>
+            <Button fx:id="historyBtn" layoutX="60.0" layoutY="33.0" mnemonicParsing="false" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fth-menu" iconSize="35" />
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="30.0" />
+               </GridPane.margin>
+            </Button>
+            <Label alignment="TOP_CENTER" prefHeight="63.0" prefWidth="202.0" text="AI-Chatbot" textFill="WHITE" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Label>
          </children>
-      </HBox>
+      </GridPane>
    </children>
-</AnchorPane>
+</StackPane>

@@ -1,6 +1,5 @@
 package controller;
 
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
@@ -8,35 +7,57 @@ import javafx.util.Duration;
 
 public class PomodoroTimerController {
     private Label timerLabel;
-    private Label originalTimerLabel;
-    private String[] time;
     private Timeline timeline;
+    private Runnable onFinishCallback;
 
-    int hour;
-    int minute;
-    int second;
-    int remainingSeconds;
+    private int initialSeconds;
+    private int remainingSeconds;
+    private String initialTimeString;
 
-    public PomodoroTimerController(Label timerLabel) {
+    public PomodoroTimerController(Label timerLabel, String initialTime, Runnable onFinishCallback) {
         this.timerLabel = timerLabel;
-        time = timerLabel.getText().split(":");
-        hour = Integer.parseInt(time[0]);
-        minute = Integer.parseInt(time[1]);
-        second = Integer.parseInt(time[2]);
-        remainingSeconds = hour * 3600 + minute * 60 + second;
-        originalTimerLabel = new Label();
-        originalTimerLabel.setText(timerLabel.getText());
+        this.onFinishCallback = onFinishCallback;
+        setTime(initialTime);
+        updateLabel();
+    }
+
+    private void setTime(String timeString) {
+        this.initialTimeString = timeString;
+        String[] timeParts = timeString.split(" : ");
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+        int second = Integer.parseInt(timeParts[2]);
+        this.initialSeconds = hour * 3600 + minute * 60 + second;
+        this.remainingSeconds = this.initialSeconds;
+        updateLabel();
     }
 
     public void start() {
         if (timeline != null && timeline.getStatus() == Timeline.Status.RUNNING) {
             return;
         }
+        if (timeline != null && timeline.getStatus() == Timeline.Status.PAUSED) {
+            timeline.play();
+            return;
+        }
+        if (remainingSeconds <= 0)
+            return;
+
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            if (remainingSeconds >= 1) remainingSeconds--;
-            updateLabel();
-            if (remainingSeconds <= 0) {
-                reset();
+            if (remainingSeconds >= 1) {
+                remainingSeconds--;
+                updateLabel();
+                if (remainingSeconds <= 0) {
+                    stop();
+                    if (onFinishCallback != null) {
+                        onFinishCallback.run();
+                    }
+                }
+            } else {
+                stop();
+                if (onFinishCallback != null) {
+                    onFinishCallback.run();
+                }
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -47,26 +68,37 @@ public class PomodoroTimerController {
         if (timeline != null) {
             timeline.stop();
         }
+        timeline = null;
+    }
+
+    public void pause() {
+        if (timeline != null && timeline.getStatus() == Timeline.Status.RUNNING) {
+            timeline.pause();
+        }
+    }
+
+    public void reset(String newTime) {
+        stop();
+        setTime(newTime);
     }
 
     public void reset() {
-        stop();
-        timerLabel.setText(originalTimerLabel.getText());
-        time = originalTimerLabel.getText().split(":");
-        hour = Integer.parseInt(time[0]);
-        minute = Integer.parseInt(time[1]);
-        second = Integer.parseInt(time[2]);
-        remainingSeconds = hour * 3600 + minute * 60 + second;
-        updateLabel();
+        reset(this.initialTimeString);
     }
 
     private void updateLabel() {
-        int hour = remainingSeconds / 3600;
-        int minute = (remainingSeconds - (hour * 3600)) / 60;
-        int second = remainingSeconds - hour * 3600 - minute * 60;
-        timerLabel.setText(String.format("%02d:%02d:%02d", hour, minute, second));
-
+        if (timerLabel == null) return;
+        int hours = remainingSeconds / 3600;
+        int minutes = (remainingSeconds % 3600) / 60;
+        int seconds = remainingSeconds % 60;
+        timerLabel.setText(String.format("%02d : %02d : %02d", hours, minutes, seconds));
     }
 
+    public boolean isRunning() {
+        return timeline != null && timeline.getStatus() == Timeline.Status.RUNNING;
+    }
 
+    public boolean isPaused() {
+        return timeline != null && timeline.getStatus() == Timeline.Status.PAUSED;
+    }
 }

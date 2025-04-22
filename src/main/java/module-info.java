@@ -14,6 +14,8 @@ module controller.libraryapp {
 //    requires org.mariadb.jdbc;
     requires com.google.gson;
     requires java.sql;
+    requires javafx.media;
+    requires jdk.jsobject;
 
     opens controller to javafx.fxml;
 

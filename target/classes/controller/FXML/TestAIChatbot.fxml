@@ -17,19 +17,19 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 
-<StackPane style="-fx-background-color: #2f2f2f;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AIChatbotController">
+<StackPane style="-fx-background-color: #2f2f2f;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane>
-         <columnConstraints>
+        <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="640.0" />
-            <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="30.0" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="652.0" minHeight="10.0" prefHeight="652.0" vgrow="ALWAYS" />
-            <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
-         </rowConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="640.0" />
+          <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="30.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="652.0" minHeight="10.0" prefHeight="652.0" vgrow="ALWAYS" />
+          <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
+        </rowConstraints>
          <children>
             <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="700.0" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowSpan="2">
                <content>

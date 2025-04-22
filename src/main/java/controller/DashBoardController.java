@@ -1,19 +1,44 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 import kotlin.OverloadResolutionByLambdaReturnType;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class DashBoardController {
+
+    private String FOCUS_TIME;
+    private String BREAK_TIME;
+    private int MIN_FOCUS_MINUTES = 10;
+    private int MAX_FOCUS_MINUTES = 120;
+    private int MIN_BREAK_MINUTES = 5;
+    private int MAX_BREAK_MINUTES = 30;
+    boolean isFocus = true;
+    boolean isPause = false;
+
+    private String soundPath = getClass().getResource("/PICTURES/clock-alarm.mp3").toString();
+    private AudioClip alarmSound;
 
     @FXML
     private Button addGoalBtn;
@@ -61,7 +86,10 @@ public class DashBoardController {
     private Button fullScreenBtn;
 
     @FXML
-    private RadioButton loopAutomaticcallyRadioBtn;
+    private Label miniFocusTimeLabel;
+
+    @FXML
+    private RadioButton loopAutomaticallyRadioBtn;
 
     @FXML
     private Button minusBreakTimeBtn;
@@ -94,6 +122,12 @@ public class DashBoardController {
     private Text quoteLabel;
 
     @FXML
+    private Button hideQuoteBtn;
+
+    @FXML
+    private Button shuffleQuoteBtn;
+
+    @FXML
     private Button runPomodoroTimerBtn;
 
     @FXML
@@ -117,50 +151,160 @@ public class DashBoardController {
     @FXML
     private AnchorPane taskAnchorPane;
 
+    @FXML
+    private Button pausePomodoroTimerBtn;
+
+    @FXML
+    private FlowPane taskListFlowPane;
+
+    @FXML
+    private Label openTaskLabel;
+
+    @FXML
+    private Label completedTaskLabel;
+
+    @FXML
+    private Label miniTaskLabel;
+
+    @FXML
+    private StackPane rootStackPane;
+
+    @FXML
+    private ImageView backgroundImage;
+
+    @FXML
+    private Slider lofiSlider;
+
+    @FXML
+    private Slider fireplaceSlider;
+
+    @FXML
+    private Slider naturalSlider;
+
+    @FXML
+    private Slider rainSlider;
+
+    @FXML
+    private Slider binauralSlider;
+
+    @FXML
+    private Slider pianoSlider;
+
+    @FXML
+    private TextField urlTextField;
 
     private List<AnchorPane> showStudyTool, showAllTool;
 
-    private PomodoroTimerController pomodoroTimerController;
+    private PomodoroTimerController focusTimeController, minifocusTimeController;
+
+    private SoundController soundController;
+
+    private Boolean isShowQuote;
+
+
+    private VideoPlayerController currentVideoController = null;
+
+    private Stage currentVideoStage = null;
+
+    private static final String[] YOUTUBE_URL_PATTERNS = {
+            "https://(?:www\\.)?youtube\\.com/watch\\?v=([a-zA-Z0-9_\\-]+)",
+            "https://(?:www\\.)?youtube\\.com/embed/([a-zA-Z0-9_\\-]+)",
+            "https://youtu\\.be/([a-zA-Z0-9_\\-]+)",
+            "https://(?:www\\.)?youtube\\.com/v/([a-zA-Z0-9_\\-]+)",
+    };
+
 
     @FXML
     public void initialize() {
+
+        isShowQuote = true;
+
+        //Media Settings:
+        Platform.runLater(() -> {
+            Stage stage = (Stage) rootStackPane.getScene().getWindow(); // Lấy Stage
+            if (stage != null) {
+                stage.setOnCloseRequest(event -> {
+                    System.out.println("Cửa sổ đóng, giải phóng âm thanh...");
+                    if (soundController != null) {
+                        soundController.disposeAll();
+                        this.cleanupOnExit();
+                    }
+                });
+            }
+        });
+
+        soundController = new SoundController();
+        soundController.loadSound("lofi","/PICTURES/lofi-beat.mp3");
+        soundController.loadSound("fireplace","/PICTURES/fireplace-sound.mp3");
+        soundController.loadSound("natural","/PICTURES/natural-sound.mp3");
+        soundController.loadSound("rain","/PICTURES/rain-sound.mp3");
+        soundController.loadSound("binaural","/PICTURES/binaural-beat.mp3");
+        soundController.loadSound("piano","/PICTURES/piano-sound.mp3");
+
+        setupSliderListener(lofiSlider, "lofi");
+        setupSliderListener(fireplaceSlider, "fireplace");
+        setupSliderListener(naturalSlider, "natural");
+        setupSliderListener(rainSlider, "rain");
+        setupSliderListener(binauralSlider, "binaural");
+        setupSliderListener(pianoSlider, "piano");
+
+        //Background Settings:
+        if (backgroundImage != null && rootStackPane != null) {
+            backgroundImage.fitWidthProperty().bind(rootStackPane.widthProperty());
+            backgroundImage.fitHeightProperty().bind(rootStackPane.heightProperty());
+        } else {
+            System.err.println("Lỗi binding: rootStackPane hoặc backgroundImage từ FXML là null.");
+        }
+
+        //Pomodoro Clock Setting:
+        FOCUS_TIME = focusTimeFixLabel.getText();
+        BREAK_TIME = breakTimeFixLabel.getText();
+
+        alarmSound = new AudioClip(soundPath);
+        alarmSound.setCycleCount(AudioClip.INDEFINITE);
+
+        focusTimeController = new PomodoroTimerController(focusTimeLabel, FOCUS_TIME, this::handleTimerFinish);
+        minifocusTimeController = new PomodoroTimerController(miniFocusTimeLabel, FOCUS_TIME, null);
+
+        //Pane Settings:
         showStudyTool = List.of(quoteAnchorPane, soundAnchorPane, backgroundAnchorPane);
         showAllTool = List.of(pomodoroAnchorPane, pomodoroFixAnchorPane, sessionGoalAnchorPane, taskAnchorPane,
                 quoteAnchorPane, soundAnchorPane, backgroundAnchorPane);
-        for (AnchorPane anchorPane : showAllTool) showAnchorPane(anchorPane, false);
+        for (AnchorPane anchorPane : showAllTool) showNode(anchorPane, false);
+
     }
 
-    private void showAnchorPane(AnchorPane ap, boolean isShow) {
-        ap.setVisible(isShow);
-        ap.setManaged(isShow);
+    private void showNode(Node node, boolean isShow) {
+        node.setVisible(isShow);
+        node.setManaged(isShow);
     }
 
     private void showAnchorPane(AnchorPane ap, List<AnchorPane> showStudyTool, boolean isShow) {
         for (AnchorPane anchorPane : showStudyTool) {
-            showAnchorPane(anchorPane, false);
+            showNode(anchorPane, false);
         }
-        showAnchorPane(ap, true);
+        showNode(ap, true);
     }
 
     @FXML
     public void pomodoroTimerBtnClicked() {
-        showAnchorPane(pomodoroAnchorPane, true);
+        showNode(pomodoroAnchorPane, true);
     }
 
     @FXML
     public void sessionGoalsBtnClicked() {
-        showAnchorPane(sessionGoalAnchorPane, true);
+        showNode(sessionGoalAnchorPane, true);
     }
 
     @FXML
     public void pomodoroFixBtnClicked() {
-        showAnchorPane(pomodoroAnchorPane, false);
-        showAnchorPane(pomodoroFixAnchorPane, true);
+        showNode(pomodoroAnchorPane, false);
+        showNode(pomodoroFixAnchorPane, true);
     }
 
     @FXML
     public void seeAllTaskBtnClicked() {
-        showAnchorPane(taskAnchorPane, true);
+        showNode(taskAnchorPane, true);
     }
 
     @FXML
@@ -180,71 +324,388 @@ public class DashBoardController {
 
     @FXML
     public void closeSessionGoalsBtnClicked() {
-        showAnchorPane(sessionGoalAnchorPane, false);
-        showAnchorPane(taskAnchorPane, false);
+        showNode(sessionGoalAnchorPane, false);
+        showNode(taskAnchorPane, false);
     }
 
     @FXML
     public void closePomodoroTimerBtnClicked() {
-        showAnchorPane(pomodoroAnchorPane, false);
+        showNode(pomodoroAnchorPane, false);
     }
 
     @FXML
     public void closePomodoroFixBtnClicked() {
-        showAnchorPane(pomodoroFixAnchorPane, false);
-    }
-
-    @FXML
-    public void startTimerBtnClicked() {
-        showAnchorPane(pomodoroFixAnchorPane, false);
-        showAnchorPane(pomodoroAnchorPane, true);
+        showNode(pomodoroFixAnchorPane, false);
     }
 
     @FXML
     public void closeBackgroundBtnClicked() {
-        showAnchorPane(backgroundAnchorPane, false);
+        showNode(backgroundAnchorPane, false);
     }
 
     @FXML
     public void closeSoundAnchorPaneBtnClicked() {
-        showAnchorPane(soundAnchorPane, false);
+        showNode(soundAnchorPane, false);
     }
 
     @FXML
     public void closeQuoteAnchorPaneBtnClicked() {
-        showAnchorPane(quoteAnchorPane, false);
-    }
-
-    @FXML
-    public void runPomodoroTimerBtnClicked() {
-        if (pomodoroTimerController == null) {
-            pomodoroTimerController = new PomodoroTimerController(focusTimeLabel);
-        }
-        pomodoroTimerController.start();
-    }
-
-    @FXML
-    public void addGoalBtnClicked() {
-    }
-
-    @FXML
-    public void minusFocusTimeBtnClicked() {
-    }
-
-    @FXML
-    public void plusFocusTimeBtnClicked() {
-    }
-
-    @FXML
-    public void minusBreakTimeBtnClicked() {
-    }
-
-    @FXML
-    public void plusTimeBreakBtnClicked() {
+        showNode(quoteAnchorPane, false);
     }
 
     @FXML
     public void fullScreenBtnClicked() {
+        Node sourceNode = fullScreenBtn;
+        Scene scene = sourceNode.getScene();
+        Window window = scene.getWindow();
+        if (window instanceof Stage) {
+            Stage stage = (Stage) window;
+            boolean currentFullScreenState = stage.isFullScreen();
+            stage.setFullScreen(!currentFullScreenState);
+        }
     }
+
+    private void setupSliderListener(Slider slider, String soundIdentifier) {
+        if (slider != null && soundController != null) {
+            double initialSliderValue = slider.getValue();
+            double initialVolume = initialSliderValue / slider.getMax();
+            soundController.setVolume(soundIdentifier, initialVolume);
+
+            slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+                double volume = newValue.doubleValue() / slider.getMax();
+                soundController.setVolume(soundIdentifier, volume);
+                if (volume > 0 && !soundController.isPlaying(soundIdentifier)) {
+                    soundController.playSound(soundIdentifier, true);
+                } else if (volume == 0 && soundController.isPlaying(soundIdentifier)) {
+                    soundController.stopSound(soundIdentifier);
+                }
+            });
+            soundController.playSound(soundIdentifier, true);
+        }
+    }
+
+    @FXML
+    public void hideQuoteBtnClicked() {
+        isShowQuote = !isShowQuote;
+        showNode(quoteLabel,isShowQuote);
+    }
+
+    @FXML
+    public void shuffleQuoteBtnClicked() {
+
+    }
+
+    /**
+     * Logic xử lí Pomodoro Timer:
+     */
+    @FXML
+    public void startTimerBtnClicked() {
+        if (focusTimeController != null) focusTimeController.stop();
+        if (minifocusTimeController != null) minifocusTimeController.stop();
+
+        FOCUS_TIME = focusTimeFixLabel.getText();
+        BREAK_TIME = breakTimeFixLabel.getText();
+
+        isFocus = true;
+        focusTimeController.reset(FOCUS_TIME);
+        minifocusTimeController.reset(FOCUS_TIME);
+
+        isPause = false;
+        updateTimerButtons();
+        showNode(pomodoroFixAnchorPane, false);
+        showNode(pomodoroAnchorPane, true);
+    }
+
+    @FXML
+    public void runPomodoroTimerBtnClicked() {
+        if (focusTimeController != null) focusTimeController.start();
+        if (minifocusTimeController != null) minifocusTimeController.start();
+        isPause = false;
+        updateTimerButtons();
+    }
+
+    @FXML
+    public void pausePomodoroTimerBtnClicked() {
+        if (focusTimeController != null) focusTimeController.pause();
+        if (minifocusTimeController != null) minifocusTimeController.pause();
+        isPause = true;
+        updateTimerButtons();
+    }
+
+    private void handleTimerFinish() {
+        playAlarm();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Pomodoro Clock");
+        alert.setHeaderText(null);
+        alert.setContentText(isFocus ? "Hết thời gian! Nghỉ ngơi một chút nhé." : "Nghỉ ngơi xong! Tập trung tếp thôi nào.");
+
+        alert.setOnHidden(e -> {
+            stopAlarm();
+            if (loopAutomaticallyRadioBtn.isSelected()) {
+                isFocus = !isFocus;
+                String nextTime = isFocus ? FOCUS_TIME : BREAK_TIME;
+                focusTimeController.reset(nextTime);
+                minifocusTimeController.reset(nextTime);
+                runPomodoroTimerBtnClicked();
+            } else {
+                isFocus = true;
+                focusTimeController.reset(FOCUS_TIME);
+                minifocusTimeController.reset(FOCUS_TIME);
+                isPause = false;
+                updateTimerButtons();
+            }
+        });
+
+        alert.show();
+    }
+
+    private void updateTimerButtons() {
+        if (runPomodoroTimerBtn != null && pausePomodoroTimerBtn != null) {
+              showNode(runPomodoroTimerBtn, isPause || !focusTimeController.isRunning());
+              showNode(pausePomodoroTimerBtn, !isPause && focusTimeController.isRunning());
+        }
+    }
+
+    private void playAlarm() {
+        if (alarmSound != null) {
+            alarmSound.setCycleCount(AudioClip.INDEFINITE);
+            alarmSound.play();
+        }
+    }
+
+    private void stopAlarm() {
+        if (alarmSound != null && alarmSound.isPlaying()) {
+            alarmSound.stop();
+        }
+    }
+
+    @FXML
+    public void minusFocusTimeBtnClicked() {
+        String currentTimeString = focusTimeFixLabel.getText();
+        String[] parts = currentTimeString.split(" : ");
+        int currentHours = Integer.parseInt(parts[0]);
+        int currentMinutes = Integer.parseInt(parts[1]);
+        long totalMinutes = TimeUnit.HOURS.toMinutes(currentHours) + currentMinutes;
+
+        long newTotalMinutes = totalMinutes - 5;
+        if (newTotalMinutes < MIN_FOCUS_MINUTES) {
+            newTotalMinutes = MIN_FOCUS_MINUTES;
+        }
+        long newHours = TimeUnit.MINUTES.toHours(newTotalMinutes);
+        long remainingMinutes = newTotalMinutes % 60;
+        String newTimeString = String.format("%02d : %02d : %02d", newHours, remainingMinutes, 0);
+        focusTimeFixLabel.setText(newTimeString);
+    }
+
+    @FXML
+    public void plusFocusTimeBtnClicked() {
+        String currentTimeString = focusTimeFixLabel.getText();
+        String[] parts = currentTimeString.split(" : ");
+        int currentHours = Integer.parseInt(parts[0]);
+        int currentMinutes = Integer.parseInt(parts[1]);
+        long totalMinutes = TimeUnit.HOURS.toMinutes(currentHours) + currentMinutes;
+
+        long newTotalMinutes = totalMinutes + 5;
+        if (newTotalMinutes > MAX_FOCUS_MINUTES) {
+            newTotalMinutes = MAX_FOCUS_MINUTES;
+        }
+        long newHours = TimeUnit.MINUTES.toHours(newTotalMinutes);
+        long remainingMinutes = newTotalMinutes % 60;
+        String newTimeString = String.format("%02d : %02d : %02d", newHours, remainingMinutes, 0);
+        focusTimeFixLabel.setText(newTimeString);
+    }
+
+    @FXML
+    public void minusBreakTimeBtnClicked() {
+        String currentTimeString = breakTimeFixLabel.getText();
+        String[] parts = currentTimeString.split(" : ");
+        int currentHours = Integer.parseInt(parts[0]);
+        int currentMinutes = Integer.parseInt(parts[1]);
+        long totalMinutes = TimeUnit.HOURS.toMinutes(currentHours) + currentMinutes;
+
+        long newTotalMinutes = totalMinutes - 5;
+        if (newTotalMinutes < MIN_BREAK_MINUTES) {
+            newTotalMinutes = MIN_BREAK_MINUTES;
+        }
+        long newHours = TimeUnit.MINUTES.toHours(newTotalMinutes);
+        long remainingMinutes = newTotalMinutes % 60;
+        String newTimeString = String.format("%02d : %02d : %02d", newHours, remainingMinutes, 0);
+        breakTimeFixLabel.setText(newTimeString);
+    }
+
+    @FXML
+    public void plusTimeBreakBtnClicked() {
+        String currentTimeString = breakTimeFixLabel.getText();
+        String[] parts = currentTimeString.split(" : ");
+        int currentHours = Integer.parseInt(parts[0]);
+        int currentMinutes = Integer.parseInt(parts[1]);
+        long totalMinutes = TimeUnit.HOURS.toMinutes(currentHours) + currentMinutes;
+
+        long newTotalMinutes = totalMinutes + 5;
+        if (newTotalMinutes > MAX_BREAK_MINUTES) {
+            newTotalMinutes = MAX_BREAK_MINUTES;
+        }
+        long newHours = TimeUnit.MINUTES.toHours(newTotalMinutes);
+        long remainingMinutes = newTotalMinutes % 60;
+        String newTimeString = String.format("%02d : %02d : %02d", newHours, remainingMinutes, 0);
+        breakTimeFixLabel.setText(newTimeString);
+    }
+
+    /**
+     * Logic xử lí Session Goals:
+     */
+    @FXML
+    public void addGoalBtnClicked() {
+        String goalText = sessionGoalTextField.getText();
+        if (goalText == null || goalText.isEmpty()) {
+            sessionGoalTextField.requestFocus();
+            return;
+        }
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/FXML/Task.fxml")); // Đảm bảo đường dẫn đúng
+            AnchorPane taskNode = loader.load();
+            TaskController taskController = loader.getController();
+            if (taskController == null) {
+                System.err.println("Lỗi: Không thể lấy TaskController từ FXML.");
+                return;
+            }
+            taskController.setData(goalText.trim(), taskListFlowPane, this);
+            taskNode.setUserData(taskController);
+            taskListFlowPane.getChildren().add(taskNode);
+            updateTaskCounts();
+            sessionGoalTextField.clear();
+
+        } catch ( IOException e) {
+            System.err.println("Lỗi khi tải Task.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTaskCounts() {
+        int totalTasks = 0;
+        int completedTasks = 0;
+        for (Node taskNode : taskListFlowPane.getChildren()) {
+            totalTasks++;
+            Object taskData = taskNode.getUserData();
+            if (taskData instanceof TaskController) {
+                TaskController controller = (TaskController) taskData;
+                if (controller.isCompeleted()) {
+                    completedTasks++;
+                }
+            }
+        }
+        int openTasks = totalTasks - completedTasks;
+        openTaskLabel.setText(String.valueOf(openTasks));
+        completedTaskLabel.setText(String.valueOf(completedTasks));
+        miniTaskLabel.setText(String.format("%d/%d", completedTasks, openTasks));
+    }
+
+    /**
+     * Logic gọi URL Youtube:
+     */
+    @FXML
+    private void handleUrlBtnClicked() {
+        String url = urlTextField.getText();
+        if (url == null || url.trim().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Thiếu thông tin", "Vui lòng nhập URL YouTube.");
+            return;
+        }
+        String videoId = extractYouTubeVideoId(url.trim());
+        if (videoId != null) {
+            openVideoPlayerWindow(videoId);
+        } else {
+            showAlert(Alert.AlertType.ERROR, "URL không hợp lệ", "Không thể nhận dạng Video ID từ URL.");
+        }
+    }
+
+    private void openVideoPlayerWindow(String videoId) {
+        closeCurrentVideoPlayer();
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(
+                    getClass().getResource("/controller/FXML/WebView.fxml")));
+            Parent videoPlayerRoot = loader.load();
+            VideoPlayerController videoController = loader.getController();
+            Stage videoStage = new Stage();
+            videoStage.setTitle("YouTube Player - " + videoId);
+            Scene videoScene = new Scene(videoPlayerRoot);
+            videoStage.setScene(videoScene);
+            videoStage.setFullScreen(true);
+            videoStage.setOnCloseRequest((WindowEvent event) -> {
+                if (videoController != null) {
+                    videoController.shutdown();
+                }
+                currentVideoStage = null;
+                currentVideoController = null;
+            });
+            this.currentVideoStage = videoStage;
+            this.currentVideoController = videoController;
+            videoController.loadAndPlay(videoId);
+            videoStage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi giao diện trình phát video", e.getMessage());
+            resetVideoPlayerState();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi mở trình phát video", e.getMessage());
+            resetVideoPlayerState();
+        }
+    }
+
+    private void closeCurrentVideoPlayer() {
+        if (currentVideoStage != null) {
+            if (currentVideoController != null) {
+                currentVideoController.shutdown();
+            }
+            currentVideoStage.close();
+        }
+        resetVideoPlayerState();
+    }
+
+    private void removeCurrentVideoPlayer() {
+        if ( currentVideoController != null) {
+            currentVideoController.shutdown();
+            this.currentVideoController = null;
+        }
+    }
+
+    private void resetVideoPlayerState() {
+        this.currentVideoController = null;
+    }
+
+    private String extractYouTubeVideoId(String youtubeUrl) {
+        if (youtubeUrl == null || youtubeUrl.trim().isEmpty()) {
+            return null;
+        }
+        for (String patternString : YOUTUBE_URL_PATTERNS) {
+            Pattern pattern = Pattern.compile(patternString);
+            Matcher matcher = pattern.matcher(youtubeUrl);
+            if (matcher.find()) {
+                if (matcher.groupCount() >= 1) {
+                    return matcher.group(1);
+                }
+            }
+        }
+        return null;
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle(title);
+            alert.setHeaderText(null); // Không cần header phụ
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+    }
+
+    public void cleanupOnExit() {
+        removeCurrentVideoPlayer(); // Gọi hàm gỡ bỏ và dọn dẹp trình phát
+    }
+
+
+
+
+
+
 
 }

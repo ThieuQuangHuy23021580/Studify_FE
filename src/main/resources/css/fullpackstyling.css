@@ -353,3 +353,28 @@
 .sidebar-item.selected .label {
     -fx-text-fill: #E8B931;
 }
+#sessionGoalTextField {
+    -fx-text-fill: white;
+}
+/*.dashboard-background {*/
+/*    -fx-background-image: url("../PICTURES/dashboard_background.png"); !* Đường dẫn tương đối từ file CSS *!*/
+/*    -fx-background-repeat: no-repeat;*/
+/*    -fx-background-position: center center;*/
+/*    -fx-background-size: cover; !* Hoặc 100% 100% *!*/
+/*}*/
+.timetable-background {
+    -fx-background-color:  #25201f;
+}
+.web-view {
+    -fx-background-color: black;
+}
+#urlTextField{
+    -fx-text-fill: white;
+    -fx-font-style: italic;
+}
+#courseNameTextField{
+    -fx-text-fill: white;
+}
+#timeTextField{
+    -fx-text-fill: white;
+}

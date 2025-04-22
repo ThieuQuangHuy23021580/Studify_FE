@@ -1,10 +1,12 @@
 package controller;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -35,9 +37,9 @@ public class SidebarController {
 
     private VBox selectedItem;
 
-    private Map<String, AnchorPane> contentCache = new HashMap<>();
+    private Map<String, Node> contentCache = new HashMap<>();
 
-    private AnchorPane mainContent;
+    private StackPane mainContent;
 
     @FXML
     private void initialize() {
@@ -45,8 +47,8 @@ public class SidebarController {
         setSelected(dashboardBtn);
     }
 
-    public void setMainContent(AnchorPane mainContent) {
-        this.mainContent = mainContent;
+    public void setMainContent(Node mainContent) {
+        this.mainContent = (StackPane) mainContent;
     }
 
     /**
@@ -66,7 +68,7 @@ public class SidebarController {
      */
     private void loadMainContent(String fxmlPath) {
         try {
-            AnchorPane newContent = contentCache.computeIfAbsent(fxmlPath, path -> {
+            Node newContent = contentCache.computeIfAbsent(fxmlPath, path -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
                     return loader.load();
@@ -104,7 +106,7 @@ public class SidebarController {
 
     public void handleAiChatbotClick() throws IOException {
         setSelected(aichatbotBtn);
-        loadMainContent("/controller/FXML/AIChatbot.fxml");
+        loadMainContent("/controller/FXML/TestAIChatbot.fxml");
     }
 
 

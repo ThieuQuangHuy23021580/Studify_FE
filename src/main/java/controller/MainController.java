@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 
@@ -19,13 +20,14 @@ public class MainController {
         try {
             System.out.println("Đang tải Sidebar.fxml...");
             FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/controller/FXML/Sidebar.fxml"));
-            AnchorPane sidebar = sidebarLoader.load();
+            StackPane sidebar = sidebarLoader.load();
             SidebarController sidebarController = sidebarLoader.getController();
 
             System.out.println("Đang tải DashBoard.fxml...");
             FXMLLoader dashboardLoader = new FXMLLoader(getClass().getResource("/controller/FXML/DashBoard.fxml"));
-            AnchorPane dashboard = dashboardLoader.load();
+            StackPane dashboard = dashboardLoader.load();
             sidebarController.setMainContent(dashboard);
+
 
             mainView.setLeft(sidebar);
             mainView.setCenter(dashboard);
