@@ -20,9 +20,9 @@
 #signInButton {
     -fx-font-family: "Poppins-ExtraBold";
     -fx-background-color: transparent;
-    -fx-border-color: #E50914FF; /* Màu viền */
+    -fx-border-color:  #64453e; /* Màu viền */
     -fx-border-width: 3px; /* Độ dày viền */
-    -fx-text-fill: #E50914FF; /* Màu chữ */
+    -fx-text-fill:  #64453e; /* Màu chữ */
     -fx-background-radius: 50px; /* Bo góc button */
     -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
     -fx-font-size: 24;
@@ -30,10 +30,10 @@
 
 #signInButton:hover {
     -fx-font-family: "Poppins-ExtraBold";
-    -fx-border-color: #E50914FF;
-    -fx-effect: dropshadow(gaussian, #E50914FF, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
-    -fx-background-color: rgba(229, 9, 20, 0.7); /* Màu nền nhẹ khi hover */
-    -fx-text-fill: #E50914FF; /* Màu chữ khi hover */
+    -fx-border-color:  #b77a4d;
+    -fx-effect: dropshadow(gaussian,  #b77a4d, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(100, 69, 62, 0.7); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #b77a4d; /* Màu chữ khi hover */
     -fx-font-size: 24;
 }
 #toSignInButton {
@@ -57,9 +57,9 @@
 #signUpButton {
     -fx-font-family: "Poppins-ExtraBold";
     -fx-background-color: transparent;
-    -fx-border-color: #E50914FF; /* Màu viền */
+    -fx-border-color:  #64453e; /* Màu viền */
     -fx-border-width: 3px; /* Độ dày viền */
-    -fx-text-fill: #E50914FF; /* Màu chữ */
+    -fx-text-fill:  #64453e; /* Màu chữ */
     -fx-background-radius: 50px; /* Bo góc button */
     -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
     -fx-font-size: 24;
@@ -67,10 +67,10 @@
 
 #signUpButton:hover {
     -fx-font-family: "Poppins-ExtraBold";
-    -fx-border-color: #E50914FF;
-    -fx-effect: dropshadow(gaussian, #E50914FF, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
-    -fx-background-color: rgba(229, 9, 20, 0.7); /* Màu nền nhẹ khi hover */
-    -fx-text-fill: #E50914FF; /* Màu chữ khi hover */
+    -fx-border-color:  #b77a4d;
+    -fx-effect: dropshadow(gaussian,  #b77a4d, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color:  rgba(100, 69, 62, 0.7); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #b77a4d; /* Màu chữ khi hover */
     -fx-font-size: 24;
 }
 
