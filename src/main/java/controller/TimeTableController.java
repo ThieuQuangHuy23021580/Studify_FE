@@ -15,7 +15,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit; // Giữ lại import này nếu bạn dùng trong các hàm khác
+import java.util.concurrent.TimeUnit;
 
 public class TimeTableController {
 
@@ -37,7 +37,7 @@ public class TimeTableController {
     private final Map<String, Integer> dayToColumnMap = new HashMap<>();
 
     private static final int MIN_COURSE_ROW_INPUT = 7;
-    private static final int MAX_COURSE_ROW_INPUT = 14;
+    private static final int MAX_COURSE_ROW_INPUT = 20;
     private static final int GRID_ROW_OFFSET = 1;
     private static final int MIN_COURSE_COLUMN_INDEX = 1;
     private static final int MAX_COURSE_COLUMN_INDEX = 7;

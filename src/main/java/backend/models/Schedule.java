@@ -1,24 +1,17 @@
 package backend.models;
 
-import java.util.List;
-
 public class Schedule {
     private int id;
-    private String course;
-    private String period;
-    private String dayOfWeek;
-    private String room;
-    private List<Integer> studentIds;
+    private String courseName;
+    private String day;
+    private int period;
+    private int userId;
 
-    public Schedule() {}
-
-    public Schedule(int id, String course, String period, String dayOfWeek, String room, List<Integer> studentIds) {
-        this.id = id;
-        this.course = course;
+    public Schedule(String courseName, String day, int period, int userId) {
+        this.courseName = courseName;
+        this.day = day;
         this.period = period;
-        this.dayOfWeek = dayOfWeek;
-        this.room = room;
-        this.studentIds = studentIds;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -29,43 +22,35 @@ public class Schedule {
         this.id = id;
     }
 
-    public String getCourse() {
-        return course;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public String getPeriod() {
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public int getPeriod() {
         return period;
     }
 
-    public void setPeriod(String period) {
+    public void setPeriod(int period) {
         this.period = period;
     }
 
-    public String getDayOfWeek() {
-        return dayOfWeek;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setDayOfWeek(String dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
-
-    public String getRoom() {
-        return room;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
-    }
-
-    public List<Integer> getStudentIds() {
-        return studentIds;
-    }
-
-    public void setStudentIds(List<Integer> studentIds) {
-        this.studentIds = studentIds;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

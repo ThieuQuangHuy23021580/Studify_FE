@@ -1,30 +1,73 @@
 package backend.controllers;
 
 import backend.dao.StudySessionDAO;
+import backend.models.Database;
 import backend.models.StudySession;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class StudySessionController {
+    private final StudySessionDAO studySessionDAO;
 
-    private final StudySessionDAO dao = new StudySessionDAO();
-
-    /** Lưu một phiên Pomodoro */
-    public void savePomodoro(int userId, LocalDateTime start, LocalDateTime end) {
-        int minutes = (int) Duration.between(start, end).toMinutes();
-        dao.insert(new StudySession(userId, start, end, minutes));
+    public StudySessionController(Connection conn) throws SQLException {
+        this.studySessionDAO = new StudySessionDAO(conn);
+        studySessionDAO.createTableIfNotExists();
     }
 
-    /** Lấy toàn bộ session của user */
-    public List<StudySession> getSessions(int userId) {
-        return dao.findByUser(userId);
+    public void logStudyTime(int userId, int durationMinutes) {
+        StudySession session = new StudySession(userId, LocalDate.now(), durationMinutes);
+        try {
+            studySessionDAO.saveSession(session);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    /** Tổng phút học của hôm nay */
-    public int todayMinutes(int userId) {
-        String today = LocalDateTime.now().toLocalDate().toString(); // yyyy-MM-dd
-        return dao.totalMinutesByDate(userId, today);
+    public int getTotalStudyMinutes(int userId) {
+        try {
+            return studySessionDAO.getTotalMinutes(userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public double getTotalStudyHours(int userId) {
+        int totalMinutes = getTotalStudyMinutes(userId);
+        return totalMinutes / 60.0;
+    }
+
+    public double getAverageStudyMinutes(int userId) {
+        try {
+            return studySessionDAO.getAverageMinutesPerDay(userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public double getAverageStudyHours(int userId) {
+        double averageMinutes = getAverageStudyMinutes(userId);
+        return averageMinutes / 60.0;
+    }
+
+    public int getCurrentStreak(int userId) {
+        try {
+            return studySessionDAO.getCurrentStreak(userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int getMaxStreak(int userId) {
+        try {
+            return studySessionDAO.getMaxStreak(userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
