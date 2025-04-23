@@ -4,53 +4,73 @@ import backend.models.Database;
 import backend.models.StudySession;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudySessionDAO {
-    private Connection getConnection() throws SQLException {
-        return Database.getConnect();
-    }
+    public void insert(StudySession s) {
+        String sql = """
+            INSERT INTO study_sessions 
+                   (user_id, started_at, ended_at, duration_minutes)
+            VALUES (?, ?, ?, ?)""";
 
-    public void insertSession(StudySession session) {
-        String sql = "INSERT INTO study_sessions (user_id, date, duration_minutes) VALUES (?, ?, ?)";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Database.getConnect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, session.getUserId());
-            stmt.setString(2, session.getDate().toString());
-            stmt.setInt(3, session.getDurationMinutes());
-            stmt.executeUpdate();
+            ps.setInt   (1, s.getUserId());
+            ps.setString(2, s.getStartedAt().toString());
+            ps.setString(3, s.getEndedAt().toString());
+            ps.setInt   (4, s.getDurationMinutes());
+            ps.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<StudySession> getSessionsByUser(int userId) {
+    public List<StudySession> findByUser(int userId) {
         List<StudySession> list = new ArrayList<>();
-        String sql = "SELECT * FROM study_sessions WHERE user_id = ?";
+        String sql = "SELECT * FROM study_sessions WHERE user_id = ? ORDER BY started_at DESC";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Database.getConnect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, userId);
-            ResultSet rs = stmt.executeQuery();
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                StudySession session = new StudySession(
-                        rs.getInt("user_id"),
-                        LocalDate.parse(rs.getString("date")),
-                        rs.getInt("duration_minutes")
-                );
-                session.setId(rs.getInt("id"));
-                list.add(session);
+                StudySession s = new StudySession();
+                s.setId            (rs.getInt("id"));
+                s.setUserId        (rs.getInt("user_id"));
+                s.setStartedAt     (LocalDateTime.parse(rs.getString("started_at")));
+                s.setEndedAt       (LocalDateTime.parse(rs.getString("ended_at")));
+                s.setDurationMinutes(rs.getInt("duration_minutes"));
+                list.add(s);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return list;
+    }
+
+    public int totalMinutesByDate(int userId, String date) {
+        String sql = """
+            SELECT COALESCE(SUM(duration_minutes),0) 
+            FROM study_sessions
+            WHERE user_id = ? AND DATE(started_at) = ?""";
+
+        try (Connection conn = Database.getConnect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ps.setString(2, date);
+            ResultSet rs = ps.executeQuery();
+            return rs.getInt(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

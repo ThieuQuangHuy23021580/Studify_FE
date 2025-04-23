@@ -13,7 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -56,7 +55,7 @@ public class MainController {
      * Được gọi từ LoginController để truyền User và khởi tạo lại view ban đầu nếu cần.
      */
     public void initData(User user) {
-        if (user == null) {
+        if(user == null) {
             showErrorDialog("Lỗi Dữ Liệu", "Không nhận được thông tin người dùng hợp lệ.");
             return;
         }
@@ -84,11 +83,11 @@ public class MainController {
                 } else if (controller instanceof AIChatbotController) {
                     ((AIChatbotController) controller).initData(user);
                     System.out.println("Called initData for AIChatbotController.");
-                } else if (controller instanceof TimeTableController) {
+                } else if(controller instanceof TimeTableController){
                     ((TimeTableController) controller).initData(user);
                     System.out.println("Called initData for TimeTableController.");
-                } else if (controller instanceof StudyStatsController) {
-                    ((StudyStatsController) controller).initData(user);
+                } else if(controller instanceof StudyStatsController){
+                    ((StudyStatsController)controller).initData(user);
                 }
             }
             if (mainView != null) {
