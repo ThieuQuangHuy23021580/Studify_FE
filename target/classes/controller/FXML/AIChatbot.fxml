@@ -12,11 +12,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane style="-fx-background-color: #2f2f2f;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AIChatbotController">
+<StackPane style="-fx-background-color: #2f2f2f;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AIChatbotController">
    <children>
       <GridPane>
          <columnConstraints>
@@ -30,9 +29,9 @@
             <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
-            <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="700.0" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowSpan="2">
+            <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowSpan="2">
                <content>
-                  <VBox fx:id="chatVbox" prefHeight="200.0" prefWidth="700.0" style="-fx-background-color: #2f2f2f;" />
+                  <FlowPane fx:id="chatFlowPane" style="-fx-background-color: #2f2f2f;" />
                </content>
             </ScrollPane>
             <HBox minHeight="50.0" minWidth="640.0" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowIndex="2">

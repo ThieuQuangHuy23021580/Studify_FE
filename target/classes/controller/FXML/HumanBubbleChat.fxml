@@ -7,14 +7,14 @@
 
 <!-- fx:controller không cần thiết nếu BubbleChatController chỉ set text -->
 
-<HBox fx:id="bubbleBox" alignment="CENTER_LEFT" minWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="670.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="bubbleBox" alignment="CENTER_LEFT" minWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="650.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <!--
         Bỏ maxWidth="${Double.MAX_VALUE}". HBox sẽ tự điều chỉnh.
         Màu nền và bo góc vẫn giữ nguyên.
         Đổi màu nền và alignment="CENTER_RIGHT" cho AIBubbleChat.fxml
     -->
     <children>
-        <Label fx:id="messageLabel" maxWidth="400.0" style="-fx-padding: 8px 12px; -fx-background-color: #4CAF50; -fx-background-radius: 15;" text="Message..." textFill="WHITE" wrapText="true">
+        <Label fx:id="messageLabel" maxWidth="450.0" style="-fx-padding: 8px 12px; -fx-background-color: #4CAF50; -fx-background-radius: 15;" text="Message..." textFill="WHITE" wrapText="true">
             <!--
                 maxWidth="500.0" vẫn là yếu tố chính quyết định khi nào text xuống dòng
                          và giới hạn chiều rộng của bubble.

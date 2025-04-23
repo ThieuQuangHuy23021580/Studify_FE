@@ -25,7 +25,7 @@ import java.util.UUID;
 public class AIChatbotController {
 
     @FXML
-    private VBox chatVbox;
+    private FlowPane chatFlowPane;
     @FXML
     private TextField sendTextField;
     @FXML
@@ -52,7 +52,7 @@ public class AIChatbotController {
         chatBotBackendController = new ChatBotController();
         sessionBackendController = new SessionController();
 
-        chatVbox.heightProperty().addListener((obs, oldVal, newVal) -> {
+        chatFlowPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             if (chatScrollPane != null) {
                 Platform.runLater(() -> chatScrollPane.setVvalue(1.0));
             }
@@ -65,7 +65,6 @@ public class AIChatbotController {
                 }
             });
         }
-        chatVbox.setFillWidth(false);
         updateChatInputState(false);
     }
 
@@ -134,7 +133,7 @@ public class AIChatbotController {
             }
         }
         currentSessionId = null;
-        chatVbox.getChildren().clear();
+        chatFlowPane.getChildren().clear();
         updateChatInputState(false);
     }
 
@@ -159,7 +158,7 @@ public class AIChatbotController {
      * @param sessionId ID của session cần hiển thị lịch sử.
      */
     private void displayChatHistory(String sessionId) {
-        chatVbox.getChildren().clear();
+        chatFlowPane.getChildren().clear();
         if (chatBotBackendController == null || sessionId == null) {
             System.err.println("Cannot display history: Backend controller or session ID is null.");
             updateChatInputState(false);
@@ -178,9 +177,8 @@ public class AIChatbotController {
         } else {
             System.out.println("Rendering " + history.size() + " messages.");
             for (String messageLine : history) {
-                // Phân tích vai trò và nội dung từ chuỗi đã định dạng ("Role: Content")
-                String rolePrefixUser = "User: ";
-                String rolePrefixBot = "Bot: ";
+                String rolePrefixUser = "user: ";
+                String rolePrefixBot = "bot: ";
                 boolean isHuman;
                 String messageContent;
 
@@ -192,18 +190,16 @@ public class AIChatbotController {
                     messageContent = messageLine.substring(rolePrefixBot.length()).trim();
                 } else {
                     System.out.println("Skipping history line (unknown format): " + messageLine);
-                    continue; // Bỏ qua dòng không đúng định dạng
+                    continue;
                 }
-                // Gọi hàm thêm bubble đã căn chỉnh
                 addAlignedMessageBubble(messageContent, isHuman);
             }
         }
 
-        // Cuộn xuống cuối sau khi thêm xong tất cả bubble
         Platform.runLater(() -> {
             if (chatScrollPane != null) chatScrollPane.setVvalue(1.0);
         });
-        updateChatInputState(true); // Đảm bảo input được bật
+        updateChatInputState(true);
     }
 
     /**
@@ -329,8 +325,8 @@ public class AIChatbotController {
             alignmentWrapper.getChildren().add(bubbleContent);
 
             Platform.runLater(() -> {
-                if (chatVbox != null) {
-                    chatVbox.getChildren().add(alignmentWrapper);
+                if (chatFlowPane != null) {
+                    chatFlowPane.getChildren().add(alignmentWrapper);
                     VBox.setMargin(alignmentWrapper, new javafx.geometry.Insets(3, 5, 3, 5));
                 }
             });
@@ -354,8 +350,8 @@ public class AIChatbotController {
             VBox.setMargin(wrapper, new javafx.geometry.Insets(3, 5, 3, 5));
         }
         removeTypingIndicator();
-        if (!chatVbox.getChildren().contains(typingIndicator.getParent())) {
-            Platform.runLater(() -> chatVbox.getChildren().add(typingIndicator.getParent()));
+        if (!chatFlowPane.getChildren().contains(typingIndicator.getParent())) {
+            Platform.runLater(() -> chatFlowPane.getChildren().add(typingIndicator.getParent()));
         }
     }
 
@@ -364,7 +360,7 @@ public class AIChatbotController {
      */
     private void removeTypingIndicator() {
         Platform.runLater(() ->
-                chatVbox.getChildren().removeIf(node -> "typing_indicator_wrapper".equals(node.getUserData()))
+                chatFlowPane.getChildren().removeIf(node -> "typing_indicator_wrapper".equals(node.getUserData()))
         );
     }
 
@@ -378,8 +374,8 @@ public class AIChatbotController {
             alert.setHeaderText(null);
             alert.setContentText(message);
             try {
-                if (chatVbox != null && chatVbox.getScene() != null && chatVbox.getScene().getWindow() != null) {
-                    alert.initOwner(chatVbox.getScene().getWindow());
+                if (chatFlowPane != null && chatFlowPane.getScene() != null && chatFlowPane.getScene().getWindow() != null) {
+                    alert.initOwner(chatFlowPane.getScene().getWindow());
                 }
             } catch (Exception e) { /* Ignore */ }
             alert.showAndWait();

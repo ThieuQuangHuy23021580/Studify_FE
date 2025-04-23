@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bubbleBox" nodeOrientation="LEFT_TO_RIGHT" prefWidth="670.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="bubbleBox" nodeOrientation="LEFT_TO_RIGHT" prefWidth="650.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="messageLabel" maxWidth="400.0" style="-fx-padding: 8px 12px; -fx-background-color: #607D8B; -fx-background-radius: 15;" text="AI Message..." textFill="WHITE" wrapText="true">
+      <Label fx:id="messageLabel" maxWidth="450.0" style="-fx-padding: 8px 12px; -fx-background-color: #607D8B; -fx-background-radius: 15;" text="AI Message..." textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Regular" size="15.0" />
          </font>

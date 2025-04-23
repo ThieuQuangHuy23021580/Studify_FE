@@ -165,20 +165,20 @@
 }
 
 .scroll-pane .viewport {
-    -fx-background-color: transparent; /* Làm trong suốt nền của Viewport bên trong ScrollPane */
+    -fx-background-color:  #2f2f2f; /* Làm trong suốt nền của Viewport bên trong ScrollPane */
 }
 
 .scroll-pane .scroll-bar:horizontal .thumb {
-    -fx-background-color: #e50914; /* Màu của thanh trượt ngang */
+    -fx-background-color: rgba(100, 69, 62, 0.7); /* Màu của thanh trượt ngang */
     -fx-pref-width: 2px;
 }
 
 .scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: rgba(229, 9, 20, 0.31); /* Màu của thanh trượt dọc */
+    -fx-background-color: rgba(100, 69, 62, 0.7); /* Màu của thanh trượt dọc */
     -fx-transition: 0.3s;          /* Thời gian chuyển đổi */
 }
 .scroll-pane .scroll-bar:vertical:hover .thumb {
-    -fx-background-color: rgb(229, 9, 20);
+    -fx-background-color: #B77A4DFF;
 }
 .scroll-pane .scroll-bar:vertical .track,
 .scroll-pane .scroll-bar:horizontal .track {
@@ -201,24 +201,6 @@
 }
 .scroll-pane .scroll-bar:vertical {
     -fx-background-insets: 100 ;
-}
-
-#changeInfoButton:hover {
-    -fx-background-color: #E50914FF;
-    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
-}
-#updateInfoButton:hover {
-    -fx-background-color: #E50914FF;
-    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
-}
-#cancelInfoButton:hover {
-    -fx-background-color: #E50914FF;
-    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
-}
-
-#seeUserPasswordButton:hover{
-    -fx-border-color: red;
-    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
 }
 
 
@@ -387,4 +369,10 @@
 }
 #messageLabel{
     -fx-font-size: 18;
+}
+#sessionLabel{
+    -fx-font-size: 15;
+}
+#chatFlowPane{
+    -fx-background-color: #2f2f2f;
 }
