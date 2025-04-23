@@ -16,10 +16,8 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
 <StackPane style="-fx-background-color: #2f2f2f;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AIChatbotController">
    <children>
-<<<<<<< Updated upstream
       <GridPane>
          <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
@@ -31,37 +29,16 @@
             <RowConstraints maxHeight="652.0" minHeight="10.0" prefHeight="652.0" vgrow="ALWAYS" />
             <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
          </rowConstraints>
-=======
-      <Button fx:id="newChatBtn" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322">
-         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fth-edit" iconSize="35" />
-         </graphic>
-      </Button>
-      <Label alignment="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="40.0" prefWidth="130.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 23;" text="AI-Chatbot" textFill="WHITE">
-         <effect>
-            <Glow />
-         </effect>
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="190.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="700.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="60.0" AnchorPane.topAnchor="0.0">
-         <content>
-            <VBox fx:id="chatVbox" prefHeight="200.0" prefWidth="100.0" />
-         </content>
-      </ScrollPane>
-      <HBox layoutX="190.0" layoutY="740.0" prefHeight="60.0" prefWidth="700.0">
->>>>>>> Stashed changes
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="700.0" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowSpan="2">
+            <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="700.0" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowSpan="2">
                <content>
-                  <VBox fx:id="chatVbox" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #2f2f2f;" />
+                  <VBox fx:id="chatVbox" prefHeight="200.0" prefWidth="700.0" style="-fx-background-color: #2f2f2f;" />
                </content>
             </ScrollPane>
             <HBox minHeight="50.0" minWidth="640.0" style="-fx-background-color: #2f2f2f;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <TextField fx:id="sendTextField" minHeight="60.0" minWidth="545.0" promptText="Ask anything ..." style="-fx-background-color: #424242; -fx-background-radius: 15px 0px 0px 15px; -fx-font-size: 20;" />
-                  <Button layoutX="311.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="50.0" style="-fx-background-color: #424242;">
+                  <Button fx:id="searchDataBtn" layoutX="311.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="50.0" style="-fx-background-color: #424242;">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -69,7 +46,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="dashicons-database-import" iconSize="40" />
                      </graphic>
                   </Button>
-                  <Button fx:id="sendBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="50.0" style="-fx-background-color: #424242; -fx-background-radius: 0px 15px 15px 0px;">
+                  <Button fx:id="sendBtn" mnemonicParsing="false" onMouseClicked="#sendBtnClicked" prefHeight="60.0" prefWidth="50.0" style="-fx-background-color: #424242; -fx-background-radius: 0px 15px 15px 0px;">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -86,7 +63,7 @@
                <children>
                   <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="190.0" style="-fx-background-color: #2f2f2f;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="100.0">
                      <content>
-                        <FlowPane minHeight="600.0" minWidth="190.0" prefWidth="190.0" style="-fx-background-color: #212121;" />
+                        <FlowPane fx:id="sessionFlowPane" minHeight="600.0" minWidth="190.0" prefWidth="190.0" style="-fx-background-color: #212121;" />
                      </content>
                   </ScrollPane>
                   <Label layoutY="75.0" prefHeight="27.0" prefWidth="202.0" text="     History" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -96,7 +73,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <Button fx:id="newChatBtn" mnemonicParsing="false" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322">
+            <Button fx:id="newSessionBtn" mnemonicParsing="false" onMouseClicked="#newSessionBtnClicked" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322">
                <graphic>
                   <FontIcon iconColor="WHITE" iconLiteral="fth-edit" iconSize="35" />
                </graphic>

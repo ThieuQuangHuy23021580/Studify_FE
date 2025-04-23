@@ -1,117 +1,130 @@
 package controller;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.input.MouseEvent;
+import backend.models.User;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SidebarController {
+
     @FXML
     private VBox aichatbotBtn;
-
     @FXML
     private VBox dashboardBtn;
-
     @FXML
     private VBox sidebarContainer;
-
     @FXML
     private VBox studymaterialBtn;
-
     @FXML
     private VBox studystatsBtn;
-
     @FXML
     private VBox timetableBtn;
 
     private List<VBox> sidebarItems;
-
     private VBox selectedItem;
-
-    private Map<String, Node> contentCache = new HashMap<>();
-
-    private StackPane mainContent;
+    private MainController mainController;
 
     @FXML
     private void initialize() {
-        sidebarItems = List.of(dashboardBtn, studymaterialBtn, timetableBtn,studystatsBtn, aichatbotBtn);
+        sidebarItems = List.of(dashboardBtn, studymaterialBtn, timetableBtn, studystatsBtn, aichatbotBtn);
         setSelected(dashboardBtn);
+        System.out.println("SidebarController initialized.");
     }
 
-    public void setMainContent(Node mainContent) {
-        this.mainContent = (StackPane) mainContent;
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
     /**
-     *  Chọn Button trên Sidebar.
-     * @param item là Vbox chứa Button.
+     * Đánh dấu mục được chọn trên Sidebar (thay đổi giao diện).
+     *
+     * @param item VBox của mục được chọn.
      */
-    private void setSelected(VBox item){
-        for(VBox box : sidebarItems){
-            box.getStyleClass().remove("selected");
+    private void setSelected(VBox item) {
+        if (sidebarItems == null) return;
+        for (VBox box : sidebarItems) {
+            if (box != null) {
+                box.getStyleClass().remove("selected");
+            }
         }
-        item.getStyleClass().add("selected");
-        selectedItem = item;
+        if (item != null) {
+            item.getStyleClass().add("selected");
+            selectedItem = item;
+        }
     }
+
     /**
-     * Truyền mainContent từ Main vào Sidebar.
-     * @param fxmlPath resource từ Main.
+     * Xử lý sự kiện khi nhấn vào nút Dashboard.
      */
-    private void loadMainContent(String fxmlPath) {
-        try {
-            Node newContent = contentCache.computeIfAbsent(fxmlPath, path -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-                    return loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            mainContent.getChildren().setAll(newContent);
-
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            System.out.println("Failed to load main content" + e.getMessage());
+    @FXML
+    public void handleDashboardClick() {
+        setSelected(dashboardBtn);
+        if (mainController != null) {
+            User currentUser = mainController.getLoggedInUser();
+            mainController.loadAndSetCenterContent("/controller/FXML/DashBoard.fxml", currentUser);
+        } else {
+            System.err.println("Sidebar Error: MainController is null, cannot load Dashboard view.");
         }
     }
 
-    public void handleDashboardClick() throws IOException {
-        setSelected(dashboardBtn);
-        loadMainContent("/controller/FXML/DashBoard.fxml");
-    }
-
-    public void handleStudyStatsClick() throws IOException {
+    /**
+     * Xử lý sự kiện khi nhấn vào nút Study Stats.
+     */
+    @FXML
+    public void handleStudyStatsClick() {
         setSelected(studystatsBtn);
-        loadMainContent("/controller/FXML/StudyStats.fxml");
+        if (mainController != null) {
+            User currentUser = mainController.getLoggedInUser();
+            mainController.loadAndSetCenterContent("/controller/FXML/StudyStats.fxml", currentUser); // Giả sử StudyStats cũng cần User
+        } else {
+            System.err.println("Sidebar Error: MainController is null, cannot load Study Stats view.");
+        }
     }
 
-    public void handleTimetableClick() throws IOException {
+    /**
+     * Xử lý sự kiện khi nhấn vào nút TimeTable.
+     */
+    @FXML
+    public void handleTimetableClick() {
         setSelected(timetableBtn);
-        loadMainContent("/controller/FXML/TimeTable.fxml");
+        if (mainController != null) {
+            User currentUser = mainController.getLoggedInUser();
+            mainController.loadAndSetCenterContent("/controller/FXML/TimeTable.fxml", currentUser); // Giả sử TimeTable cũng cần User
+        } else {
+            System.err.println("Sidebar Error: MainController is null, cannot load TimeTable view.");
+        }
     }
 
-    public void handleMaterialClick() throws IOException {
+    /**
+     * Xử lý sự kiện khi nhấn vào nút Study Material.
+     */
+    @FXML
+    public void handleMaterialClick() {
         setSelected(studymaterialBtn);
-        loadMainContent("/controller/FXML/StudyMaterial.fxml");
+        if (mainController != null) {
+            User currentUser = mainController.getLoggedInUser();
+            mainController.loadAndSetCenterContent("/controller/FXML/StudyMaterial.fxml", currentUser); // Giả sử Material cũng cần User
+        } else {
+            System.err.println("Sidebar Error: MainController is null, cannot load Study Material view.");
+        }
     }
 
-    public void handleAiChatbotClick() throws IOException {
+    /**
+     * Xử lý sự kiện khi nhấn vào nút AI Chatbot.
+     */
+    @FXML
+    public void handleAiChatbotClick() {
         setSelected(aichatbotBtn);
-        loadMainContent("/controller/FXML/TestAIChatbot.fxml");
+        if (mainController != null) {
+            User currentUser = mainController.getLoggedInUser();
+            if (currentUser != null) {
+                mainController.loadAndSetCenterContent("/controller/FXML/AIChatbot.fxml", currentUser);
+            } else {
+                System.err.println("Sidebar Error: User not logged in, cannot navigate to Chatbot.");
+            }
+        } else {
+            System.err.println("Sidebar Error: MainController is null, cannot load AI Chatbot view.");
+        }
     }
-
-
-
-
-
-
 }

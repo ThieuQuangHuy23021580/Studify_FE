@@ -1,5 +1,6 @@
 package controller;
 
+import backend.models.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -206,6 +207,8 @@ public class DashBoardController {
 
     private Stage currentVideoStage = null;
 
+    private User user;
+
     private static final String[] YOUTUBE_URL_PATTERNS = {
             "https://(?:www\\.)?youtube\\.com/watch\\?v=([a-zA-Z0-9_\\-]+)",
             "https://(?:www\\.)?youtube\\.com/embed/([a-zA-Z0-9_\\-]+)",
@@ -272,6 +275,13 @@ public class DashBoardController {
                 quoteAnchorPane, soundAnchorPane, backgroundAnchorPane);
         for (AnchorPane anchorPane : showAllTool) showNode(anchorPane, false);
 
+    }
+
+    public void setBackgroundImage(ImageView backgroundImage) {
+        this.backgroundImage = backgroundImage;
+        backgroundImage.setPreserveRatio(false);
+        backgroundImage.fitWidthProperty().bind(rootStackPane.widthProperty());
+        backgroundImage.fitHeightProperty().bind(rootStackPane.heightProperty());
     }
 
     private void showNode(Node node, boolean isShow) {
@@ -702,10 +712,7 @@ public class DashBoardController {
         removeCurrentVideoPlayer(); // Gọi hàm gỡ bỏ và dọn dẹp trình phát
     }
 
-
-
-
-
-
-
+    public void initData(User user) {
+        if(user != null) this.user = user;
+    }
 }

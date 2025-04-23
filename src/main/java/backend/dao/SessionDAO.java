@@ -30,7 +30,7 @@ public class SessionDAO {
             stmt.setString(1, userId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                sessions.add(new Session(rs.getString("session_id"), rs.getString("user_id")));
+                sessions.add(new Session(rs.getString("id"), rs.getString("user_id")));
             }
         } catch (SQLException e) {
             System.out.println("Error fetching sessions: " + e.getMessage());

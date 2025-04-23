@@ -125,6 +125,19 @@ public class LoginController {
             if (user != null) {
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", null, "Welcome back!");
                 // TODO: Chuyển đến màn hình chính (main scene)
+                Stage currentStage = (Stage) toSignInButton.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/FXML/Main.fxml"));
+                Parent mainRoot = loader.load();
+                MainController mainController = loader.getController();
+                if(mainController != null) {
+                    mainController.initData(user);
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Lỗi", "Lỗi tải giao diện chính", "Không thể khởi tạo dữ liệu người dùng.");
+                    return;
+                }
+                Scene mainScene = new Scene(mainRoot);
+                currentStage.setTitle("Studify App");
+                currentStage.setScene(mainScene);
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", null, "Invalid email or password.");
             }

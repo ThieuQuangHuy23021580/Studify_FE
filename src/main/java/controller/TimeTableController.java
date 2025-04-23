@@ -1,5 +1,6 @@
 package controller;
 
+import backend.models.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -40,6 +41,7 @@ public class TimeTableController {
     private static final int GRID_ROW_OFFSET = 1;
     private static final int MIN_COURSE_COLUMN_INDEX = 1;
     private static final int MAX_COURSE_COLUMN_INDEX = 7;
+    private User user;
 
     @FXML
     public void initialize() {
@@ -171,6 +173,12 @@ public class TimeTableController {
             return (Label) foundNode;
         }
         return null;
+    }
+
+    public void initData(User user) {
+        if(user != null) {
+            this.user =user;
+        }
     }
 
     private static class GridCoordinates {

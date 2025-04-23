@@ -378,3 +378,13 @@
 #timeTextField{
     -fx-text-fill: white;
 }
+#sendBtn:hover {
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+
+}
+#sendTextField{
+    -fx-text-fill: white;
+}
+#messageLabel{
+    -fx-font-size: 18;
+}
