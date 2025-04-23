@@ -1,5 +1,7 @@
 package controller;
 
+import backend.controllers.ScheduleController;
+import backend.models.Schedule;
 import backend.models.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -37,11 +39,13 @@ public class TimeTableController {
     private final Map<String, Integer> dayToColumnMap = new HashMap<>();
 
     private static final int MIN_COURSE_ROW_INPUT = 7;
-    private static final int MAX_COURSE_ROW_INPUT = 14;
+    private static final int MAX_COURSE_ROW_INPUT = 20;
     private static final int GRID_ROW_OFFSET = 1;
     private static final int MIN_COURSE_COLUMN_INDEX = 1;
     private static final int MAX_COURSE_COLUMN_INDEX = 7;
     private User user;
+
+    private final ScheduleController scheduleController = new ScheduleController();
 
     @FXML
     public void initialize() {
@@ -75,8 +79,18 @@ public class TimeTableController {
             timeTextField.requestFocus();
             return;
         }
-        Label targetLabel = findLabelAt(coords.colIndex, coords.rowIndex);
 
+        String[] parts = timeInput.trim().split("-");
+        int hour = Integer.parseInt(parts[0].trim());
+        String day = parts[1].trim();
+
+        if (user != null) {
+            Schedule newSchedule = new Schedule(courseName.trim(), day, hour, user.getUserId());
+            scheduleController.addSchedule(newSchedule);
+        }
+
+        // Hiển thị trên UI
+        Label targetLabel = findLabelAt(coords.colIndex, coords.rowIndex);
         if (targetLabel != null) {
             targetLabel.setText(courseName.trim());
             targetLabel.setStyle("-fx-text-fill:#E8B931; -fx-border-color:white; -fx-background-color: black; -fx-padding: 2px; -fx-alignment: center;");
@@ -179,6 +193,7 @@ public class TimeTableController {
         if(user != null) {
             this.user =user;
         }
+        loadSchedule();
     }
 
     private static class GridCoordinates {
@@ -189,6 +204,28 @@ public class TimeTableController {
             this.rowIndex = rowIndex;
         }
     }
+
+    public void loadSchedule() {
+        if (user == null) return;
+
+        var schedules = scheduleController.getSchedulesByUserId(user.getUserId());
+        for (Schedule schedule : schedules) {
+            String day = schedule.getDay().toUpperCase();
+            int hour = schedule.getPeriod();
+
+            int colIndex = dayToColumnMap.getOrDefault(day, -1);
+            int rowIndex = hour - MIN_COURSE_ROW_INPUT + GRID_ROW_OFFSET;
+
+            if (colIndex != -1 && rowIndex >= GRID_ROW_OFFSET) {
+                Label label = findLabelAt(colIndex, rowIndex);
+                if (label != null) {
+                    label.setText(schedule.getCourseName());
+                    label.setStyle("-fx-text-fill:#E8B931; -fx-border-color:white; -fx-background-color: black; -fx-padding: 2px; -fx-alignment: center;");
+                }
+            }
+        }
+    }
+
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Platform.runLater(() -> {

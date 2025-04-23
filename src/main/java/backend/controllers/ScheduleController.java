@@ -7,13 +7,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ScheduleController {
-    protected ScheduleDAO scheduleDAO;
+    private final ScheduleDAO scheduleDAO;
 
     public ScheduleController() {
         this.scheduleDAO = new ScheduleDAO();
     }
 
-    /** Thêm một lịch học mới */
     public void addSchedule(Schedule schedule) {
         try {
             scheduleDAO.insert(schedule);
@@ -23,7 +22,6 @@ public class ScheduleController {
         }
     }
 
-    /** Cập nhật lịch học */
     public void updateSchedule(Schedule schedule) {
         try {
             scheduleDAO.update(schedule);
@@ -33,22 +31,20 @@ public class ScheduleController {
         }
     }
 
-    /** Xóa lịch học theo ID */
-    public void deleteSchedule(int scheduleId) {
+    public void deleteSchedule(int id) {
         try {
-            scheduleDAO.delete(scheduleId);
+            scheduleDAO.delete(id);
             System.out.println("Schedule deleted successfully.");
         } catch (SQLException e) {
             System.err.println("Error deleting schedule: " + e.getMessage());
         }
     }
 
-    /** Lấy tất cả lịch học */
-    public List<Schedule> getAllSchedules() {
+    public List<Schedule> getSchedulesByUserId(int userId) {
         try {
-            return scheduleDAO.getAll();
+            return scheduleDAO.getAllByUserId(userId);
         } catch (SQLException e) {
-            System.err.println("Error retrieving schedules: " + e.getMessage());
+            System.err.println("Error fetching schedules: " + e.getMessage());
             return null;
         }
     }
