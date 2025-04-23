@@ -1,5 +1,6 @@
 package controller;
 
+import backend.controllers.QuoteController;
 import backend.models.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -209,6 +210,8 @@ public class DashBoardController {
 
     private User user;
 
+    QuoteController quoteController;
+
     private static final String[] YOUTUBE_URL_PATTERNS = {
             "https://(?:www\\.)?youtube\\.com/watch\\?v=([a-zA-Z0-9_\\-]+)",
             "https://(?:www\\.)?youtube\\.com/embed/([a-zA-Z0-9_\\-]+)",
@@ -220,6 +223,7 @@ public class DashBoardController {
     @FXML
     public void initialize() {
 
+        quoteController = new QuoteController();
         isShowQuote = true;
 
         //Media Settings:
@@ -402,7 +406,7 @@ public class DashBoardController {
 
     @FXML
     public void shuffleQuoteBtnClicked() {
-
+        quoteLabel.setText(quoteController.getRandomQuote());
     }
 
     /**
