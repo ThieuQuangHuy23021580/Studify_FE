@@ -1,5 +1,7 @@
 package controller;
 
+import backend.controllers.StudySessionController;
+import backend.models.Database;
 import backend.models.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ import javafx.stage.WindowEvent;
 import kotlin.OverloadResolutionByLambdaReturnType;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -209,6 +212,8 @@ public class DashBoardController {
 
     private User user;
 
+    private StudySessionController studySessionController;
+
     private static final String[] YOUTUBE_URL_PATTERNS = {
             "https://(?:www\\.)?youtube\\.com/watch\\?v=([a-zA-Z0-9_\\-]+)",
             "https://(?:www\\.)?youtube\\.com/embed/([a-zA-Z0-9_\\-]+)",
@@ -218,8 +223,7 @@ public class DashBoardController {
 
 
     @FXML
-    public void initialize() {
-
+    public void initialize() throws SQLException {
         isShowQuote = true;
 
         //Media Settings:
@@ -259,6 +263,8 @@ public class DashBoardController {
             System.err.println("Lỗi binding: rootStackPane hoặc backgroundImage từ FXML là null.");
         }
 
+        studySessionController = new StudySessionController(Database.getConnect());
+
         //Pomodoro Clock Setting:
         FOCUS_TIME = focusTimeFixLabel.getText();
         BREAK_TIME = breakTimeFixLabel.getText();
@@ -266,15 +272,11 @@ public class DashBoardController {
         alarmSound = new AudioClip(soundPath);
         alarmSound.setCycleCount(AudioClip.INDEFINITE);
 
-        focusTimeController = new PomodoroTimerController(focusTimeLabel, FOCUS_TIME, this::handleTimerFinish);
-        minifocusTimeController = new PomodoroTimerController(miniFocusTimeLabel, FOCUS_TIME, null);
-
         //Pane Settings:
         showStudyTool = List.of(quoteAnchorPane, soundAnchorPane, backgroundAnchorPane);
         showAllTool = List.of(pomodoroAnchorPane, pomodoroFixAnchorPane, sessionGoalAnchorPane, taskAnchorPane,
                 quoteAnchorPane, soundAnchorPane, backgroundAnchorPane);
         for (AnchorPane anchorPane : showAllTool) showNode(anchorPane, false);
-
     }
 
     public void setBackgroundImage(ImageView backgroundImage) {
@@ -714,5 +716,8 @@ public class DashBoardController {
 
     public void initData(User user) {
         if(user != null) this.user = user;
+
+        focusTimeController = new PomodoroTimerController(focusTimeLabel, FOCUS_TIME, this::handleTimerFinish, studySessionController, user.getUserId());
+        minifocusTimeController = new PomodoroTimerController(miniFocusTimeLabel, FOCUS_TIME, null, studySessionController, user.getUserId());
     }
 }

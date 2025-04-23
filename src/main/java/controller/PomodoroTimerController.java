@@ -1,5 +1,6 @@
 package controller;
 
+import backend.controllers.StudySessionController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
@@ -14,10 +15,20 @@ public class PomodoroTimerController {
     private int remainingSeconds;
     private String initialTimeString;
 
-    public PomodoroTimerController(Label timerLabel, String initialTime, Runnable onFinishCallback) {
+    private StudySessionController studySessionController;
+    private int userId;
+    private int sessionDuration;
+
+    public PomodoroTimerController(Label timerLabel, String initialTime,
+                                   Runnable onFinishCallback,
+                                   StudySessionController studySessionController,
+                                   int userId) {
         this.timerLabel = timerLabel;
         this.onFinishCallback = onFinishCallback;
+        this.studySessionController = studySessionController;
+        this.userId = userId;
         setTime(initialTime);
+        this.sessionDuration = 0;
         updateLabel();
     }
 
@@ -47,17 +58,22 @@ public class PomodoroTimerController {
             if (remainingSeconds >= 1) {
                 remainingSeconds--;
                 updateLabel();
+
+                // Mỗi 60 giây tăng sessionDuration lên 1 và lưu
+                if ((initialSeconds - remainingSeconds) % 60 == 0) {
+                    sessionDuration++;
+                    if (studySessionController != null && userId > 0) {
+                        studySessionController.logStudyTime(userId, 1); // lưu 1 phút mỗi phút
+                    }
+                }
+
                 if (remainingSeconds <= 0) {
                     stop();
-                    if (onFinishCallback != null) {
-                        onFinishCallback.run();
-                    }
+                    if (onFinishCallback != null) onFinishCallback.run();
                 }
             } else {
                 stop();
-                if (onFinishCallback != null) {
-                    onFinishCallback.run();
-                }
+                if (onFinishCallback != null) onFinishCallback.run();
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -69,6 +85,12 @@ public class PomodoroTimerController {
             timeline.stop();
         }
         timeline = null;
+
+        if (sessionDuration > 0 && studySessionController != null && userId > 0) {
+            studySessionController.logStudyTime(userId, sessionDuration);
+            sessionDuration = 0;
+        }
+
     }
 
     public void pause() {
