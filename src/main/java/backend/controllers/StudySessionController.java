@@ -3,28 +3,53 @@ package backend.controllers;
 import backend.dao.StudySessionDAO;
 import backend.models.StudySession;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class StudySessionController {
-
     private final StudySessionDAO dao = new StudySessionDAO();
 
-    /** Lưu một phiên Pomodoro */
-    public void savePomodoro(int userId, LocalDateTime start, LocalDateTime end) {
-        int minutes = (int) Duration.between(start, end).toMinutes();
-        dao.insert(new StudySession(userId, start, end, minutes));
+    public void logSession(int userId, int durationMinutes) {
+        StudySession session = new StudySession(userId, LocalDate.now(), durationMinutes);
+        dao.insertSession(session);
     }
 
-    /** Lấy toàn bộ session của user */
-    public List<StudySession> getSessions(int userId) {
-        return dao.findByUser(userId);
+    public double getTotalStudyHours(int userId) {
+        return dao.getSessionsByUser(userId).stream()
+                .mapToInt(StudySession::getDurationMinutes)
+                .sum() / 60.0;
     }
 
-    /** Tổng phút học của hôm nay */
-    public int todayMinutes(int userId) {
-        String today = LocalDateTime.now().toLocalDate().toString(); // yyyy-MM-dd
-        return dao.totalMinutesByDate(userId, today);
+    public double getAverageHoursPerDay(int userId) {
+        Map<LocalDate, Integer> dailyTotals = new HashMap<>();
+
+        for (StudySession session : dao.getSessionsByUser(userId)) {
+            dailyTotals.merge(session.getDate(), session.getDurationMinutes(), Integer::sum);
+        }
+
+        return dailyTotals.values().stream()
+                .mapToInt(Integer::intValue)
+                .average()
+                .orElse(0) / 60.0;
+    }
+
+    public int getStreak(int userId) {
+        Set<LocalDate> activeDays = dao.getSessionsByUser(userId).stream()
+                .collect(Collectors.groupingBy(StudySession::getDate,
+                        Collectors.summingInt(StudySession::getDurationMinutes)))
+                .entrySet().stream()
+                .filter(e -> e.getValue() >= 10)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+
+        int streak = 0;
+        LocalDate today = LocalDate.now();
+
+        while (activeDays.contains(today.minusDays(streak))) {
+            streak++;
+        }
+
+        return streak;
     }
 }
