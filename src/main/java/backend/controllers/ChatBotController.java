@@ -29,4 +29,8 @@ public class ChatBotController {
     public List<String> getConversationHistory(String sessionId) {
         return chatBot.getSessionHistory(sessionId);
     }
+
+    public String getFirstMessage(String sessionId) {
+        return chatBot.getUserFirstMessage(sessionId);
+    }
 }

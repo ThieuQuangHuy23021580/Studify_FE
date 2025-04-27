@@ -101,4 +101,9 @@ public class PomodoroTimerController {
     public boolean isPaused() {
         return timeline != null && timeline.getStatus() == Timeline.Status.PAUSED;
     }
+
+    public int getPassedMinutes() {
+        return (initialSeconds-remainingSeconds) / 60;
+    }
 }
+

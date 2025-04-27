@@ -38,6 +38,8 @@ public class AIChatbotController {
     private Button newSessionBtn;
     @FXML
     private Button searchDataBtn;
+    @FXML
+    private Button deleteSessionBtn;
 
     private ChatBotController chatBotBackendController;
     private SessionController sessionBackendController;
@@ -95,10 +97,9 @@ public class AIChatbotController {
         if (sessions.isEmpty()) {
             Label noSessionsLabel = new Label("  No sessions yet.");
             noSessionsLabel.setStyle("-fx-text-fill: #a0a0a0;");
-            sessionFlowPane.getChildren().add(noSessionsLabel);
+            sessionFlowPane.getChildren().addFirst(noSessionsLabel);
         } else {
 
-            // sessions.sort(Comparator.comparing(Session::getCreationTimestamp).reversed());
             for (Session session : sessions) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/FXML/SingleSession.fxml"));
@@ -109,6 +110,7 @@ public class AIChatbotController {
                         sessionNode.getProperties().put("controller", controller);
                         String displayName = session.getSessionId(); // Tạm thời dùng ID
                         //TODO: Tạo logic hiển thị đẹp hơn.
+                        displayName = reformatChatDisplayName(displayName);
                         controller.setData(session.getSessionId(), displayName, this::handleSessionSelection);
                         sessionFlowPane.getChildren().add(sessionNode);
                     }
@@ -118,6 +120,17 @@ public class AIChatbotController {
                 }
             }
         }
+    }
+
+    private String reformatChatDisplayName(String sessionId) {
+        String firstMessage = chatBotBackendController.getFirstMessage(sessionId);
+        System.out.println("reformat Displayname called :"+firstMessage);
+        if(firstMessage != null && !firstMessage.trim().isEmpty()){
+            int maxLength =  20;
+            sessionId = firstMessage.length() > maxLength ? firstMessage.substring(0, maxLength) : firstMessage;
+        }
+        else return sessionId;
+        return firstMessage;
     }
 
     /**
@@ -168,12 +181,10 @@ public class AIChatbotController {
         System.out.println("Displaying chat history for session: " + sessionId);
 
         // *** LẤY LỊCH SỬ TRỰC TIẾP TỪ DAO ***
-        // Đảm bảo ChatBotController của bạn có phương thức gọi DAO này
         List<String> history = chatBotBackendController.getConversationHistory(sessionId);
 
         if (history.isEmpty()) {
             System.out.println("No messages found for this session.");
-            // Có thể hiển thị một thông báo trong chatVbox nếu muốn
         } else {
             System.out.println("Rendering " + history.size() + " messages.");
             for (String messageLine : history) {
@@ -247,7 +258,7 @@ public class AIChatbotController {
                 if (!sessionFlowPane.getChildren().isEmpty() && !(sessionFlowPane.getChildren().get(0).getProperties().containsKey("controller"))) {
                     sessionFlowPane.getChildren().clear();
                 }
-                sessionFlowPane.getChildren().add(sessionNode);
+                sessionFlowPane.getChildren().addFirst(sessionNode);
                 handleSessionSelection(newSessionId);
             } catch (Exception e) {
                 e.printStackTrace();

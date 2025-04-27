@@ -13,9 +13,10 @@ import com.google.gson.JsonParser;
 
 public class ChatBot {
     private Map<String, List<String>> sessionHistory;
+    private ChatBotDAO chatBotDAO = null ;
 
     public ChatBot() {
-        ChatBotDAO chatBotDAO = new ChatBotDAO();
+        chatBotDAO = new ChatBotDAO();
         sessionHistory = chatBotDAO.loadAllSessionHistories();  
     }
 
@@ -25,7 +26,7 @@ public class ChatBot {
 
             List<String> history = sessionHistory.getOrDefault(sessionId, new ArrayList<>());
 
-            history.add("User: " + prompt);
+            history.add("user: " + prompt);
             if (history.size() > 20) {
                 history = history.subList(history.size() - 20, history.size()); // giữ 20 dòng cuối
             }
@@ -34,7 +35,7 @@ public class ChatBot {
             for (String msg : history) {
                 fullPrompt.append(msg).append("\n");
             }
-            fullPrompt.append("Bot:");
+            fullPrompt.append("bot:");
 
             // Dùng Gson để tạo JSON request
             JsonObject json = new JsonObject();
@@ -64,7 +65,7 @@ public class ChatBot {
             JsonObject responseObj = JsonParser.parseString(responseJson).getAsJsonObject();
             String response = responseObj.get("response").getAsString().trim();
 
-            history.add("Bot: " + response);
+            history.add("bot: " + response);
             sessionHistory.put(sessionId, history);
 
             chatBotDAO.saveMessage(sessionId, "user", prompt);
@@ -79,6 +80,10 @@ public class ChatBot {
 
     public List<String> getSessionHistory(String sessionId) {
         return sessionHistory.getOrDefault(sessionId, new ArrayList<>());
+    }
+
+    public String getUserFirstMessage(String sessionId) {
+        return chatBotDAO.getFirstMessage(sessionId);
     }
 
     public static void main(String[] args) {

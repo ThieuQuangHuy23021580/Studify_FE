@@ -100,10 +100,10 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="800.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="5.0" />
       <BarChart fx:id="performanceChart" layoutX="428.0" layoutY="111.0" prefHeight="462.0" prefWidth="577.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis side="BOTTOM" tickLabelGap="1.0" fx:id="xAxis" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </BarChart>
       <Label alignment="CENTER" layoutX="415.0" layoutY="67.0" prefHeight="35.0" prefWidth="275.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 28;" text="Performance" textFill="#282322">
@@ -113,8 +113,8 @@
       </Label>
       <MenuButton fx:id="timePeriodMenuBtn" layoutX="804.0" layoutY="67.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="179.0" style="-fx-background-color: #282322; -fx-font-weight: bold; -fx-font-size: 20;" text="Time Period" textFill="WHITE">
         <items>
-          <MenuItem mnemonicParsing="false" text="This month" />
-          <MenuItem mnemonicParsing="false" text="This year" />
+          <MenuItem fx:id="weeklyBtn" mnemonicParsing="false" text="This month" />
+          <MenuItem fx:id="monthlyBtn" mnemonicParsing="false" text="This year" />
         </items>
       </MenuButton>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#262221" height="90.0" layoutX="465.0" layoutY="635.0" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="250.0">
@@ -135,7 +135,7 @@
             </LinearGradient>
          </stroke>
       </Rectangle>
-      <Label fx:id="userNameText11" alignment="CENTER" layoutX="428.0" layoutY="550.0" prefHeight="40.0" prefWidth="601.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 26;" text="Study Duration Overview" textFill="#282322" underline="true">
+      <Label fx:id="chartTitleLabel" alignment="CENTER" layoutX="428.0" layoutY="550.0" prefHeight="40.0" prefWidth="601.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 26;" text="Study Duration Overview" textFill="#282322" underline="true">
          <effect>
             <Glow />
          </effect>

@@ -1,5 +1,6 @@
 package backend.dao;
 
+import backend.models.Database;
 import backend.models.StudySession;
 
 import java.sql.*;
@@ -9,8 +10,8 @@ import java.util.*;
 public class StudySessionDAO {
     private final Connection conn;
 
-    public StudySessionDAO(Connection conn) {
-        this.conn = conn;
+    public StudySessionDAO() {
+        this.conn = Database.getConnect();
     }
 
     public void createTableIfNotExists() throws SQLException {
@@ -128,5 +129,66 @@ public class StudySessionDAO {
             }
             return Math.max(maxStreak, currentStreak);
         }
+    }
+
+    public Map<String, Integer> getWeeklyDurations(int userId, int limit) {
+        Map<String, Integer> weeklyData = new LinkedHashMap<>();
+        String sql = "SELECT strftime('%Y-%W', date) as study_week, SUM(duration_minutes) as total_minutes " +
+                "FROM study_sessions " +
+                "WHERE user_id = ? " +
+                "GROUP BY study_week " +
+                "ORDER BY study_week DESC " +
+                "LIMIT ?";
+
+        try (Connection conn = Database.getConnect();
+             PreparedStatement stmt = (conn != null) ? conn.prepareStatement(sql) : null) {
+
+            if (stmt == null) { /* Lỗi */ return weeklyData; }
+            stmt.setInt(1, userId);
+            stmt.setInt(2, limit);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    weeklyData.put(rs.getString("study_week"), rs.getInt("total_minutes"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching weekly study durations for user " + userId);
+        }
+        return weeklyData;
+    }
+
+    /**
+     * Lấy tổng số phút học mỗi tháng cho một user_id.
+     * @param userId ID của người dùng.
+     * @param limit Số tháng gần nhất muốn lấy.
+     * @return Map với Key là tháng (YYYY-MM), Value là tổng số phút. Sắp xếp theo tháng giảm dần.
+     */
+    public Map<String, Integer> getMonthlyDurations(int userId, int limit) {
+        Map<String, Integer> monthlyData = new LinkedHashMap<>();
+        String sql = "SELECT strftime('%Y-%m', date) as study_month, SUM(duration_minutes) as total_minutes " +
+                "FROM study_sessions " +
+                "WHERE user_id = ? " +
+                "GROUP BY study_month " +
+                "ORDER BY study_month DESC " +
+                "LIMIT ?";
+
+        try (Connection conn = Database.getConnect();
+             PreparedStatement stmt = (conn != null) ? conn.prepareStatement(sql) : null) {
+
+            if (stmt == null) { /* Lỗi */ return monthlyData; }
+            stmt.setInt(1, userId);
+            stmt.setInt(2, limit);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    monthlyData.put(rs.getString("study_month"), rs.getInt("total_minutes"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching monthly study durations for user " + userId);
+            e.printStackTrace();
+        }
+        return monthlyData;
     }
 }

@@ -366,13 +366,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fth-x-circle" iconSize="30" wrappingWidth="31.0" />
                      </graphic>
                   </Button>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="120.0" AnchorPane.leftAnchor="20.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="150.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="120.0" AnchorPane.rightAnchor="20.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="20.0" layoutY="170.0" stroke="BLACK" strokeType="INSIDE" width="120.0" AnchorPane.leftAnchor="20.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="150.0" layoutY="170.0" stroke="BLACK" strokeType="INSIDE" width="120.0" AnchorPane.rightAnchor="20.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="20.0" layoutY="260.0" stroke="BLACK" strokeType="INSIDE" width="120.0" AnchorPane.leftAnchor="20.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="150.0" layoutY="260.0" stroke="BLACK" strokeType="INSIDE" width="120.0" AnchorPane.rightAnchor="20.0" />
-                  <FontIcon iconColor="RED" iconLiteral="dashicons-youtube" iconSize="35" layoutX="25.0" layoutY="380.0">
+                  <FontIcon iconColor="RED" iconLiteral="dashicons-youtube" iconSize="35" layoutX="25.0" layoutY="430.0">
                      <stroke>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
@@ -390,9 +384,9 @@
                         </LinearGradient>
                      </stroke>
                   </FontIcon>
-                  <Label layoutX="70.0" layoutY="350.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Youtube URL" textFill="WHITE" />
-                  <TextField fx:id="urlTextField" layoutX="25.0" layoutY="385.0" prefHeight="48.0" prefWidth="201.0" promptText="Enter link here ..." style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 4; -fx-font-size: 20;" AnchorPane.leftAnchor="20.0" />
-                  <Button layoutX="229.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#handleUrlBtnClicked" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-border-width: 3;" textAlignment="CENTER" AnchorPane.rightAnchor="10.0">
+                  <Label layoutX="70.0" layoutY="400.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20;" text="Youtube URL" textFill="WHITE" />
+                  <TextField fx:id="urlTextField" layoutX="25.0" layoutY="430.0" prefHeight="48.0" prefWidth="201.0" promptText="Enter link here ..." style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 4; -fx-font-size: 20;" AnchorPane.leftAnchor="20.0" />
+                  <Button layoutX="229.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#handleUrlBtnClicked" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: white; -fx-border-width: 3;" textAlignment="CENTER" AnchorPane.rightAnchor="10.0">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="dashicons-format-links" iconSize="30" selectionStart="1" tabSize="0" />
                      </graphic>
@@ -400,9 +394,122 @@
                         <Font size="1.0" />
                      </font>
                   </Button>
+                  <GridPane layoutX="9.0" layoutY="64.0" prefHeight="131.0" prefWidth="288.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="animeCateBtn" mnemonicParsing="false" onMouseClicked="#animeCateBtnClicked" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #0ab2f5 0.0%, #dd00ff 100.0%); -fx-background-radius: 20;" text="Anime" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="libraryCateBtn" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#libraryCateBtnClicked" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #0ab2f5 0.0%, #dd00ff 100.0%); -fx-background-radius: 20;" text="Library" textFill="WHITE" GridPane.columnIndex="2">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="naturalCateBtn" layoutX="20.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#naturalCateBtnClicked" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #0ab2f5 0.0%, #dd00ff 100.0%); -fx-background-radius: 20;" text="Nature" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="animalsCateBtn" layoutX="25.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#animalsCateBtnClicked" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #0ab2f5 0.0%, #dd00ff 100.0%); -fx-background-radius: 20;" text="Animals" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="deskCateBtn" layoutX="135.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#deskCateBtnClicked" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #0ab2f5 0.0%, #dd00ff 100.0%); -fx-background-radius: 20;" text="Desk" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="cafeCateBtn" layoutX="25.0" layoutY="97.0" mnemonicParsing="false" onMouseClicked="#cafeCateBtnClicked" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #0ab2f5 0.0%, #dd00ff 100.0%); -fx-background-radius: 20;" text="Cafe" textFill="WHITE" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="cityCateBtn" layoutX="109.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#cityCateBtnClicked" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #0ab2f5 0.0%, #dd00ff 100.0%); -fx-background-radius: 20;" text="City" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Button>
+                     </children>
+                  </GridPane>
+                  <GridPane layoutX="10.0" layoutY="210.0" prefHeight="180.0" prefWidth="260.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="image1" fitHeight="56.0" fitWidth="120.0" pickOnBounds="true">
+                           <GridPane.margin>
+                              <Insets bottom="4.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fx:id="image3" fitHeight="56.0" fitWidth="120.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="2.0" top="2.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fx:id="image5" fitHeight="56.0" fitWidth="120.0" layoutX="10.0" layoutY="70.0" pickOnBounds="true" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets top="4.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fx:id="image2" fitHeight="56.0" fitWidth="120.0" layoutX="10.0" layoutY="130.0" pickOnBounds="true" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="4.0" left="10.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fx:id="image4" fitHeight="56.0" fitWidth="120.0" layoutX="155.0" layoutY="10.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="2.0" left="10.0" top="2.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fx:id="image6" fitHeight="56.0" fitWidth="120.0" layoutX="155.0" layoutY="70.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="10.0" top="4.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                     </children>
+                  </GridPane>
                </children>
                <GridPane.margin>
-                  <Insets bottom="230.0" left="95.0" right="110.0" top="20.0" />
+                  <Insets bottom="200.0" left="95.0" right="110.0" top="20.0" />
                </GridPane.margin>
             </AnchorPane>
             <AnchorPane fx:id="soundAnchorPane" maxWidth="300.0" minWidth="290.0" opacity="0.95" prefHeight="482.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
@@ -485,7 +592,7 @@
                   <Insets bottom="220.0" left="95.0" right="110.0" top="20.0" />
                </GridPane.margin>
             </AnchorPane>
-            <AnchorPane fx:id="quoteAnchorPane" maxWidth="300.0" minWidth="290.0" opacity="0.95" prefHeight="201.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <AnchorPane fx:id="quoteAnchorPane" maxWidth="300.0" minWidth="290.0" opacity="0.95" prefHeight="201.0" prefWidth="290.0" style="-fx-background-color: #282322; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 3;" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <FontIcon iconColor="WHITE" iconLiteral="dashicons-editor-quote" iconSize="30" layoutX="25.0" layoutY="55.0">
                      <stroke>

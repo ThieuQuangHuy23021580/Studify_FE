@@ -7,12 +7,13 @@ import backend.models.StudySession;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Map;
 
 public class StudySessionController {
     private final StudySessionDAO studySessionDAO;
 
-    public StudySessionController(Connection conn) throws SQLException {
-        this.studySessionDAO = new StudySessionDAO(conn);
+    public StudySessionController() throws SQLException {
+        this.studySessionDAO = new StudySessionDAO();
         studySessionDAO.createTableIfNotExists();
     }
 
@@ -69,5 +70,13 @@ public class StudySessionController {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public Map<String, Integer> getWeeklyStudyDurations(int userId, int limit) {
+        return studySessionDAO.getWeeklyDurations(userId, limit);
+    }
+
+    public Map<String, Integer> getMonthlyStudyDurations(int userId, int limit) {
+        return studySessionDAO.getMonthlyDurations(userId, limit);
     }
 }

@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit; // Giữ lại import này nếu bạn dùng trong các hàm khác
 
@@ -45,7 +46,8 @@ public class TimeTableController {
     private static final int MAX_COURSE_COLUMN_INDEX = 7;
     private User user;
 
-    private final ScheduleController scheduleController = new ScheduleController();
+    private ScheduleController scheduleController;
+    private List<Schedule> schedules;
 
     @FXML
     public void initialize() {
@@ -56,6 +58,7 @@ public class TimeTableController {
         dayToColumnMap.put("FRIDAY", 5);
         dayToColumnMap.put("SATURDAY", 6);
         dayToColumnMap.put("SUNDAY", 7);
+        scheduleController = new ScheduleController();
     }
 
     @FXML
@@ -191,9 +194,9 @@ public class TimeTableController {
 
     public void initData(User user) {
         if(user != null) {
-            this.user =user;
+            this.user = user;
+            loadSchedule();
         }
-        loadSchedule();
     }
 
     private static class GridCoordinates {
@@ -207,8 +210,8 @@ public class TimeTableController {
 
     public void loadSchedule() {
         if (user == null) return;
-
-        var schedules = scheduleController.getSchedulesByUserId(user.getUserId());
+        System.out.println(user.getUserId());
+        schedules = scheduleController.getSchedulesByUserId(user.getUserId());
         for (Schedule schedule : schedules) {
             String day = schedule.getDay().toUpperCase();
             int hour = schedule.getPeriod();

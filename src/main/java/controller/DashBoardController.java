@@ -1,5 +1,9 @@
 package controller;
 
+import backend.controllers.SessionController;
+import backend.controllers.StudySessionController;
+import backend.models.Background;
+import backend.controllers.BackgroundController;
 import backend.controllers.QuoteController;
 import backend.models.User;
 import javafx.application.Platform;
@@ -18,9 +22,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
-import kotlin.OverloadResolutionByLambdaReturnType;
-
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -195,6 +199,32 @@ public class DashBoardController {
     @FXML
     private TextField urlTextField;
 
+    @FXML
+    private Button animeCateBtn;
+
+    @FXML
+    private Button cafeCateBtn;
+
+    @FXML
+    private Button libraryCateBtn;
+
+    @FXML
+    private Button naturalCateBtn;
+
+    @FXML
+    private Button deskCateBtn;
+
+    @FXML
+    private Button cityCateBtn;
+
+
+    @FXML private ImageView image1;
+    @FXML private ImageView image2;
+    @FXML private ImageView image3;
+    @FXML private ImageView image4;
+    @FXML private ImageView image5;
+    @FXML private ImageView image6;
+
     private List<AnchorPane> showStudyTool, showAllTool;
 
     private PomodoroTimerController focusTimeController, minifocusTimeController;
@@ -203,14 +233,16 @@ public class DashBoardController {
 
     private Boolean isShowQuote;
 
-
     private VideoPlayerController currentVideoController = null;
 
     private Stage currentVideoStage = null;
 
-    private User user;
+    private List<ImageView> backgroundImageViews;
 
-    QuoteController quoteController;
+    private QuoteController quoteController;
+    private BackgroundController backgroundController;
+    private StudySessionController studySessionController;
+    private User currentUser;
 
     private static final String[] YOUTUBE_URL_PATTERNS = {
             "https://(?:www\\.)?youtube\\.com/watch\\?v=([a-zA-Z0-9_\\-]+)",
@@ -221,14 +253,24 @@ public class DashBoardController {
 
 
     @FXML
-    public void initialize() {
-
+    public void initialize() throws SQLException {
+        studySessionController = new StudySessionController();
         quoteController = new QuoteController();
         isShowQuote = true;
 
+        //Background Settings:
+        if (backgroundImage != null && rootStackPane != null) {
+            backgroundImage.fitWidthProperty().bind(rootStackPane.widthProperty());
+            backgroundImage.fitHeightProperty().bind(rootStackPane.heightProperty());
+        } else {
+            System.err.println("Lỗi binding: rootStackPane hoặc backgroundImage từ FXML là null.");
+        }
+        backgroundController = new BackgroundController();
+        backgroundImageViews = List.of(image1, image2, image3, image4, image5, image6);
+
         //Media Settings:
         Platform.runLater(() -> {
-            Stage stage = (Stage) rootStackPane.getScene().getWindow(); // Lấy Stage
+            Stage stage = (Stage) rootStackPane.getScene().getWindow();
             if (stage != null) {
                 stage.setOnCloseRequest(event -> {
                     System.out.println("Cửa sổ đóng, giải phóng âm thanh...");
@@ -255,14 +297,6 @@ public class DashBoardController {
         setupSliderListener(binauralSlider, "binaural");
         setupSliderListener(pianoSlider, "piano");
 
-        //Background Settings:
-        if (backgroundImage != null && rootStackPane != null) {
-            backgroundImage.fitWidthProperty().bind(rootStackPane.widthProperty());
-            backgroundImage.fitHeightProperty().bind(rootStackPane.heightProperty());
-        } else {
-            System.err.println("Lỗi binding: rootStackPane hoặc backgroundImage từ FXML là null.");
-        }
-
         //Pomodoro Clock Setting:
         FOCUS_TIME = focusTimeFixLabel.getText();
         BREAK_TIME = breakTimeFixLabel.getText();
@@ -281,11 +315,127 @@ public class DashBoardController {
 
     }
 
-    public void setBackgroundImage(ImageView backgroundImage) {
-        this.backgroundImage = backgroundImage;
-        backgroundImage.setPreserveRatio(false);
-        backgroundImage.fitWidthProperty().bind(rootStackPane.widthProperty());
-        backgroundImage.fitHeightProperty().bind(rootStackPane.heightProperty());
+    public void initData(User user) {
+        if(user != null){
+           currentUser = user;
+            System.out.println("User Dashboard:" + currentUser.getUserId());
+            showUserBackground();
+            setupBackgroundSelectionClick();
+            loadBackgroundsByCategory("anime");
+        }
+        else System.out.println("Fail to load dashboard user");
+    }
+
+    private void loadBackgroundsByCategory(String category) {
+        if (backgroundController == null || backgroundImageViews == null) {
+            System.err.println("Error: BackgroundController or ImageView list not initialized.");
+            return;
+        }
+        List<Background> backgrounds = backgroundController.getBackgroundsByCategory(category);
+        for (int i = 0; i < backgroundImageViews.size(); i++) {
+            ImageView imageView = backgroundImageViews.get(i);
+            if (imageView != null) {
+                if (i < backgrounds.size()) {
+                    Background bg = backgrounds.get(i);
+                    String imagePath = bg.getImagePath();
+                    System.out.println("Attempting to load image from resource path: [" + imagePath + "]");
+                    if (imagePath != null && !imagePath.trim().isEmpty()) {
+                        try (InputStream imageStream = getClass().getResourceAsStream("/" + imagePath.trim())) {
+                            Image image = new Image(imageStream);
+                            imageView.setImage(image);
+                            imageView.setUserData(bg);
+                            imageView.setFitWidth(120);
+                            imageView.setFitHeight(56);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            imageView.setImage(null);
+                            imageView.setUserData(null);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void setupBackgroundSelectionClick() {
+        if (backgroundImageViews == null) return;
+        for (ImageView imageView : backgroundImageViews) {
+            if (imageView != null) {
+                imageView.setOnMouseClicked(event -> {
+                    Object userData = imageView.getUserData();
+                    if (userData instanceof Background) {
+                        handleBackgroundSelection((Background) userData);
+                    }
+                });
+                imageView.setOnMouseEntered(e -> imageView.setStyle("-fx-effect: dropshadow(gaussian, rgba(255,255,255,0.7), 10, 0.5, 0, 0);"));
+                imageView.setOnMouseExited(e -> imageView.setStyle("-fx-effect: null;"));
+                imageView.setPickOnBounds(true);
+                imageView.setCursor(javafx.scene.Cursor.HAND);
+            }
+        }
+    }
+
+    private void handleBackgroundSelection(Background selectedBackground) {
+        if (selectedBackground == null) return;
+        boolean success = backgroundController.setUserBackground(currentUser.getUserId(), selectedBackground.getId());
+        if(currentUser != null && success) currentUser.setBackgroundId(selectedBackground.getId());
+        setBackgroundImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/" + selectedBackground.getImagePath()))));
+    }
+
+    public void showUserBackground() {
+        String imagePath = backgroundController.getUserBackground(currentUser.getUserId()).getImagePath();
+        if(backgroundController.getUserBackground(currentUser.getUserId()) != null){
+            Platform.runLater(() ->{
+                try(InputStream imageStream = getClass().getResourceAsStream("/"+imagePath.trim())){
+                    if(imageStream != null){
+                        Image image = new Image(imageStream);
+                        setBackgroundImage(image);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
+
+    public void setBackgroundImage(Image backgroundImage) {
+        if (backgroundImage == null) return;
+        this.backgroundImage.setImage(backgroundImage);
+    }
+
+    @FXML
+    public void animeCateBtnClicked() {
+        loadBackgroundsByCategory("anime");
+    }
+
+    @FXML
+    public void libraryCateBtnClicked() {
+        loadBackgroundsByCategory("library");
+    }
+
+    @FXML
+    public void naturalCateBtnClicked() {
+        loadBackgroundsByCategory("nature");
+    }
+
+    @FXML
+    public void animalsCateBtnClicked() {
+        loadBackgroundsByCategory("animals");
+    }
+
+    @FXML
+    public void deskCateBtnClicked() {
+        loadBackgroundsByCategory("desk");
+    }
+
+    @FXML
+    public void cafeCateBtnClicked() {
+        loadBackgroundsByCategory("cafe");
+    }
+
+    @FXML
+    public void cityCateBtnClicked() {
+        loadBackgroundsByCategory("city");
     }
 
     private void showNode(Node node, boolean isShow) {
@@ -414,7 +564,12 @@ public class DashBoardController {
      */
     @FXML
     public void startTimerBtnClicked() {
-        if (focusTimeController != null) focusTimeController.stop();
+        if (focusTimeController != null) {
+            if(focusTimeController.getPassedMinutes() > 0 && !isPause) {
+                studySessionController.logStudyTime(currentUser.getUserId(), focusTimeController.getPassedMinutes());
+            }
+            focusTimeController.stop();
+        }
         if (minifocusTimeController != null) minifocusTimeController.stop();
 
         FOCUS_TIME = focusTimeFixLabel.getText();
@@ -440,7 +595,12 @@ public class DashBoardController {
 
     @FXML
     public void pausePomodoroTimerBtnClicked() {
-        if (focusTimeController != null) focusTimeController.pause();
+        if (focusTimeController != null) {
+            if(focusTimeController.getPassedMinutes() > 0){
+                studySessionController.logStudyTime(currentUser.getUserId(), focusTimeController.getPassedMinutes());
+            }
+            focusTimeController.pause();
+        }
         if (minifocusTimeController != null) minifocusTimeController.pause();
         isPause = true;
         updateTimerButtons();
@@ -448,7 +608,6 @@ public class DashBoardController {
 
     private void handleTimerFinish() {
         playAlarm();
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Pomodoro Clock");
         alert.setHeaderText(null);
@@ -459,11 +618,17 @@ public class DashBoardController {
             if (loopAutomaticallyRadioBtn.isSelected()) {
                 isFocus = !isFocus;
                 String nextTime = isFocus ? FOCUS_TIME : BREAK_TIME;
+                if(focusTimeController.getPassedMinutes() > 0){
+                    studySessionController.logStudyTime(currentUser.getUserId(),focusTimeController.getPassedMinutes());
+                }
                 focusTimeController.reset(nextTime);
                 minifocusTimeController.reset(nextTime);
                 runPomodoroTimerBtnClicked();
             } else {
                 isFocus = true;
+                if(focusTimeController.getPassedMinutes() > 0){
+                    studySessionController.logStudyTime(currentUser.getUserId(),focusTimeController.getPassedMinutes());
+                }
                 focusTimeController.reset(FOCUS_TIME);
                 minifocusTimeController.reset(FOCUS_TIME);
                 isPause = false;
@@ -706,17 +871,15 @@ public class DashBoardController {
         Platform.runLater(() -> {
             Alert alert = new Alert(alertType);
             alert.setTitle(title);
-            alert.setHeaderText(null); // Không cần header phụ
+            alert.setHeaderText(null);
             alert.setContentText(message);
             alert.showAndWait();
         });
     }
 
     public void cleanupOnExit() {
-        removeCurrentVideoPlayer(); // Gọi hàm gỡ bỏ và dọn dẹp trình phát
+        removeCurrentVideoPlayer();
     }
 
-    public void initData(User user) {
-        if(user != null) this.user = user;
-    }
+
 }

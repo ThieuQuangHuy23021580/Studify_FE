@@ -30,24 +30,16 @@ public class MainController {
         userDAO = new UserDAO();
         backgroundDAO = new BackgroundDAO();
         try {
-            System.out.println("Đang tải Sidebar.fxml...");
             FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/controller/FXML/Sidebar.fxml"));
             Node sidebarNode = sidebarLoader.load(); // Lấy Node
             SidebarController sidebarController = sidebarLoader.getController();
             if (sidebarController != null) {
                 sidebarController.setMainController(this);
                 mainView.setLeft(sidebarNode);
-                System.out.println("Sidebar loaded and set.");
-            } else {
-                throw new IOException("Could not get SidebarController instance.");
             }
-            loadAndSetCenterContent("/controller/FXML/DashBoard.fxml", null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorDialog("Lỗi tải giao diện", "Không thể tải các thành phần giao diện cần thiết: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            showErrorDialog("Lỗi hệ thống", "Đã xảy ra lỗi khởi tạo không mong muốn: " + e.getMessage());
+            showErrorDialog("MainController", "Không load được Sidebar.fxml: " + e.getMessage());
         }
     }
 
@@ -55,12 +47,11 @@ public class MainController {
      * Được gọi từ LoginController để truyền User và khởi tạo lại view ban đầu nếu cần.
      */
     public void initData(User user) {
-        if(user == null) {
-            showErrorDialog("Lỗi Dữ Liệu", "Không nhận được thông tin người dùng hợp lệ.");
-            return;
+        if(user != null) {
+            loggedInUser = user;
+            loadAndSetCenterContent("/controller/FXML/DashBoard.fxml",loggedInUser);
         }
-        this.loggedInUser = user;
-        loadAndSetCenterContent("/controller/FXML/DashBoard.fxml", this.loggedInUser);
+        else showErrorDialog("MainController", "Không lấy được user từ LoginView.");
     }
 
     /**
@@ -78,15 +69,16 @@ public class MainController {
             this.currentCenterController = controller;
             if (controller != null && user != null) {
                 if (controller instanceof DashBoardController) {
-                    ((DashBoardController) controller).initData(user);
                     System.out.println("Called initData for DashBoardController.");
+                    ((DashBoardController) controller).initData(user);
                 } else if (controller instanceof AIChatbotController) {
-                    ((AIChatbotController) controller).initData(user);
                     System.out.println("Called initData for AIChatbotController.");
+                    ((AIChatbotController) controller).initData(user);
                 } else if(controller instanceof TimeTableController){
-                    ((TimeTableController) controller).initData(user);
                     System.out.println("Called initData for TimeTableController.");
+                    ((TimeTableController) controller).initData(user);
                 } else if(controller instanceof StudyStatsController){
+                    System.out.println("Called initData for StudyStatsController.");
                     ((StudyStatsController)controller).initData(user);
                 }
             }
@@ -102,50 +94,6 @@ public class MainController {
     public User getLoggedInUser() {
         return loggedInUser;
     }
-
-
-    /**
-     * Tải và áp dụng background .
-     */
-    private void loadUserPreferences() {
-        if (loggedInUser == null || backgroundDAO == null) {
-            System.err.println("MainController Error: Cannot load background, user or DAO is null.");
-            return;
-        }
-        if (!(currentCenterController instanceof DashBoardController)) {
-            System.err.println("MainController WARN: Cannot set background because the current center view is not Dashboard.");
-            return;
-        }
-        DashBoardController dashController = (DashBoardController) currentCenterController;
-        int backgroundId = loggedInUser.getBackgroundId();
-        Background userBackground = null;
-        if (backgroundId > 0) {
-            userBackground = backgroundDAO.getBackgroundById(backgroundId);
-        }
-        if (userBackground == null) {
-            userBackground = backgroundDAO.getBackgroundById(1);
-        }
-
-        if (userBackground != null) {
-            String imagePath = userBackground.getImagePath();
-            if (imagePath != null && !imagePath.trim().isEmpty()) {
-                try (InputStream imageStream = getClass().getResourceAsStream(imagePath.trim())) {
-                    if (imageStream == null) throw new NullPointerException("Resource not found: " + imagePath.trim());
-                    Image bgImage = new Image(Objects.requireNonNull(getClass().getResource(imagePath).toExternalForm()));
-                    dashController.setBackgroundImage(new ImageView(bgImage));
-
-                } catch (Exception e) {
-                    System.err.println("Error loading/setting background Image in MainController->loadUserPreferences: " + e.getMessage());
-                    showErrorDialog("Lỗi Ảnh Nền", "Không thể tải hoặc đặt ảnh nền.");
-                }
-            } else {
-                System.err.println("Image path is null or empty for background ID: " + userBackground.getId());
-            }
-        } else {
-            System.err.println("ERROR: Could not load default background (ID 1) either!");
-        }
-    }
-
 
     private void showErrorDialog(String title, String message) {
         Platform.runLater(() -> {
