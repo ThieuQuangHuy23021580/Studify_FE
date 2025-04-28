@@ -37,7 +37,8 @@ public class StudySessionController {
 
     public double getTotalStudyHours(int userId) {
         int totalMinutes = getTotalStudyMinutes(userId);
-        return totalMinutes / 60.0;
+        double hours = totalMinutes / 60.0;
+        return Math.round(hours * 10) / 10.0;
     }
 
     public double getAverageStudyMinutes(int userId) {
@@ -51,7 +52,8 @@ public class StudySessionController {
 
     public double getAverageStudyHours(int userId) {
         double averageMinutes = getAverageStudyMinutes(userId);
-        return averageMinutes / 60.0;
+        double hours = averageMinutes / 60.0;
+        return Math.round(hours * 10) / 10.0;
     }
 
     public int getCurrentStreak(int userId) {
@@ -72,8 +74,8 @@ public class StudySessionController {
         }
     }
 
-    public Map<String, Integer> getWeeklyStudyDurations(int userId, int limit) {
-        return studySessionDAO.getWeeklyDurations(userId, limit);
+    public Map<String, Integer> getDailyStudyDurations(int userId, int limit) {
+        return studySessionDAO.getDailyDurations(userId, limit);
     }
 
     public Map<String, Integer> getMonthlyStudyDurations(int userId, int limit) {

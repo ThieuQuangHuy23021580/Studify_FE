@@ -3,9 +3,11 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.ImageView?>
@@ -15,6 +17,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1080.0" style="-fx-background-color: #25201f;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudyStatsController">
@@ -46,13 +49,13 @@
             </Glow>
          </effect>
       </Circle>
-      <ImageView fx:id="avatar" fitHeight="200.0" fitWidth="200.0" layoutX="112.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="userNameText" alignment="CENTER" layoutX="75.0" layoutY="310.0" prefHeight="35.0" prefWidth="275.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 28;" text="User Name" textFill="#282322">
+      <ImageView fx:id="avatarImageView" fitHeight="200.0" fitWidth="200.0" layoutX="112.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="userNameLabel" alignment="CENTER" layoutX="75.0" layoutY="310.0" prefHeight="35.0" prefWidth="275.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 28;" text="User Name" textFill="#282322">
          <effect>
             <Glow />
          </effect>
       </Label>
-      <Label fx:id="levelText" alignment="CENTER" layoutX="75.0" layoutY="340.0" prefHeight="35.0" prefWidth="275.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 21;" text="(Begginer)" textFill="#282322">
+      <Label fx:id="levelLabel" alignment="CENTER" layoutX="49.0" layoutY="340.0" prefHeight="35.0" prefWidth="327.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 21;" text="(Begginer)" textFill="#2e96f7">
          <effect>
             <Glow />
          </effect>
@@ -92,15 +95,15 @@
             <Glow />
          </effect>
       </Label>
-      <Label fx:id="educationLevelText" alignment="CENTER" layoutX="75.0" layoutY="425.0" prefHeight="35.0" prefWidth="275.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22;" text="University" textFill="WHITE">
+      <Label fx:id="educationLevelLabel" alignment="CENTER" layoutX="75.0" layoutY="425.0" prefHeight="35.0" prefWidth="275.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22;" text="University" textFill="WHITE">
          <effect>
             <Glow />
          </effect>
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="800.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="5.0" />
-      <BarChart fx:id="performanceChart" layoutX="428.0" layoutY="111.0" prefHeight="462.0" prefWidth="577.0">
+      <BarChart fx:id="performanceChart" layoutX="428.0" layoutY="111.0" maxHeight="454.0" maxWidth="577.0" minHeight="454.0" minWidth="577.0" prefHeight="454.0" prefWidth="577.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" tickLabelGap="1.0" fx:id="xAxis" />
+          <CategoryAxis side="BOTTOM" tickLabelGap="0.0" fx:id="xAxis" />
         </xAxis>
         <yAxis>
           <NumberAxis fx:id="yAxis" side="LEFT" />
@@ -113,8 +116,9 @@
       </Label>
       <MenuButton fx:id="timePeriodMenuBtn" layoutX="804.0" layoutY="67.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="179.0" style="-fx-background-color: #282322; -fx-font-weight: bold; -fx-font-size: 20;" text="Time Period" textFill="WHITE">
         <items>
-          <MenuItem fx:id="weeklyBtn" mnemonicParsing="false" text="This month" />
-          <MenuItem fx:id="monthlyBtn" mnemonicParsing="false" text="This year" />
+            <MenuItem fx:id="weeklyBtn" mnemonicParsing="false" text="This week" />
+          <MenuItem fx:id="monthlyBtn" mnemonicParsing="false" text="This month" />
+          <MenuItem fx:id="yearlyBtn" mnemonicParsing="false" text="This year" />
         </items>
       </MenuButton>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#262221" height="90.0" layoutX="465.0" layoutY="635.0" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 60; -fx-arc-height: 60;" width="250.0">
@@ -198,22 +202,22 @@
       </Rectangle>
       <FontIcon iconColor="#262221" iconLiteral="fth-clock" iconSize="50" layoutX="485.0" layoutY="701.0" wrappingWidth="51.0" />
       <FontIcon iconColor="#262221" iconLiteral="fth-activity" iconSize="50" layoutX="757.0" layoutY="701.0" wrappingWidth="51.0" />
-      <Label alignment="CENTER" layoutX="488.0" layoutY="641.0" prefHeight="35.0" prefWidth="269.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Study time (h)" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="488.0" layoutY="641.0" prefHeight="35.0" prefWidth="269.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Study time(h)" textFill="WHITE">
          <effect>
             <Glow />
          </effect>
       </Label>
-      <Label alignment="CENTER" layoutX="755.0" layoutY="641.0" prefHeight="35.0" prefWidth="275.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Average/day" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="810.0" layoutY="641.0" prefHeight="35.0" prefWidth="177.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 18;" text="Average/day(h)" textFill="WHITE">
          <effect>
             <Glow />
          </effect>
       </Label>
-      <Label fx:id="studyTimeText" alignment="CENTER" layoutX="555.0" layoutY="675.0" prefHeight="35.0" prefWidth="149.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 24;" text="0" textFill="WHITE">
+      <Label fx:id="studyTimeLabel" alignment="CENTER" layoutX="541.0" layoutY="675.0" prefHeight="35.0" prefWidth="163.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 24;" text="0" textFill="WHITE">
          <effect>
             <Glow />
          </effect>
       </Label>
-      <Label fx:id="averageTimeText" alignment="CENTER" layoutX="827.0" layoutY="675.0" prefHeight="35.0" prefWidth="149.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 24;" text="0" textFill="WHITE">
+      <Label fx:id="averageTimeLabel" alignment="CENTER" layoutX="820.0" layoutY="675.0" prefHeight="35.0" prefWidth="154.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 24;" text="0" textFill="WHITE">
          <effect>
             <Glow />
          </effect>
@@ -244,7 +248,7 @@
             <Glow />
          </effect>
       </Label>
-      <Label fx:id="currentStreakText" alignment="CENTER" layoutX="196.0" layoutY="625.0" prefHeight="58.0" prefWidth="125.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 40;" text="0" textFill="#dd00ff">
+      <Label fx:id="currentStreakLabel" alignment="CENTER" layoutX="196.0" layoutY="625.0" prefHeight="58.0" prefWidth="125.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 40;" text="0" textFill="#dd00ff">
          <effect>
             <Glow />
          </effect>
@@ -254,10 +258,39 @@
             <Glow />
          </effect>
       </Label>
-      <Label fx:id="longgestStreakText" alignment="CENTER" layoutX="221.0" layoutY="714.0" prefHeight="38.0" prefWidth="82.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 26;" text="0" textFill="#2acaf7">
+      <Label fx:id="longgestStreakLabel" alignment="CENTER" layoutX="221.0" layoutY="714.0" prefHeight="38.0" prefWidth="82.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 26;" text="0" textFill="#2acaf7">
          <effect>
             <Glow />
          </effect>
       </Label>
+      <TextField fx:id="userNameField" layoutX="95.0" layoutY="303.0" prefHeight="45.0" prefWidth="235.0" promptText="Enter new user name ..." style="-fx-background-color: white; -fx-font-family: 'Poppins-ExtraBold'; -fx-border-color: #64453e; -fx-font-size: 20;" visible="false">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </TextField>
+      <MenuButton fx:id="educationLevelMenuBtn" layoutX="145.0" layoutY="425.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #25201f;" textFill="#25201f" visible="false">
+        <items>
+          <MenuItem fx:id="primaryMenuItem" mnemonicParsing="false" text="Primary" />
+          <MenuItem fx:id="secondaryMenuItem" mnemonicParsing="false" text="Sencondary" />
+            <MenuItem fx:id="highschoolMenuItem" mnemonicParsing="false" text="Highschool" />
+            <MenuItem fx:id="vocationalMenuItem" mnemonicParsing="false" text="Vocational" />
+            <MenuItem fx:id="tertiaryMenuItem" mnemonicParsing="false" text="Tertiary" />
+        </items>
+      </MenuButton>
+      <Button fx:id="changeInfoBtn" layoutX="68.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#changeInfoBtnClicked" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322">
+         <graphic>
+            <FontIcon iconColor="#2e96f7" iconLiteral="fth-edit" iconSize="35" />
+         </graphic>
+      </Button>
+      <Button fx:id="confirmBtn" layoutX="68.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#confirmBtnClicked" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322" visible="false">
+         <graphic>
+            <FontIcon iconColor="#49b21f" iconLiteral="fth-check-square" iconSize="35" />
+         </graphic>
+      </Button>
+      <Button fx:id="cancelBtn" layoutX="310.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#cancelBtnClicked" style="-fx-background-color: trans; -fx-border-width: 2;" textFill="#282322" visible="false">
+         <graphic>
+            <FontIcon iconColor="RED" iconLiteral="fth-x-square" iconSize="35" />
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

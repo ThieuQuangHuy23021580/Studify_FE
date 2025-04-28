@@ -14,7 +14,7 @@
         Đổi màu nền và alignment="CENTER_RIGHT" cho AIBubbleChat.fxml
     -->
     <children>
-        <Label fx:id="messageLabel" maxWidth="450.0" style="-fx-padding: 8px 12px; -fx-background-color: #4CAF50; -fx-background-radius: 15;" text="Message..." textFill="WHITE" wrapText="true">
+        <Label fx:id="messageLabel" maxWidth="450.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-padding: 8px 12px; -fx-background-color: #4CAF50; -fx-background-radius: 15;" text="Message..." textFill="WHITE" wrapText="true">
             <!--
                 maxWidth="500.0" vẫn là yếu tố chính quyết định khi nào text xuống dòng
                          và giới hạn chiều rộng của bubble.

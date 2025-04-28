@@ -5,6 +5,9 @@ public class User {
     private String password;
     private String email;
     private int backgroundId;
+    private String educationLevel;
+    private String avatar;
+    private String username;
 
     public User() {}
 
@@ -51,6 +54,29 @@ public class User {
         this.backgroundId = backgroundId;
     }
 
+    public void setEducationLevel(String educationLevel) {
+        this.educationLevel = educationLevel;
+    }
+
+    public String getEducationLevel() {
+        return educationLevel;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
     @Override
     public String toString() {
         return "User{" +

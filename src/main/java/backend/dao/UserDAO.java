@@ -74,4 +74,94 @@ public class UserDAO {
         }
         return -1;
     }
+
+    public boolean setUserEducationLevel(int userId, String educationLevel) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "UPDATE users SET education_level = ? WHERE id = ?"
+            );
+            stmt.setString(1, educationLevel);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getUserEducationLevel(int userId) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT education_level FROM users WHERE id = ?"
+            );
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("education_level");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean setUserAvatar(int userId, String avatar) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "UPDATE users SET avatar = ? WHERE id = ?"
+            );
+            stmt.setString(1, avatar);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getUserAvatar(int userId) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT avatar FROM users WHERE id = ?"
+            );
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("avatar");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean setUserName(int userId, String name) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "UPDATE users SET user_name = ? WHERE id = ?"
+            );
+            stmt.setString(1, name);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getUserName(int userId) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT user_name FROM users WHERE id = ?"
+            );
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("user_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

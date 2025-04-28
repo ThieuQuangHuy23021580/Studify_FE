@@ -131,31 +131,35 @@ public class StudySessionDAO {
         }
     }
 
-    public Map<String, Integer> getWeeklyDurations(int userId, int limit) {
-        Map<String, Integer> weeklyData = new LinkedHashMap<>();
-        String sql = "SELECT strftime('%Y-%W', date) as study_week, SUM(duration_minutes) as total_minutes " +
+    public Map<String, Integer> getDailyDurations(int userId, int limit) {
+        Map<String, Integer> dailyData = new LinkedHashMap<>();
+        String sql = "SELECT strftime('%Y-%m-%d', date) as study_day, SUM(duration_minutes) as total_minutes " +
                 "FROM study_sessions " +
                 "WHERE user_id = ? " +
-                "GROUP BY study_week " +
-                "ORDER BY study_week DESC " +
+                "GROUP BY study_day " +
+                "ORDER BY study_day DESC " +
                 "LIMIT ?";
 
         try (Connection conn = Database.getConnect();
              PreparedStatement stmt = (conn != null) ? conn.prepareStatement(sql) : null) {
 
-            if (stmt == null) { /* Lỗi */ return weeklyData; }
+            if (stmt == null) {
+                System.err.println("StudySessionDAO Error: Cannot prepare statement for getDailyDurations.");
+                return dailyData;
+            }
+
             stmt.setInt(1, userId);
             stmt.setInt(2, limit);
-
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    weeklyData.put(rs.getString("study_week"), rs.getInt("total_minutes"));
+                    dailyData.put(rs.getString("study_day"), rs.getInt("total_minutes"));
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error fetching weekly study durations for user " + userId);
+            System.err.println("Error fetching daily study durations for user " + userId);
+            e.printStackTrace();
         }
-        return weeklyData;
+        return dailyData;
     }
 
     /**
