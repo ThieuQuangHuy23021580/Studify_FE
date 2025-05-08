@@ -24,6 +24,10 @@ public class TaskController {
         this.dashBoardController = dashBoardController;
     }
 
+    public String getData() {
+        return taskNameLabel.getText();
+    }
+
     @FXML
     void deleteTaskBtnClicked() {
         if (parentContainer != null && taskRootNode != null) {

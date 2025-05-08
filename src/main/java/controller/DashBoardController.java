@@ -242,6 +242,7 @@ public class DashBoardController {
     private QuoteController quoteController;
     private BackgroundController backgroundController;
     private StudySessionController studySessionController;
+    private backend.controllers.TaskController taskController;
     private User currentUser;
 
     private static final String[] YOUTUBE_URL_PATTERNS = {
@@ -256,6 +257,7 @@ public class DashBoardController {
     public void initialize() throws SQLException {
         studySessionController = new StudySessionController();
         quoteController = new QuoteController();
+        taskController = new backend.controllers.TaskController();
         isShowQuote = true;
 
         //Background Settings:
@@ -742,6 +744,7 @@ public class DashBoardController {
             return;
         }
         try{
+            taskController.addTask(currentUser.getUserId(), goalText);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/FXML/Task.fxml")); // Đảm bảo đường dẫn đúng
             AnchorPane taskNode = loader.load();
             TaskController taskController = loader.getController();

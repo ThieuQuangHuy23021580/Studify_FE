@@ -42,6 +42,15 @@ public class ScheduleDAO {
             stmt.executeUpdate();
         }
     }
+    public void delete(String day, int period) throws SQLException {
+        String sql = "DELETE FROM schedules WHERE day = ? AND period = ?";
+        try (Connection conn = Database.getConnect();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, day);
+            stmt.setInt(2, period);
+            stmt.executeUpdate();
+        }
+    }
 
     public List<Schedule> getAllByUserId(int userId) throws SQLException {
         List<Schedule> list = new ArrayList<>();

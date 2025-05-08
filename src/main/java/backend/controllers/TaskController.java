@@ -30,6 +30,7 @@ public class TaskController {
         return taskDAO.findAllByUser(userId);
     }
 
+
     public List<TaskStat> getCompletedTaskStatsByMonth(int userId) {
         return taskDAO.getCompletedTaskStatsByMonth(userId);
     }

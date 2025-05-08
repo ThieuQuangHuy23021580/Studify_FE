@@ -55,7 +55,7 @@
             <Glow />
          </effect>
       </Label>
-      <Label fx:id="levelLabel" alignment="CENTER" layoutX="75.0" layoutY="340.0" prefHeight="35.0" prefWidth="275.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 21;" text="(Begginer)" textFill="#282322">
+      <Label fx:id="levelLabel" alignment="CENTER" layoutX="49.0" layoutY="340.0" prefHeight="35.0" prefWidth="327.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 21;" text="(Begginer)" textFill="#2e96f7">
          <effect>
             <Glow />
          </effect>
@@ -263,7 +263,7 @@
             <Glow />
          </effect>
       </Label>
-      <TextField fx:id="userNameField" layoutX="95.0" layoutY="301.0" prefHeight="45.0" prefWidth="235.0" promptText="Enter new user name ..." style="-fx-background-color: white; -fx-font-family: 'Poppins-ExtraBold'; -fx-border-color: #64453e; -fx-font-size: 20;" visible="false">
+      <TextField fx:id="userNameField" layoutX="95.0" layoutY="303.0" prefHeight="45.0" prefWidth="235.0" promptText="Enter new user name ..." style="-fx-background-color: white; -fx-font-family: 'Poppins-ExtraBold'; -fx-border-color: #64453e; -fx-font-size: 20;" visible="false">
          <font>
             <Font name="Times New Roman" size="16.0" />
          </font>

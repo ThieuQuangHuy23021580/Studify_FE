@@ -25,6 +25,10 @@ import java.util.UUID;
 public class AIChatbotController {
 
     @FXML
+    private ScrollPane historyScrollPane;
+    @FXML
+    private Label historyLabel;
+    @FXML
     private FlowPane chatFlowPane;
     @FXML
     private TextField sendTextField;
@@ -40,6 +44,8 @@ public class AIChatbotController {
     private Button searchDataBtn;
     @FXML
     private Button deleteSessionBtn;
+
+    private boolean showHistory = true;
 
     private ChatBotController chatBotBackendController;
     private SessionController sessionBackendController;
@@ -84,7 +90,6 @@ public class AIChatbotController {
         loadSessionList();
         selectDefaultSession();
     }
-
 
     /**
      * Tải danh sách các session của người dùng hiện tại và hiển thị.
@@ -231,6 +236,13 @@ public class AIChatbotController {
                 node.setStyle("-fx-background-color: transparent;");
             }
         }
+    }
+    @FXML
+    private void historyBtnClicked(){
+        historyLabel.setVisible(showHistory);
+        historyScrollPane.setVisible(showHistory);
+        historyScrollPane.setManaged(showHistory);
+        showHistory = !showHistory;
     }
 
     /**

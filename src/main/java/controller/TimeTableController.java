@@ -92,11 +92,10 @@ public class TimeTableController {
             scheduleController.addSchedule(newSchedule);
         }
 
-        // Hiển thị trên UI
         Label targetLabel = findLabelAt(coords.colIndex, coords.rowIndex);
         if (targetLabel != null) {
             targetLabel.setText(courseName.trim());
-            targetLabel.setStyle("-fx-text-fill:#E8B931; -fx-border-color:white; -fx-background-color: black; -fx-padding: 2px; -fx-alignment: center;");
+            targetLabel.setStyle("-fx-text-fill:  #25201f; -fx-border-color:white; -fx-background-color: #f8ecde; -fx-padding: 2px; -fx-alignment: center;");
             courseNameTextField.clear();
             timeTextField.clear();
         }
@@ -117,6 +116,11 @@ public class TimeTableController {
             timeTextField.requestFocus();
             return;
         }
+
+        String[] parts = timeInput.trim().split("-");
+        int hour = Integer.parseInt(parts[0].trim());
+        String day = parts[1].trim();
+
         Label targetLabel = findLabelAt(coords.colIndex, coords.rowIndex);
 
         if (targetLabel != null) {
@@ -125,6 +129,7 @@ public class TimeTableController {
                 targetLabel.setStyle("-fx-text-fill:white; -fx-background-color:transparent;-fx-border-color:white; -fx-padding: 2px; -fx-alignment: center");
                 showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đã xóa nội dung khóa học khỏi thời gian biểu.");
                 timeTextField.clear();
+                scheduleController.deleteSchedule(day,hour);
             } else {
                 showAlert(Alert.AlertType.INFORMATION, "Thông báo", "Không có nội dung khóa học tại vị trí đã chỉ định để xóa.");
             }
@@ -223,7 +228,7 @@ public class TimeTableController {
                 Label label = findLabelAt(colIndex, rowIndex);
                 if (label != null) {
                     label.setText(schedule.getCourseName());
-                    label.setStyle("-fx-text-fill:#E8B931; -fx-border-color:white; -fx-background-color: black; -fx-padding: 2px; -fx-alignment: center;");
+                    label.setStyle("-fx-text-fill:  #25201f; -fx-border-color:white; -fx-background-color: #f8ecde; -fx-padding: 2px; -fx-alignment: center;");
                 }
             }
         }

@@ -31,14 +31,22 @@ public class ScheduleController {
         }
     }
 
-    public void deleteSchedule(int id) {
+    public void deleteScheduleById(int id) {
         try {
             scheduleDAO.delete(id);
-            System.out.println("Schedule deleted successfully.");
         } catch (SQLException e) {
-            System.err.println("Error deleting schedule: " + e.getMessage());
+            System.err.println("Error deleting all schedule: " + e.getMessage());
         }
     }
+
+    public void deleteSchedule(String day, int period) {
+        try {
+            scheduleDAO.delete(day,period);
+        } catch (SQLException e){
+            System.out.println("Error deleting single schedule: " + e.getMessage());
+        }
+    }
+
 
     public List<Schedule> getSchedulesByUserId(int userId) {
         try {

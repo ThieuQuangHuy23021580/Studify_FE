@@ -27,7 +27,7 @@ public class SidebarController {
 
     @FXML
     private void initialize() {
-        sidebarItems = List.of(dashboardBtn, studymaterialBtn, timetableBtn, studystatsBtn, aichatbotBtn);
+        sidebarItems = List.of(dashboardBtn, timetableBtn, studystatsBtn, aichatbotBtn);
         setSelected(dashboardBtn);
         System.out.println("SidebarController initialized.");
     }
@@ -76,7 +76,7 @@ public class SidebarController {
         setSelected(studystatsBtn);
         if (mainController != null) {
             User currentUser = mainController.getLoggedInUser();
-            mainController.loadAndSetCenterContent("/controller/FXML/StudyStats.fxml", currentUser); // Giả sử StudyStats cũng cần User
+            mainController.loadAndSetCenterContent("/controller/FXML/NewStudyStats.fxml", currentUser); // Giả sử StudyStats cũng cần User
         } else {
             System.err.println("Sidebar Error: MainController is null, cannot load Study Stats view.");
         }
@@ -96,19 +96,19 @@ public class SidebarController {
         }
     }
 
-    /**
-     * Xử lý sự kiện khi nhấn vào nút Study Material.
-     */
-    @FXML
-    public void handleMaterialClick() {
-        setSelected(studymaterialBtn);
-        if (mainController != null) {
-            User currentUser = mainController.getLoggedInUser();
-            mainController.loadAndSetCenterContent("/controller/FXML/StudyMaterial.fxml", currentUser); // Giả sử Material cũng cần User
-        } else {
-            System.err.println("Sidebar Error: MainController is null, cannot load Study Material view.");
-        }
-    }
+//    /**
+//     * Xử lý sự kiện khi nhấn vào nút Study Material.
+//     */
+//    @FXML
+//    public void handleMaterialClick() {
+//        setSelected(studymaterialBtn);
+//        if (mainController != null) {
+//            User currentUser = mainController.getLoggedInUser();
+//            mainController.loadAndSetCenterContent("/controller/FXML/StudyMaterial.fxml", currentUser); // Giả sử Material cũng cần User
+//        } else {
+//            System.err.println("Sidebar Error: MainController is null, cannot load Study Material view.");
+//        }
+//    }
 
     /**
      * Xử lý sự kiện khi nhấn vào nút AI Chatbot.

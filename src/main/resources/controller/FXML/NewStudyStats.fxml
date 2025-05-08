@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane style="-fx-background-color: #e7dbcb;" styleClass="study-stats-stackpane" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudyStatsController">
+   <children>
+      <GridPane alignment="TOP_CENTER" StackPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="676.0" minWidth="10.0" prefWidth="542.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="626.0" minWidth="10.0" prefWidth="538.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="516.0" minHeight="104.0" prefHeight="227.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="696.0" minHeight="284.0" prefHeight="573.0" vgrow="ALWAYS" />
+          <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ScrollPane fx:id="mainScrollPane" style="-fx-background-color: transparent;" GridPane.columnSpan="2" GridPane.rowSpan="2">
+               <content>
+                  <FlowPane fx:id="mainFlowPane" alignment="TOP_CENTER" columnHalignment="CENTER" style="-fx-background-color: #e7dbcb;">
+                     <children>
+                        <StackPane fx:id="mainStackPane" minWidth="1080.0">
+                           <children>
+                              <GridPane alignment="TOP_CENTER" style="-fx-background-color: #f8ecde;">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="678.0" minWidth="10.0" prefWidth="277.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" maxWidth="803.0" minWidth="10.0" prefWidth="803.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="200.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="250.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <AnchorPane fx:id="mainAnchorPane" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" GridPane.rowSpan="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                                       <children>
+                                          <ImageView fx:id="shelfImageView" fitHeight="280.0" fitWidth="1080.0" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <image>
+                                                <Image url="@../../PICTURES/background/bg12.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                                       <children>
+                                          <Circle fx:id="avatarCircle" fill="#e7dbcb" radius="78.0" stroke="#e7dbcb" strokeType="INSIDE" style="-fx-fill: #603a27;" AnchorPane.leftAnchor="97.0" AnchorPane.topAnchor="22.0" />
+                                          <ImageView fx:id="avatarImageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0" />
+                                          <Label fx:id="userNameLabel" layoutX="275.0" layoutY="94.0" text="Quang Huy" textFill="#25201f" AnchorPane.topAnchor="80.0">
+                                             <font>
+                                                <Font name="Century" size="29.0" />
+                                             </font>
+                                             <effect>
+                                                <Glow />
+                                             </effect>
+                                          </Label>
+                                          <Label fx:id="levelLabel" layoutX="285.0" layoutY="90.0" text="(Begginer)" textFill="#603a27" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="115.0">
+                                             <font>
+                                                <Font name="Century" size="25.0" />
+                                             </font>
+                                             <effect>
+                                                <Glow />
+                                             </effect>
+                                          </Label>
+                                          <Button fx:id="changeAvatarBtn" layoutX="966.0" layoutY="103.0" mnemonicParsing="false" onMouseClicked="#changeAvatarBtnClicked" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #f8ecde; -fx-background-radius: 25;" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="150.0">
+                                             <graphic>
+                                                <FontIcon iconColor="#603a27" iconLiteral="fa-image" iconSize="25" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="informationStackPane" layoutX="10.0" layoutY="410.0">
+                           <children>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="65.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="950.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="65.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="260.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="60.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <AnchorPane style="-fx-background-color: #f8ecde; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label layoutX="69.0" layoutY="59.0" text="Information" textFill="#25201f" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="10.0">
+                                             <font>
+                                                <Font name="Century" size="29.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="126.0" layoutY="103.0" text="Username:" textFill="#603a27" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="65.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="40.0" layoutY="70.0" text="Education Level:" textFill="#603a27" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="105.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="40.0" layoutY="100.0" text="Email address:" textFill="#603a27" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="145.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="changeInfoBtn" layoutX="785.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#changeInfoBtnClicked" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #603a27;" text="Edit" textFill="#f8ecde" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="70.0">
+                                             <font>
+                                                <Font name="Century" size="23.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="cancelBtn" layoutX="769.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#cancelBtnClicked" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #603a27;" text="Cancel" textFill="#f8ecde" visible="false" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="210.0">
+                                             <font>
+                                                <Font name="Century" size="23.0" />
+                                             </font>
+                                          </Button>
+                                          <Label fx:id="miniUserNameLabel" layoutX="343.0" layoutY="103.0" prefHeight="28.0" prefWidth="436.0" text="Quang Huy" textFill="#603a27" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="65.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="educationLevelLabel" layoutX="80.0" layoutY="115.0" prefHeight="28.0" prefWidth="217.0" text="Teriary" textFill="#603a27" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="105.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="emailLabel" layoutX="80.0" layoutY="155.0" text="23021580@vnu.edu.vn" textFill="#603a27" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="145.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="confirmBtn" layoutX="769.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#confirmBtnClicked" prefHeight="44.0" prefWidth="121.0" style="-fx-background-color: #603a27;" text="Done" textFill="#f8ecde" visible="false" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="70.0">
+                                             <font>
+                                                <Font name="Century" size="23.0" />
+                                             </font>
+                                          </Button>
+                                          <MenuButton fx:id="educationLevelMenuBtn" layoutX="430.0" layoutY="74.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="171.0" style="-fx-background-color: transparent; -fx-font-size: 15; -fx-text-fill: #25201f;" textFill="#603a27" visible="false" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="105.0">
+                                             <items>
+                                                <MenuItem fx:id="primaryMenuItem" mnemonicParsing="false" text="Primary" />
+                                                <MenuItem fx:id="secondaryMenuItem" mnemonicParsing="false" text="Sencondary" />
+                                                <MenuItem fx:id="highschoolMenuItem" mnemonicParsing="false" text="Highschool" />
+                                                <MenuItem fx:id="vocationalMenuItem" mnemonicParsing="false" text="Vocational" />
+                                                <MenuItem fx:id="tertiaryMenuItem" mnemonicParsing="false" text="Tertiary" />
+                                             </items>
+                                             <font>
+                                                <Font name="Century" size="22.0" />
+                                             </font>
+                                          </MenuButton>
+                                          <TextField fx:id="userNameField" layoutX="189.0" layoutY="67.0" prefHeight="37.0" prefWidth="438.0" promptText="Enter your new name here..." style="-fx-background-color: #f8ecde; -fx-border-color: #603a27;" visible="false" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="65.0">
+                                             <font>
+                                                <Font name="Century" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="streakStackPane" minHeight="400.0" minWidth="1080.0">
+                           <children>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="65.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="950.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="65.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <AnchorPane minWidth="950.0" style="-fx-background-color: #f8ecde; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
+                                       <children>
+                                          <Label layoutX="41.0" layoutY="38.0" text="Streak" textFill="#25201f" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="10.0">
+                                             <font>
+                                                <Font name="Century" size="29.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="40.0" layoutY="20.0" text="(Study 10'/day to grow your streak)" textFill="#603a27" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="45.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#603a27" height="200.0" layoutX="20.0" layoutY="100.0" stroke="TRANSPARENT" strokeType="INSIDE" width="950.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                          <ImageView fitHeight="194.0" fitWidth="200.0" layoutX="500.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="500.0">
+                                             <image>
+                                                <Image url="@../../PICTURES/heart.jpg" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutY="120.0" prefHeight="37.0" prefWidth="500.0" text="Your Streak has reached" textFill="#f8ecde" AnchorPane.leftAnchor="-1.0">
+                                             <font>
+                                                <Font name="Century" size="29.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="currentStreakLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="170.0" prefHeight="37.0" prefWidth="500.0" text="0" textFill="#f59017">
+                                             <font>
+                                                <Font name="Century" size="54.0" />
+                                             </font>
+                                             <effect>
+                                                <Glow level="1.0" />
+                                             </effect>
+                                          </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutY="240.0" prefHeight="37.0" prefWidth="500.0" text=" days so far." textFill="#f8ecde">
+                                             <font>
+                                                <Font name="Century" size="29.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="BOTTOM_CENTER" layoutX="696.0" layoutY="100.0" prefHeight="64.0" prefWidth="253.0" text="The longgest Streak is:" textFill="#f8ecde" wrapText="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="longgestStreakLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="696.0" layoutY="165.0" prefHeight="67.0" prefWidth="254.0" text="0" textFill="#f8ecde">
+                                             <font>
+                                                <Font name="Century" size="38.0" />
+                                             </font>
+                                             <effect>
+                                                <Glow level="1.0" />
+                                             </effect>
+                                          </Label>
+                                          <Label alignment="TOP_CENTER" layoutX="697.0" layoutY="229.0" prefHeight="64.0" prefWidth="253.0" text="  hardworking days." textFill="#f8ecde" wrapText="true" AnchorPane.bottomAnchor="107.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="229.0">
+                                             <font>
+                                                <Font name="Century Schoolbook Italic" size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="performanceStackPane" minHeight="600.0" minWidth="1080.0">
+                           <children>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="65.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.0" minWidth="241.0" prefWidth="252.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="700.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="65.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="60.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="560.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="100.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane style="-fx-background-color: #f8ecde; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="235.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="65.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="130.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="130.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <AnchorPane style="-fx-background-color: #603a27;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                             <children>
+                                                <FontIcon iconColor="#f8ecde" iconLiteral="fth-clock" iconSize="50" layoutX="47.0" layoutY="75.0" wrappingWidth="51.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" />
+                                                <Label alignment="CENTER" layoutX="69.0" layoutY="10.0" prefHeight="35.0" prefWidth="182.0" style="-fx-font-weight: bold; -fx-font-size: 21; -fx-font-family: &quot;Times New Roman&quot;;" text="Study time(h)" textFill="WHITE">
+                                                   <effect>
+                                                      <Glow />
+                                                   </effect>
+                                                   <font>
+                                                      <Font name="Century" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="studyTimeLabel" alignment="CENTER" layoutX="83.0" layoutY="43.0" prefHeight="35.0" prefWidth="142.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 28;" text="0" textFill="#f59017">
+                                                   <effect>
+                                                      <Glow level="1.0" />
+                                                   </effect>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="10.0" layoutY="140.0" style="-fx-background-color: #603a27;" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                                             <children>
+                                                <FontIcon iconColor="#f8ecde" iconLiteral="fth-activity" iconSize="50" layoutX="33.0" layoutY="78.0" wrappingWidth="51.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" />
+                                                <Label alignment="CENTER" layoutX="73.0" layoutY="10.0" prefHeight="35.0" prefWidth="176.0" style="-fx-font-family: &quot;Times New Roman&quot;; -fx-font-weight: bold; -fx-font-size: 21;" text="Average/day(h)" textFill="WHITE">
+                                                   <effect>
+                                                      <Glow />
+                                                   </effect>
+                                                </Label>
+                                                <Label fx:id="averageTimeLabel" alignment="CENTER" layoutX="85.0" layoutY="43.0" prefHeight="35.0" prefWidth="146.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 28;" text="0" textFill="#f59017">
+                                                   <effect>
+                                                      <Glow level="1.0" />
+                                                   </effect>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                    <AnchorPane style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label layoutX="69.0" layoutY="59.0" text="Performance" textFill="#25201f" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="10.0">
+                                             <font>
+                                                <Font name="Century" size="29.0" />
+                                             </font>
+                                          </Label>
+                                          <MenuButton fx:id="timePeriodMenuBtn" layoutX="443.0" layoutY="20.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="179.0" style="-fx-background-color: #603a27; -fx-font-weight: bold; -fx-font-size: 21; -fx-font-family: &quot;Times New Roman&quot;;" text="Time Period" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                                             <items>
+                                                <MenuItem fx:id="weeklyBtn" mnemonicParsing="false" text="This week" />
+                                                <MenuItem fx:id="monthlyBtn" mnemonicParsing="false" text="This month" />
+                                                <MenuItem fx:id="yearlyBtn" mnemonicParsing="false" text="This year" />
+                                             </items>
+                                          </MenuButton>
+                                          <BarChart fx:id="performanceChart" layoutX="54.0" layoutY="39.0" maxHeight="454.0" maxWidth="577.0" minHeight="454.0" minWidth="577.0" prefHeight="454.0" prefWidth="577.0" style="-fx-background-color: #f8ecde;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="60.0">
+                                             <xAxis>
+                                                <CategoryAxis side="BOTTOM" tickLabelGap="0.0" fx:id="xAxis" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis fx:id="yAxis" side="LEFT" />
+                                             </yAxis>
+                                          </BarChart>
+                                          <Label fx:id="chartTitleLabel" alignment="CENTER" layoutX="2.0" layoutY="496.0" prefHeight="40.0" prefWidth="698.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 26;" text="Study Duration Overview" textFill="#603a27" underline="true" AnchorPane.bottomAnchor="10.0">
+                                             <effect>
+                                                <Glow />
+                                             </effect>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="contactStackPane" minHeight="330.0" minWidth="1080.0" style="-fx-background-color: #442c1f;">
+                           <children>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <AnchorPane GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="5">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="365.0" style="-fx-font-weight: bold; -fx-font-size: 21; -fx-font-family: &quot;Times New Roman&quot;;" text="Email: aquariushuybit@gmail.com" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="60.0">
+                                             <effect>
+                                                <Glow />
+                                             </effect>
+                                             <font>
+                                                <Font name="Century" size="11.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="141.0" layoutY="132.0" prefHeight="35.0" prefWidth="635.0" style="-fx-font-weight: bold; -fx-font-size: 21; -fx-font-family: &quot;Times New Roman&quot;;" text="Admin's facebook: https://www.facebook.com/quang.huy.301989/" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="210.0">
+                                             <effect>
+                                                <Glow />
+                                             </effect>
+                                             <font>
+                                                <Font name="Century" size="11.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="145.0" layoutY="110.0" prefHeight="35.0" prefWidth="610.0" style="-fx-font-weight: bold; -fx-font-size: 21; -fx-font-family: &quot;Times New Roman&quot;;" text="Github: https://github.com/ThieuQuangHuy23021580" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="160.0">
+                                             <effect>
+                                                <Glow />
+                                             </effect>
+                                             <font>
+                                                <Font name="Century" size="11.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="155.0" layoutY="170.0" prefHeight="35.0" prefWidth="610.0" style="-fx-font-weight: bold; -fx-font-size: 21; -fx-font-family: &quot;Times New Roman&quot;;" text="Phone: 84-932-301-160" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="110.0">
+                                             <effect>
+                                                <Glow />
+                                             </effect>
+                                             <font>
+                                                <Font name="Century" size="11.0" />
+                                             </font>
+                                          </Label>
+                                          <ImageView fitHeight="177.0" fitWidth="250.0" layoutX="641.0" layoutY="103.0" pickOnBounds="true" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0">
+                                             <image>
+                                                <Image url="@../../PICTURES/contact-us.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="35.0" prefWidth="183.0" style="-fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: &quot;Times New Roman&quot;;" text="----------------------   Contact Us   ----------------------" textFill="#f59017" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <effect>
+                                                <Glow level="0.5" />
+                                             </effect>
+                                             <font>
+                                                <Font name="Century" size="11.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </FlowPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </GridPane>
+   </children>
+</StackPane>
