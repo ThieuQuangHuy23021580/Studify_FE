@@ -334,12 +334,7 @@
 #sessionGoalTextField {
     -fx-text-fill: white;
 }
-/*.dashboard-background {*/
-/*    -fx-background-image: url("../PICTURES/dashboard_background.png"); !* Đường dẫn tương đối từ file CSS *!*/
-/*    -fx-background-repeat: no-repeat;*/
-/*    -fx-background-position: center center;*/
-/*    -fx-background-size: cover; !* Hoặc 100% 100% *!*/
-/*}*/
+
 .timetable-background {
     -fx-background-color:  #25201f;
 }
@@ -375,4 +370,7 @@
 
 .study-stats-stackpane .button:hover {
     -fx-effect: dropshadow(gaussian,  #b77a4d, 10, 0, 0, 0);
+}
+.dashboard-background .button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.65), 30, 0, 0, 0);
 }

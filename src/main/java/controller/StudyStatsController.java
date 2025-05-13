@@ -302,6 +302,7 @@ public class StudyStatsController {
         confirmBtn.setVisible(true);
         cancelBtn.setVisible(true);
         educationLevelMenuBtn.setVisible(true);
+        Platform.runLater(() -> mainScrollPane.setVvalue(0.0));
     }
 
     public void confirmBtnClicked() {
@@ -370,6 +371,7 @@ public class StudyStatsController {
             levelLabel.setText("(Legend)");
             levelLabel.setStyle("-fx-text-fill: red;");
         }
+        Platform.runLater(() -> mainScrollPane.setVvalue(0.0));
     }
 
     public void changeAvatarBtnClicked(){
