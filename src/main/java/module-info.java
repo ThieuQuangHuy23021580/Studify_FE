@@ -18,6 +18,7 @@ module controller.libraryapp {
     requires javafx.media;
     requires jdk.jsobject;
     requires org.checkerframework.checker.qual;
+    requires org.json;
 
 
     opens controller to javafx.fxml;

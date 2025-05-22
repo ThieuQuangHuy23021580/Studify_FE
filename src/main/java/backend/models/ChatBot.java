@@ -10,6 +10,7 @@ import java.util.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.json.JSONObject;
 
 public class ChatBot {
     private Map<String, List<String>> sessionHistory;
@@ -20,7 +21,7 @@ public class ChatBot {
         sessionHistory = chatBotDAO.loadAllSessionHistories();  
     }
 
-    public String askChatbot(String sessionId, String prompt) {
+    public String askChatbot(String sessionId, String prompt, String userMessage) {
         try {
             ChatBotDAO chatBotDAO = new ChatBotDAO(); // để lưu message
 
@@ -68,8 +69,12 @@ public class ChatBot {
             history.add("bot: " + response);
             sessionHistory.put(sessionId, history);
 
-            chatBotDAO.saveMessage(sessionId, "user", prompt);
-            chatBotDAO.saveMessage(sessionId, "bot", response);
+            JSONObject newJson = new JSONObject(response);
+
+            String message = newJson.getString("message");
+
+            chatBotDAO.saveMessage(sessionId, "user", userMessage);
+            //chatBotDAO.saveMessage(sessionId, "bot", message);
 
             return response;
 
@@ -85,17 +90,4 @@ public class ChatBot {
     public String getUserFirstMessage(String sessionId) {
         return chatBotDAO.getFirstMessage(sessionId);
     }
-
-    public static void main(String[] args) {
-        ChatBot bot = new ChatBot();
-        String sessionId = "user123";
-
-        System.out.println("Bot 2: " + bot.askChatbot(sessionId, "What is the third law of newton1?"));
-
-        System.out.println("\n--- Chat History ---");
-        for (String msg : bot.getSessionHistory(sessionId)) {
-            System.out.println(msg);
-        }
-    }
-
 }

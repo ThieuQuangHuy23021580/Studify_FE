@@ -38,6 +38,20 @@ public class SessionDAO {
         return sessions;
     }
 
+    public String getUserIdBySessionId(String sessionId) {
+        String sql = "SELECT user_id FROM sessions WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, sessionId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("user_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public boolean sessionExists(String sessionId) {
         String sql = "SELECT 1 FROM sessions WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

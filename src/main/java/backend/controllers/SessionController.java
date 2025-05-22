@@ -23,6 +23,10 @@ public class SessionController {
         return sessionDAO.sessionExists(sessionId);
     }
 
+    public String getUserIdBySessionId(String sessionId) {
+        return sessionDAO.getUserIdBySessionId(sessionId);
+    }
+
     public static void main(String[] args) {
         SessionController sc = new SessionController();
         sc.createNewSession("coding", "32");
