@@ -92,6 +92,27 @@ public class TaskDAO {
         return tasks;
     }
 
+    public List<Task> findCompletedByUserId(int userId) {
+        List<Task> tasks = new ArrayList<>();
+        String sql = "SELECT * FROM tasks WHERE user_id = ? AND completed = 1";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Task task = new Task(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getBoolean("completed"),
+                        rs.getInt("user_id")
+                );
+                tasks.add(task);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tasks;
+    }
+
     public List<TaskStat> getCompletedTaskStatsByDay(int userId) {
         String sql = "SELECT DATE(completed_at) AS period, COUNT(*) AS total " +
                 "FROM tasks WHERE completed = 1 AND user_id = ? " +
