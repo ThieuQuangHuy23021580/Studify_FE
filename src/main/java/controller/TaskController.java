@@ -31,6 +31,7 @@ public class TaskController {
     @FXML
     void deleteTaskBtnClicked() {
         if (parentContainer != null && taskRootNode != null) {
+            dashBoardController.getTaskController().updateTask(dashBoardController.getCurrentUser().getUserId(), isCompeleted() ,taskNameLabel.getText());
             parentContainer.getChildren().remove(taskRootNode);
             this.dashBoardController.updateTaskCounts();
         } else {

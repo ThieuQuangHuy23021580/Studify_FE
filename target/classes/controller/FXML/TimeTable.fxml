@@ -30,7 +30,7 @@
          <children>
             <AnchorPane GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <children>
-                  <GridPane fx:id="timeTableGridPane" minHeight="660.0" style="-fx-background-color: #603a27; -fx-border-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <GridPane fx:id="timeTableGridPane" alignment="CENTER" minHeight="660.0" style="-fx-background-color: #603a27; -fx-border-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="NEVER" />
                         <ColumnConstraints halignment="CENTER" hgrow="NEVER" />

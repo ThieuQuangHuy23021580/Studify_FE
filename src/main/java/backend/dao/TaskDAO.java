@@ -39,17 +39,17 @@ public class TaskDAO {
     }
 
     public boolean update(Task task) {
-        String sql = "UPDATE tasks SET title = ?, completed = ?, user_id = ?, completed_at = ? WHERE id = ?";
+        String sql = "UPDATE tasks SET completed = ?, completed_at = ? " +
+                "WHERE id = (SELECT MAX(id) FROM tasks WHERE user_id = ? AND title = ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, task.getTitle());
-            stmt.setBoolean(2, task.isCompleted());
-            stmt.setInt(3, task.getStudentId());
+            stmt.setBoolean(1, task.isCompleted());
             if (task.isCompleted()) {
-                stmt.setString(4, java.time.LocalDateTime.now().toString());
+                stmt.setString(2, java.time.LocalDateTime.now().toString());
             } else {
-                stmt.setNull(4, java.sql.Types.NULL);
+                stmt.setNull(2, java.sql.Types.NULL);
             }
-            stmt.setInt(5, task.getId());
+            stmt.setInt(3, task.getStudentId());
+            stmt.setString(4, task.getTitle());
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -57,6 +57,7 @@ public class TaskDAO {
             return false;
         }
     }
+
 
     public boolean delete(int taskId) {
         String sql = "DELETE FROM tasks WHERE id = ?";

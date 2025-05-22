@@ -1,6 +1,5 @@
 package controller;
 
-import backend.controllers.SessionController;
 import backend.controllers.StudySessionController;
 import backend.models.Background;
 import backend.controllers.BackgroundController;
@@ -15,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
@@ -327,6 +325,8 @@ public class DashBoardController {
         }
         else System.out.println("Fail to load dashboard user");
     }
+
+    public User getCurrentUser(){ return currentUser;}
 
     private void loadBackgroundsByCategory(String category) {
         if (backgroundController == null || backgroundImageViews == null) {
@@ -744,16 +744,16 @@ public class DashBoardController {
             return;
         }
         try{
-            taskController.addTask(currentUser.getUserId(), goalText);
+            taskController.addTask(currentUser.getUserId(),false,goalText);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/FXML/Task.fxml")); // Đảm bảo đường dẫn đúng
             AnchorPane taskNode = loader.load();
-            TaskController taskController = loader.getController();
-            if (taskController == null) {
+            TaskController taskNodeController = loader.getController();
+            if (taskNodeController == null) {
                 System.err.println("Lỗi: Không thể lấy TaskController từ FXML.");
                 return;
             }
-            taskController.setData(goalText.trim(), taskListFlowPane, this);
-            taskNode.setUserData(taskController);
+            taskNodeController.setData(goalText.trim(), taskListFlowPane, this);
+            taskNode.setUserData(taskNodeController);
             taskListFlowPane.getChildren().add(taskNode);
             updateTaskCounts();
             sessionGoalTextField.clear();
@@ -762,6 +762,10 @@ public class DashBoardController {
             System.err.println("Lỗi khi tải Task.fxml: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public backend.controllers.TaskController getTaskController() {
+        return taskController;
     }
 
     public void updateTaskCounts() {

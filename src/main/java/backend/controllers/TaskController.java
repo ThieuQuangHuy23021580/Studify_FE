@@ -13,12 +13,13 @@ public class TaskController {
         taskDAO = new TaskDAO();
     }
 
-    public boolean addTask(int userId, String title) {
-        Task task = new Task(title, false, userId);
+    public boolean addTask(int userId, Boolean completed, String title) {
+        Task task = new Task(title, completed, userId);
         return taskDAO.insert(task);
     }
 
-    public boolean updateTask(Task task) {
+    public boolean updateTask(int userId, Boolean completed, String title) {
+        Task task = new Task(title, completed, userId);
         return taskDAO.update(task);
     }
 
@@ -36,10 +37,10 @@ public class TaskController {
     }
 
     public List<TaskStat> getCompletedTaskStatsByYear(int userId) {
-        return taskDAO.getCompletedTaskStatsByMonth(userId);
+        return taskDAO.getCompletedTaskStatsByYear(userId);
     }
 
     public List<TaskStat> getCompletedTaskStatsByDay(int userId) {
-        return taskDAO.getCompletedTaskStatsByMonth(userId);
+        return taskDAO.getCompletedTaskStatsByDay(userId);
     }
 }
