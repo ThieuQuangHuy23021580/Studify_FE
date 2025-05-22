@@ -1,6 +1,7 @@
 package backend.controllers;
 
 import backend.dao.ChatBotDAO;
+import backend.dao.UserDAO;
 import backend.models.ChatBot;
 
 import java.util.List;
@@ -34,6 +35,7 @@ Actions you can handle:
 - add_schedule: Add a course to the study schedule
 - check_study_stats: Check the user's study time or stats
 - delete_schedules: Remove a course from the study schedule
+- update_username: Update the user's display name
 
 Respond with a valid JSON format like this:
 
@@ -86,7 +88,15 @@ User: "How long have I studied today?"
   "message": "📊 You’ve studied for 3 hours and 15 minutes today."
 }
 
-
+User: "Change my name to Alice"
+→
+{
+  "action": "update_username",
+  "params": {
+    "new_name": "Alice"
+  },
+  "message": "✅ Your name has been updated to Alice."
+}
 
 Now, analyze the following user request and respond with a JSON in the same format:
 "%s"
@@ -130,6 +140,11 @@ Now, analyze the following user request and respond with a JSON in the same form
 
                     chatBotDAO.saveMessage(sessionId, "bot", statMessage);
                     return statMessage;
+                case "update_username":
+                    String newName = params.getString("new_name");
+                    UserDAO userDAO = new UserDAO();
+                    userDAO.setUserName(Integer.parseInt(userId), newName);
+                    break;
                 case "normal_chat":
                     break;
                 default:
